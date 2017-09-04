@@ -8,17 +8,20 @@
     src: url('../lato-light.ttf') format('truetype');
 }
 
-@font-face {
-    font-family: 'lato-thin';
-    src: url('../lato-thin.ttf') format('truetype');
-}
-
 body {
     position: relative;
     margin: 0;
     padding: 0 0 300px 0;
     font-family: 'theanooldstyle-regular';
 }
+
+
+p {
+    font-family: 'lato-light';
+    font-size: 16px;
+}
+
+
 /*********************************************     HEADER     ***********/
 .pageHead {
     height: 390px;
@@ -77,6 +80,7 @@ body {
                 color: rgb(220,220,220);
             }
 
+/****************************************   CONTENT   ********************************************/
 .wrapper {
     width: 1100px;
     height: 600px;
@@ -86,6 +90,9 @@ body {
     border-radius: 2px;
     padding: 6px 20px 0 20px;
 }
+
+
+/****************************************   FOOTER   ********************************************/
 
 .pageFoot {
     position: absolute;
@@ -125,7 +132,3 @@ body {
         padding-top: 12px;
     }
 
-p {
-    font-family: 'lato-light';
-    font-size: 16px;
-}
