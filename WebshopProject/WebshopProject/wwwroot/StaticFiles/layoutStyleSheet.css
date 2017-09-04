@@ -1,0 +1,97 @@
+﻿@font-face {
+    font-family: 'theanooldstyle-regular';
+    src: url('../theanooldstyle-regular.ttf') format('truetype');
+}
+@font-face {
+    font-family: 'lato-light';
+    src: url('../lato-light.ttf') format('truetype');
+}
+@font-face {
+    font-family: 'lato-thin';
+    src: url('../lato-thin.ttf') format('truetype');
+}
+body {
+    margin: 0;
+    padding: 0;
+    font-family: 'theanooldstyle-regular';
+}
+    /*********************************************     HEADER     ***********/
+    .pageHead {
+    height: 390px;
+    width: 100%;
+    margin: 0;
+    padding: 0;
+}
+
+        .pageHead .topHead {
+            height: 341px;
+            background-image: url('header1.png');
+            background-size: contain;
+            /*background-position: center center;*/
+            background-repeat: no-repeat;
+        }
+
+    .pageHead .menuBar {
+        height: 50px;
+        width: 100%;
+        position: absolute;
+    }
+
+.menuBar ul {
+    position: static;
+    background-color: #330000;
+    list-style-type: none;
+    background: linear-gradient(#200000, #330000);
+    height: 50px;
+    margin: 0;
+    width: 100%;
+    overflow: hidden;
+    padding: 0;
+    
+}
+
+    .menuBar ul li {
+        float: left;
+    }
+
+        .menuBar ul li a {
+            text-align: center;
+            display: inline-block;
+            margin: 15px 0;
+            position: center;
+            padding: 0 60px;
+            font-size: 16px;
+            text-decoration: none;
+            height: 50px;
+            color: rgb(220,220,220);
+        }
+
+.wrapper {
+    width: 1100px;
+    height: 600px;
+    margin-left: auto;
+    margin-right: auto;
+    border: 1px solid;
+    border-radius: 2px;
+    padding: 6px 20px 0 20px;
+    margin-top: 2px;
+}
+
+.pageFoot {
+    width: 100%;
+    height: 300px;
+}
+
+.pageFoot .infoFoot {
+    height: 250px;
+    background-color: #330000;
+}
+
+.pageFoot .copyFoot {
+    height: 50px;
+    background-color: darkgrey;
+}
+p {
+    font-family: 'lato-light';
+    font-size: 16px;
+}

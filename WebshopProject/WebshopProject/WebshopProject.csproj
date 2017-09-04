@@ -6,9 +6,11 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Folder Include="Controllers\" />
     <Folder Include="Models\VM\" />
-    <Folder Include="wwwroot\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="wwwroot\FoglihtenFr02.otf" />
   </ItemGroup>
 
   <ItemGroup>

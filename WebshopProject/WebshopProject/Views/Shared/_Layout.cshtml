@@ -3,11 +3,37 @@
 <html>
 <head>
     <meta name="viewport" content="width=device-width" />
-    <title>@ViewBag.Title</title>
+    <title>FMC Webshop</title>
+    <link href="~/StaticFiles/layoutStyleSheet.css" rel="stylesheet" />
 </head>
 <body>
-    <div>
+    <header class="pageHead">
+
+        <div class="topHead">
+            <div id="logo"></div>
+            <div id="searchBar"></div>
+            <div id="headNav"></div>
+        </div>
+
+        <div class="menuBar">
+            <ul id="menuList">
+                <li><a href="">SKOR</a></li>
+                <li><a href="">VARUMÄRKEN</a></li>
+                <li><a href="">ACCESSOARER</a></li>
+                <li><a href="">GUIDE</a></li>
+                <li><a href="">REA</a></li>
+            </ul>
+        </div>
+
+    </header>
+
+    <div class="wrapper">
         @RenderBody()
     </div>
+
+    <footer class="pageFoot">
+        <div class="infoFoot"></div>
+        <div class="copyFoot"></div>
+    </footer>
 </body>
 </html>
