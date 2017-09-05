@@ -33,9 +33,9 @@ namespace WebshopProject.Models.VM
         [Display(Name = "Adress")]
         public string AddressLine { get; set; }
 
+        //[Range(4, 6)]//Todo Rimligt??? bör vara 5!
         [Required(ErrorMessage = "Obligatoriskt fält!")]
         [Display(Name = "Postnummer")]
-        [Range(5, 5)]
         public string ZipCode { get; set; }
 
         [Required(ErrorMessage = "Obligatoriskt fält!")]

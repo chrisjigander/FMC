@@ -10,6 +10,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.Identity;
+using WebshopProject.Models.Entities;
 
 namespace WebshopProject
 {
@@ -24,6 +25,7 @@ namespace WebshopProject
 
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddDbContext<WebShopDBContext>(o => o.UseSqlServer(ConnString));
             services.AddDbContext<IdentityDbContext>(o => o.UseSqlServer(ConnString));
 
             services.AddIdentity<IdentityUser, IdentityRole>(o => {

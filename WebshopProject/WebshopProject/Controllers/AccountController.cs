@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using WebshopProject.Models.VM;
+using WebshopProject.Models.Entities;
 
 namespace WebshopProject.Controllers
 {
@@ -18,14 +19,16 @@ namespace WebshopProject.Controllers
         UserManager<IdentityUser> userManager;
         SignInManager<IdentityUser> signInManager;
         IdentityDbContext identityDbContext;
+        WebShopDBContext webShopDBContext;
 
         public AccountController(UserManager<IdentityUser> userManager,
         SignInManager<IdentityUser> signInManager,
-        IdentityDbContext identityDbContext)
+        IdentityDbContext identityDbContext, WebShopDBContext webShopDBContext)
         {
             this.userManager = userManager;
             this.signInManager = signInManager;
             this.identityDbContext = identityDbContext;
+            this.webShopDBContext = webShopDBContext;
         }
 
         [HttpGet]
@@ -72,11 +75,16 @@ namespace WebshopProject.Controllers
 
                 if (!result.Succeeded)
                 {
+                    
                     ModelState.AddModelError("UserName", result.Errors.First().Description);
 
                 }
                 else
                 {
+                    var res2 = await signInManager.PasswordSignInAsync(model.UserName, model.PassWord, false, false);
+                    string userID = signInManager.UserManager.GetUserId(HttpContext.User);
+                    
+                    webShopDBContext.AddUser(model, userID);
                     return Redirect("/Home/Index"); //todo Kolla routingen och automatisk inlogging
                 }
 
