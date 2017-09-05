@@ -18,6 +18,14 @@ namespace WebshopProject.Models.VM
         public string PassWord { get; set; }
 
         [Required(ErrorMessage = "Obligatoriskt fält!")]
+        [Display(Name = "Förnamn")]
+        public string FirstName { get; set; }
+
+        [Required(ErrorMessage = "Obligatoriskt fält!")]
+        [Display(Name = "Efternamn")]
+        public string LastName { get; set; }
+
+        [Required(ErrorMessage = "Obligatoriskt fält!")]
         [EmailAddress(ErrorMessage = "Ogiltig e-mail!")]
         public string Email { get; set; }
 

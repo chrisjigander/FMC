@@ -1,1 +1,64 @@
-﻿
+﻿@model AccountRegisterVM
+
+
+<div class="registerForm">
+    <form asp-controller="Account" asp-action="Register">
+        <label asp-for="FirstName"></label>
+        <br />
+        <input asp-for="FirstName" />
+        <br />
+        <span asp-validation-for="FirstName"></span>
+        <br />
+        <label asp-for="LastName"></label>
+        <br />
+        <input asp-for="LastName" />
+        <br />
+        <span asp-validation-for="LastName"></span>
+        <br />
+        <label asp-for="Email"></label>
+        <br />
+        <input asp-for="Email" />
+        <br />
+        <span asp-validation-for="Email"></span>
+        <br />
+        <label asp-for="PhoneNumber"></label>
+        <br />
+        <input asp-for="PhoneNumber" />
+        <br />
+        <span asp-validation-for="PhoneNumber"></span>
+        <br />
+        <label asp-for="AddressLine"></label>
+        <br />
+        <input asp-for="AddressLine" />
+        <br />
+        <span asp-validation-for="AddressLine"></span>
+        <br />
+        <label asp-for="ZipCode"></label>
+        <br />
+        <input asp-for="ZipCode" />
+        <br />
+        <span asp-validation-for="ZipCode"></span>
+        <br />
+        <label asp-for="City"></label>
+        <br />
+        <input asp-for="City" />
+        <br />
+        <span asp-validation-for="City"></span>
+        <br />
+        <label asp-for="UserName"></label>
+        <br />
+        <input asp-for="UserName" />
+        <br />
+        <span asp-validation-for="UserName"></span>
+        <br />
+        <label asp-for="PassWord"></label>
+        <br />
+        <input asp-for="PassWord" />
+        <br />
+        <span asp-validation-for="PassWord"></span>
+        <br />
+
+        <input type="submit" value="Registrera" />
+    </form>
+
+</div>

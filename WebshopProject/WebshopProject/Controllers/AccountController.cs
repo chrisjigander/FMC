@@ -11,6 +11,10 @@ namespace WebshopProject.Controllers
 {
     public class AccountController : Controller
     {
+        // -----VIKTIG STRÄNG!!!-----//
+        //signInManager.UserManager.GetUserId(HttpContext.User);
+
+
         UserManager<IdentityUser> userManager;
         SignInManager<IdentityUser> signInManager;
         IdentityDbContext identityDbContext;
@@ -27,6 +31,7 @@ namespace WebshopProject.Controllers
         [HttpGet]
         public IActionResult Login()
         {
+            
             return View();
         }
 
