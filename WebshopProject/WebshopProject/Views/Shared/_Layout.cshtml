@@ -7,6 +7,7 @@
     <link href="~/StaticFiles/StyleSheets/layoutStyleSheet.css" rel="stylesheet" />
 </head>
 <body>
+    <input id="userAndCartVisible" type="hidden" value="0" />
     <header class="pageHead">
 
         <div class="topHead">
@@ -16,22 +17,26 @@
 
         <div class="menuBar">
             <ul id="menuList">
-                <li><a href="">SKOR</a></li>
-                <li><a href="">VARUMÄRKEN</a></li>
-                <li><a href="">ACCESSOARER</a></li>
-                <li><a href="">GUIDE</a></li>
-                <li><a href="">REA</a></li>
+                <li><a href="" onclick="ShowMenu(1); return false;">SKOR</a></li>
+                <li><a href="" onclick="ShowMenu(2); return false;">VARUMÄRKEN</a></li>
+                <li><a href="" onclick="ShowMenu(3); return false;">ACCESSOARER</a></li>
+                <li><a href="" onclick="ShowMenu(4); return false;">GUIDE</a></li>
+                <li><a href="" onclick="ShowMenu(5); return false;">REA</a></li>
                 
             </ul>
             <div id="menuIcons">
-                <img id="userLogo" src="~/StaticFiles/Pics/Layout/userLogo.png" href="" />
-                <img id="cartLogo" src="~/StaticFiles/Pics/Layout/cartLogo.png" href="" />
+                <img id="userLogo" onclick="ShowLogin()" src="~/StaticFiles/Pics/Layout/userLogo.png" />
+                <img id="cartLogo" src="~/StaticFiles/Pics/Layout/cartLogo.png" />
             </div>
         </div>
 
     </header>
 
-    <div class="userAndCart">
+    <div class="dropDownMenu">
+
+    </div>
+
+    <div class="userAndCartDiv">
 
     </div>
 

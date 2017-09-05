@@ -1,67 +1,52 @@
-﻿
+﻿var loginIsDisplayed = false;
+var menuIsDisplayed = false;
+var menuOption = 0;
 
-//function ShowUserInfo() {
-//    $(".userAndCart").css('visibility', 'visible');
+function ShowLogin() {
+    if (loginIsDisplayed === false) {
 
+        $(".userAndCartDiv").css('display', 'block');
+        $.ajax({
+            url: "/Account/GetLoginForm",
+            type: "GET",
+            success: function (result) {
+                $(".userAndCartDiv").html(result);
+            }
+        });
+        loginIsDisplayed = true;
+    }
+    else {
+        $(".userAndCartDiv").css('display', 'none');
 
-//    $.ajax({
-//        url: "/Account/GetLoginForm",
-//        type: "GET",
-//        success: function (result) {
-//            $(".userAndCart").html(result);
-//        }
-//    });
-//}
+        $(".userAndCartDiv").html("");
+        loginIsDisplayed = false;
 
-function ShowShoppingCart() {
-
-}
-
-
-
-
-$("#userLogo").mouseenter(function () {
-    $(".userAndCart").css('visibility', 'visible');
-
-
-    $.ajax({
-        url: "/Account/GetLoginForm",
-        type: "GET",
-        success: function (result) {
-            $(".userAndCart").html(result);
-        }
-    });
-})
-
-$("#userLogo").mouseleave(function () {
-    Leaving();
-})
-
-$(".userAndCart").mouseleave(function () {
-    Leaving();
-})
-
-function Leaving() {
-    if ($(".userAndCart:hover").length === 0) {
-
-        $(".userAndCart").html("");
-        $(".userAndCart").css('visibility', 'hidden');
     }
 }
 
-//function HideUserInfo() {
-    //if ($(".userAndCart:hover").length === 0) {
+function ShowMenu(id) {
 
-    //    $(".userAndCart").html("");
-    //    $(".userAndCart").css('visibility', 'hidden');
-    //}
+    if (menuIsDisplayed === false) {
 
-//}
+        $(".dropDownMenu").css('display', 'block');
+        $.ajax({
+            url: "/Product/GetDropDownMenu",
+            type: "GET",
+            success: function (result) {
+                $(".dropDownMenu").html(result);
+            }
+        });
+        menuIsDisplayed = true;
+        menuOption = id;
+    }
+    else {
+        if (id === menuOption) {
+            $(".dropDownMenu").css('display', 'none');
 
-function HideShoppingCart() {
-
-}
-
-function StayAlive() {
-
+            $(".dropDownMenu").html("");
+            menuIsDisplayed = false;
+            menuOption = 0;
+        }
+        menuOption = id;
+    }
 }
