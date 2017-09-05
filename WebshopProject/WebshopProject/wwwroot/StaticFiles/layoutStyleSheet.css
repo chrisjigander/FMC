@@ -9,10 +9,18 @@
 }
 
 body {
+    /*Färgvariabler*/
+    --base-color: #330000;
+    --background-grey: #F0F0F0;
+    --dark-grey: #282828;
+    --light-grey: #DCDCDC;
+    /*---------------------------------------*/
     position: relative;
     margin: 0;
     padding: 0 0 300px 0;
     font-family: 'theanooldstyle-regular';
+    background-color: var(--background-grey);
+    color: var(--dark-grey);
 }
 
 
@@ -42,39 +50,32 @@ p {
         height: 50px;
         width: 100%;
         position: absolute;
-        background-color: #330000;
-        background: linear-gradient(#200000, #330000);
+        background-color: var(--base-color);
+        background: linear-gradient(#200000, var(--base-color));
     }
 
 
 .menuBar ul {
-    /*position: relative;*/
     list-style-type: none;
     height: 50px;
     margin: 0;
     overflow: hidden;
     padding: 0;
-    /*margin-left: auto;*/
-    /*margin-right: auto;*/
     display: inline-block;
 }
 
-        .menuBar ul li {
-            float: left;
-            /*margin-left: auto;*/
-            /*margin-right: auto;*/
+    .menuBar ul li {
+        float: left;
+    }
+
+        .menuBar ul li a {
+            display: inline-block;
+            padding: 13px 60px; /*ändrat från 0 60px till 13px 60px*/
+            font-size: 16px;
+            text-decoration: none;
+            color: var(--light-grey);
         }
 
-            .menuBar ul li a {
-                display: inline-block;
-                /*margin: 15px 0;*/
-                /*position: center;*/
-                padding: 13px 60px; /*ändrat från 0 60px till 13px 60px*/
-                font-size: 16px;
-                text-decoration: none;
-                /*height: 50px;*/
-                color: rgb(220,220,220);
-            }
 #menuIcons {
     display: inline-block;
     float: right;
@@ -84,7 +85,6 @@ p {
 }
 
     #menuIcons a img {
-        /*padding-right: 20px;*/
         padding: 5px 10px; /*lagt till*/
         width: 40px;
         height: 40px;
@@ -93,16 +93,17 @@ p {
 
 /****************************************   CONTENT   ********************************************/
 .wrapper {
+    background-color: white;
     width: 1100px;
     height: 600px;
     margin-left: auto;
     margin-right: auto;
+    margin-top: 10px;
     padding: 6px 20px 0 20px;
 }
 
 
 /****************************************   FOOTER   ********************************************/
-
 .pageFoot {
     position: absolute;
     right: 0;
@@ -113,32 +114,30 @@ p {
 
     .pageFoot .infoFoot {
         height: 250px;
-        background-color: #330000;
-        color: rgb(220,220,220);
+        background-color: var(--base-color);
     }
 
         .pageFoot .infoFoot .footTable {
             padding-left: 30px;
             padding-top: 30px;
-        }
-        
-        .pageFoot .infoFoot .footTable th {
-            width: 200px;
-            text-align: left;
-            font-family: 'theanooldstyle-regular';
+            color: var(--light-grey);
         }
 
-        .pageFoot .infoFoot .footTable td {
-            font-family: 'lato-light';
-            padding-top: 10px;
-        }
+            .pageFoot .infoFoot .footTable th {
+                width: 200px;
+                text-align: left;
+                font-family: 'theanooldstyle-regular';
+            }
+
+            .pageFoot .infoFoot .footTable td {
+                font-family: 'lato-light';
+                padding-top: 10px;
+            }
 
     .pageFoot .copyFoot {
         height: 30px;
-        background-color: rgb(40,40,40);
-        color: rgb(220,220,220);
+        background-color: var(--dark-grey);
+        color: var(--light-grey);
         text-align: center;
         padding-top: 12px;
     }
-
-
