@@ -1,11 +1,10 @@
 ﻿@font-face {
-    font-family: 'theanooldstyle-regular';
-    src: url('../theanooldstyle-regular.ttf') format('truetype');
-}
-
-@font-face {
     font-family: 'lato-light';
-    src: url('../lato-light.ttf') format('truetype');
+    src: url('lato-light.ttf') format('truetype');
+}
+@font-face {
+    font-family: 'theanooldstyle-regular';
+    src: url('theanooldstyle-regular.ttf') format('truetype');
 }
 
 body {
@@ -23,8 +22,12 @@ body {
     color: var(--dark-grey);
 }
 
+h1 {
+    font-family: 'theanooldstyle-regular';
+}
 
-p {
+
+#uselessText {
     font-family: 'lato-light';
     font-size: 16px;
 }
@@ -41,7 +44,7 @@ p {
     .pageHead .topHead {
         height: 341px;
         background-image: url('header1.png');
-        background-size: cover; /*ändrat från contain till cover, bättre eller ej???*/
+        background-size: cover;
         background-position: center center;
         background-repeat: no-repeat;
     }
@@ -70,7 +73,7 @@ p {
 
         .menuBar ul li a {
             display: inline-block;
-            padding: 13px 60px; /*ändrat från 0 60px till 13px 60px*/
+            padding: 13px 60px;
             font-size: 16px;
             text-decoration: none;
             color: var(--light-grey);
@@ -79,17 +82,33 @@ p {
 #menuIcons {
     display: inline-block;
     float: right;
-    padding: 0 0 0 0; /*ändrat från 5px 10px 0 0 till 0 0 0 0*/
-    height: 50px; /*lagt till*/
-    margin-right: 10px; /*lagt till*/
+    padding: 0 0 0 0;
+    height: 50px;
+    margin-right: 10px;
 }
 
-    #menuIcons a img {
-        padding: 5px 10px; /*lagt till*/
+    #menuIcons img {
+        padding: 5px 10px;
+        padding-bottom: 6px;
         width: 40px;
-        height: 40px;
-        margin: 0; /*lagt till*/
+        height: 41px;
+        margin: 0;
     }
+
+.userAndCart {
+    height: 230px;
+    width: 250px;
+    float: right;
+    padding: 4px 0 0 6px;
+    visibility: hidden;
+    background-color: white;
+    border-bottom: 1px outset;
+    border-left: 1px outset;
+    border-right: 1px outset;
+    border-bottom-left-radius: 2px;
+    border-bottom-right-radius: 2px;
+}
+
 
 /****************************************   CONTENT   ********************************************/
 .wrapper {
@@ -136,8 +155,10 @@ p {
 
     .pageFoot .copyFoot {
         height: 30px;
-        background-color: var(--dark-grey);
-        color: var(--light-grey);
+        background-color: var(--background-grey);
+        /*border-top: 1px solid var(--background-grey);*/
+        color: var(--base-color);
         text-align: center;
+        font-size: 14px;
         padding-top: 12px;
     }

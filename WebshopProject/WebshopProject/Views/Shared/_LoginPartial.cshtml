@@ -1,0 +1,27 @@
+﻿@model AccountLoginVM
+
+
+<link href="~/StaticFiles/StyleSheets/loginPartialStyleSheet.css" rel="stylesheet" />
+
+
+<div class="loginForm">
+    <form asp-controller="Account" asp-action="Login">
+        <label asp-for="UserName"></label>
+        <br />
+        <input asp-for="UserName" />
+        <br />
+        <span asp-validation-for="UserName"></span>
+        <br />
+        <label asp-for="PassWord"></label>
+        <br />
+        <input asp-for="PassWord" />
+        <br />
+        <span asp-validation-for="PassWord"></span>
+        <br />
+        <input type="submit" value="Logga in" />
+    </form>
+    <br />
+    <label>Ej medlem?</label>
+    <a asp-controller="Account" asp-action="Register">Registrera dig</a>
+
+</div>

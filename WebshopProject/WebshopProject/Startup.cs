@@ -6,21 +6,44 @@ using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Configuration;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.AspNetCore.Identity;
 
 namespace WebshopProject
 {
     public class Startup
     {
-        // This method gets called by the runtime. Use this method to add services to the container.
-        // For more information on how to configure your application, visit https://go.microsoft.com/fwlink/?LinkID=398940
+        private string ConnString { get; set; }
+
+        public Startup(IConfiguration conf)
+        {
+            ConnString = conf["connString"];
+        }
+
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddDbContext<IdentityDbContext>(o => o.UseSqlServer(ConnString));
+
+            services.AddIdentity<IdentityUser, IdentityRole>(o => {
+                o.Password.RequireNonAlphanumeric = false;
+                o.Password.RequiredLength = 6;
+                o.Password.RequireUppercase = true;
+            })
+                .AddEntityFrameworkStores<IdentityDbContext>()
+                .AddDefaultTokenProviders();
+
+            services.ConfigureApplicationCookie(o => o.LoginPath = "/Account/Login");
+
+
             services.AddMvc();
         }
 
-        // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IHostingEnvironment env)
         {
+            app.UseAuthentication();
+
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
