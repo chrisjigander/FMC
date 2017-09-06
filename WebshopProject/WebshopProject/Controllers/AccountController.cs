@@ -117,7 +117,7 @@ namespace WebshopProject.Controllers
             string userID = signInManager.UserManager.GetUserId(HttpContext.User);
             string userToString = (string)TempData["User"];
             JObject userToJobject = JObject.Parse(userToString);
-            
+
             webShopDBContext.AddUser(userToJobject, userID);
             return Redirect("/Home/Index");
         }
@@ -127,24 +127,6 @@ namespace WebshopProject.Controllers
             AccountMyProfileVM currentProfile = webShopDBContext.GetUserProfile(userID);
             return PartialView("_MyProfilePartial", currentProfile);
         }
-        public IActionResult EditProfile()
-        {
-            string userID = signInManager.UserManager.GetUserId(HttpContext.User);
-            AccountMyProfileEditVM currentProfile = webShopDBContext.GetUserEditProfile(userID);
-            return PartialView("_MyProfileEditPartial", currentProfile);
-        }
-        public IActionResult MyOrders()
-        {
-            return PartialView("", new AccountMyOrdersVM { });
-        }
-        [HttpPost]
-        public IActionResult SaveEdit(AccountMyProfileEditVM editedUser)
-        {
-            string userID = signInManager.UserManager.GetUserId(HttpContext.User);
 
-            webShopDBContext.UpdateUser(editedUser, userID);
-
-            return Redirect("/Home/Index");
-        }
     }
 }

@@ -1,7 +1,7 @@
 ﻿@model AccountMyProfileEditVM
 
 <div class="EditForm">
-    <form asp-controller="Account" asp-action="SaveEdit">
+    <form id ="editForm" asp-controller="Profile" asp-action="SaveEdit">
         <label asp-for="FirstName"></label>
         <br />
         <input asp-for="FirstName" />
@@ -45,8 +45,7 @@
         <span asp-validation-for="City"></span>
         <br />
         
-
-        <input type="submit" value="Spara" onclick="GetProfile()"/>
+        <input type="submit" value="Spara"/>
     </form>
 
 </div>

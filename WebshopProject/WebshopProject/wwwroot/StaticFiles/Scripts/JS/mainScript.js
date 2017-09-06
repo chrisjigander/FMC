@@ -56,16 +56,53 @@ function GetProfile() {
         url: "/Account/MyProfile",
         type: "GET",
         success: function (result) {
-            $(".wrapper").html(result);
+            $(".profileContentDiv").html(result);
+            //ShowLogin();
         }
     });
 }
 function EditProfile() {
     $.ajax({
-        url: "/Account/EditProfile",
+        url: "/Profile/EditProfile",
         type: "GET",
         success: function (result) {
-            $(".wrapper").html(result);
+            $(".profileContentDiv").html(result);
         }
     });
 }
+function EditedProfile(editedUser) {
+    //window.location.href = window.location.host + "/Home/Index";
+    //console.log(window.location.host);
+    //console.log(window.location.host + "/Home/Index");
+
+    //$("#editForm").submit(e){
+    //    e.preventDefault();
+    //    $.post("@URL.Action('")
+    //};
+   
+    $.ajax({
+        url: "/Profile/SaveEdit",
+        type: "POST",
+        data: editedUser,
+        success: function (result) {
+            GetProfile();
+        }
+    });
+
+}
+function ProfileMenuOption(option) {
+
+    switch (option) {
+        case 1:
+            GetProfile();
+            break;
+        case 2:
+            GetOrders();
+            break;
+        case 3:
+            EditProfile();
+            break;
+    }
+
+}
+

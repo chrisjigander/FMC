@@ -32,5 +32,49 @@ namespace WebshopProject.Models.Entities
             });
             SaveChanges();
         }
+        internal AccountMyProfileVM GetUserProfile(string userID)
+        {
+
+            User currentUser = this.User.First(u => u.Uid == userID);
+            return new AccountMyProfileVM
+            {
+                FirstName = currentUser.Firstname,
+                LastName = currentUser.Lastname,
+                AddressLine = currentUser.Addressline,
+                ZipCode = currentUser.Zipcode,
+                City = currentUser.City,
+                Email = currentUser.Email,
+                PhoneNumber = currentUser.Phonenumber
+            };
+        }
+
+        internal AccountMyProfileEditVM GetUserEditProfile(string userID)
+        {
+            User currentUser = this.User.First(u => u.Uid == userID);
+            return new AccountMyProfileEditVM
+            {
+                FirstName = currentUser.Firstname,
+                LastName = currentUser.Lastname,
+                AddressLine = currentUser.Addressline,
+                ZipCode = currentUser.Zipcode,
+                City = currentUser.City,
+                Email = currentUser.Email,
+                PhoneNumber = currentUser.Phonenumber
+            };
+        }
+
+        internal void UpdateUser(AccountMyProfileEditVM editedUser, string userID)
+        {
+
+            User currentUser = this.User.First(u => u.Uid == userID);
+            currentUser.Firstname = editedUser.FirstName;
+            currentUser.Lastname = editedUser.LastName;
+            currentUser.Addressline = editedUser.AddressLine;
+            currentUser.Zipcode = editedUser.ZipCode;
+            currentUser.City = editedUser.City;
+            currentUser.Phonenumber = editedUser.PhoneNumber;
+            currentUser.Email = editedUser.Email;
+            SaveChanges();
+        }
     }
 }

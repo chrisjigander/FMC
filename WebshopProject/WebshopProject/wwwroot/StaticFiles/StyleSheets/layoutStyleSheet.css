@@ -193,6 +193,7 @@ h1 {
 
     .loginForm a:hover {
         color: var(--light-grey);
+        cursor: pointer;
     }
 
 .loginForm label {
@@ -213,9 +214,10 @@ h1 {
     
 }
 
-.loggedInDiv a:hover {
-    color: var(--light-grey);
-}
+    .loggedInDiv a:hover {
+        color: var(--light-grey);
+        cursor: pointer;
+    }
 
 #logOut {
     color: var(--base-color);
@@ -226,6 +228,24 @@ h1 {
 #logOut:hover {
     color: var(--light-grey);
 }
+
+/*****************************    PROFILE       ***************************************/
+
+.profileSidebarMenuDiv {
+    width: 300px;
+    background-color: red;
+    color: black;
+    display: inline-block;
+    vertical-align: top;
+
+}
+.profileContentDiv {
+    width: 700px;
+    background-color: green;
+    color: black;
+    display: inline-block;
+}
+/*****************************    View Profil   ***************************************/
 #ProfileDiv {
     font-family: 'lato-light';
 }
@@ -235,5 +255,9 @@ h1 {
 }
 tr.strongTR>td {
     padding-top: 40px;
+}
+/*****************************    Edit Form   ***************************************/
+.EditForm {
+    font-family: 'lato-light';
 }
 
