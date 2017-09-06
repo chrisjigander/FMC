@@ -7,44 +7,44 @@
     <link href="~/StaticFiles/StyleSheets/layoutStyleSheet.css" rel="stylesheet" />
 </head>
 <body>
-    <input id="userAndCartVisible" type="hidden" value="0" />
-    <header class="pageHead">
-        <a asp-controller="Home" asp-action="Index">
-            <div class="topHead">
-                <div id="logo"></div>
-                <div id="searchBar"></div>
-            </div>
-        </a>
+    
+        <header class="pageHead">
+            <a asp-controller="Home" asp-action="Index">
+                <div class="topHead">
+                    <div id="logo"></div>
+                    <div id="searchBar"></div>
+                </div>
+            </a>
 
-        <div class="menuBar">
-            <ul id="menuList">
-                <li><a href="" onclick="ShowMenu(1); return false;">SKOR</a></li>
-                <li><a href="" onclick="ShowMenu(2); return false;">VARUMÄRKEN</a></li>
-                <li><a href="" onclick="ShowMenu(3); return false;">ACCESSOARER</a></li>
-                <li><a href="" onclick="ShowMenu(4); return false;">GUIDE</a></li>
-                <li><a href="" onclick="ShowMenu(5); return false;">REA</a></li>
-                
-            </ul>
-            <div id="menuIcons">
-                <img id="userLogo" src="~/StaticFiles/Pics/Layout/userLogo.png" />
-                <img id="cartLogo" src="~/StaticFiles/Pics/Layout/cartLogo.png" />
+            <div class="menuBar">
+                <ul id="menuList">
+                    <li><a href="" onclick="ShowMenu(1); return false;">SKOR</a></li>
+                    <li><a href="" onclick="ShowMenu(2); return false;">VARUMÄRKEN</a></li>
+                    <li><a href="" onclick="ShowMenu(3); return false;">ACCESSOARER</a></li>
+                    <li><a href="" onclick="ShowMenu(4); return false;">GUIDE</a></li>
+                    <li><a href="" onclick="ShowMenu(5); return false;">REA</a></li>
+
+                </ul>
+                <div id="menuIcons">
+                    <img id="userLogo" src="~/StaticFiles/Pics/Layout/userLogo.png" />
+                    <img id="cartLogo" src="~/StaticFiles/Pics/Layout/cartLogo.png" />
+                </div>
             </div>
+
+        </header>
+
+        <div class="dropDownMenu">
+
         </div>
 
-    </header>
+        <div class="userAndCartDiv">
 
-    <div class="dropDownMenu">
+        </div>
 
-    </div>
-
-    <div class="userAndCartDiv">
-
-    </div>
-
-    <div class="wrapper">
-        @RenderBody()
-    </div>
-
+        <div class="wrapper">
+            @RenderBody()
+        </div>
+    
     <footer class="pageFoot">
         <div class="infoFoot">
             <table class="footTable">
