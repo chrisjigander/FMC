@@ -2,7 +2,21 @@
 var menuIsDisplayed = false;
 var menuOption = 0;
 
+$(document).click(function () {
+    loginIsDisplayed = true;
+
+    ShowLogin();
+});
+
+$("#userLogo").click(function (e) {
+    e.stopPropagation();
+    ShowLogin();
+});
+
 function ShowLogin() {
+
+
+
     if (loginIsDisplayed === false) {
 
         $(".userAndCartDiv").css('display', 'block');

@@ -112,6 +112,7 @@ namespace WebshopProject.Controllers
                 return PartialView("_LogInPartial");
             }
         }
+
         public IActionResult AddUser()
         {
             string userID = signInManager.UserManager.GetUserId(HttpContext.User);
@@ -121,6 +122,7 @@ namespace WebshopProject.Controllers
             webShopDBContext.AddUser(userToJobject, userID);
             return Redirect("/Home/Index");
         }
+
         public IActionResult MyProfile()
         {
             string userID = signInManager.UserManager.GetUserId(HttpContext.User);

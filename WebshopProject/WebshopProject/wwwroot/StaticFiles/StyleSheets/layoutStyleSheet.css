@@ -232,19 +232,32 @@ h1 {
 /*****************************    PROFILE       ***************************************/
 
 .profileSidebarMenuDiv {
-    width: 300px;
-    background-color: red;
+    width: 170px;
     color: black;
     display: inline-block;
     vertical-align: top;
+    border-right: 1px solid var(--base-color);
+    margin-right: 50px;
+    font-family: 'lato-light';
+}
 
+.profileSidebarMenuDiv #profileUL {
+    list-style: none;
 }
-.profileContentDiv {
-    width: 700px;
-    background-color: green;
-    color: black;
-    display: inline-block;
-}
+
+    .profileSidebarMenuDiv #profileUL a {
+        text-decoration: none;
+        color: var(--dark-grey);
+        
+    }
+
+    .profileContentDiv {
+        width: 800px;
+        color: black;
+        display: inline-block;
+    }
+
+
 /*****************************    View Profil   ***************************************/
 #ProfileDiv {
     font-family: 'lato-light';
@@ -256,8 +269,20 @@ h1 {
 tr.strongTR>td {
     padding-top: 40px;
 }
-/*****************************    Edit Form   ***************************************/
+/*****************************    Edit Profile Form   ***************************************/
 .EditForm {
     font-family: 'lato-light';
+}
+
+.dividedDiv {
+    display: inline-block;
+    vertical-align: top;
+    margin-right: 20px;
+    position: relative;
+}
+
+.dividedDiv .saveButtonEditProfile{
+    position: absolute;
+    right: 4px;
 }
 
