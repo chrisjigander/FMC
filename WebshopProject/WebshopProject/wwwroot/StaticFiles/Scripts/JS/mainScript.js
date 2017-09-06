@@ -2,14 +2,19 @@
 var menuIsDisplayed = false;
 var menuOption = 0;
 
-$(document).click(function () {
-    loginIsDisplayed = true;
-
-    ShowLogin();
-});
 
 $("#userLogo").click(function (e) {
     e.stopPropagation();
+    ShowLogin();
+});
+
+$(".userAndCartDiv").click(function (e) {
+    e.stopPropagation();
+});
+
+$(document).click(function () {
+    loginIsDisplayed = true;
+
     ShowLogin();
 });
 
