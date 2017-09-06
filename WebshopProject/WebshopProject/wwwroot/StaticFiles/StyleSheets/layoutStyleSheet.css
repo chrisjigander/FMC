@@ -182,3 +182,58 @@ h1 {
         font-size: 14px;
         padding-top: 12px;
     }
+
+/*****************************    Log In   ***************************************/
+
+.loginForm a {
+    color: var(--base-color);
+    text-decoration-style: none;
+    font-family: 'lato-light';
+}
+
+    .loginForm a:hover {
+        color: var(--light-grey);
+    }
+
+.loginForm label {
+    font-family: 'lato-light';
+    color: var(--dark-grey);
+}
+
+.loginForm input {
+    border-radius: 2px;
+}
+
+/*****************************    Logged In   ***************************************/
+
+.loggedInDiv a,p {
+    color: var(--dark-grey);
+    text-decoration: none;
+    font-family: 'lato-light';
+    
+}
+
+.loggedInDiv a:hover {
+    color: var(--light-grey);
+}
+
+#logOut {
+    color: var(--base-color);
+    position:absolute;
+    bottom: 3px;
+}
+
+#logOut:hover {
+    color: var(--light-grey);
+}
+#ProfileDiv {
+    font-family: 'lato-light';
+}
+#ProfileDiv h1 {
+    color: var(--base-color);
+    font-family: 'lato-light';
+}
+tr.strongTR>td {
+    padding-top: 40px;
+}
+

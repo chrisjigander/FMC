@@ -7,6 +7,8 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using WebshopProject.Models.VM;
 using WebshopProject.Models.Entities;
+using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
 
 namespace WebshopProject.Controllers
 {
@@ -34,7 +36,7 @@ namespace WebshopProject.Controllers
         [HttpGet]
         public IActionResult Login()
         {
-            
+
             return View();
         }
 
@@ -51,7 +53,7 @@ namespace WebshopProject.Controllers
                 }
                 else
                 {
-                    return RedirectToAction("/Home/Index");  //todo Kolla om det går att byta ut den magiska strängen
+                    return Redirect("/Home/Index");  //todo Kolla om det går att byta ut den magiska strängen
                 }
 
             }
@@ -75,17 +77,14 @@ namespace WebshopProject.Controllers
 
                 if (!result.Succeeded)
                 {
-                    
                     ModelState.AddModelError("UserName", result.Errors.First().Description);
-
                 }
                 else
                 {
                     var res2 = await signInManager.PasswordSignInAsync(model.UserName, model.PassWord, false, false);
-                    string userID = signInManager.UserManager.GetUserId(HttpContext.User);
-                    
-                    webShopDBContext.AddUser(model, userID);
-                    return Redirect("/Home/Index"); //todo Kolla routingen och automatisk inlogging
+
+                    TempData["User"] = JsonConvert.SerializeObject(model);
+                    return RedirectToAction(nameof(AddUser));
                 }
 
             }
@@ -105,12 +104,47 @@ namespace WebshopProject.Controllers
         {
             if (User.Identity.IsAuthenticated)
             {
-                return PartialView("_LoggedInPartial");
+                AccountLoggedInVM VM = new AccountLoggedInVM { UserName = User.Identity.Name };
+                return PartialView("_LoggedInPartial", VM);
             }
             else
             {
                 return PartialView("_LogInPartial");
             }
+        }
+        public IActionResult AddUser()
+        {
+            string userID = signInManager.UserManager.GetUserId(HttpContext.User);
+            string userToString = (string)TempData["User"];
+            JObject userToJobject = JObject.Parse(userToString);
+            
+            webShopDBContext.AddUser(userToJobject, userID);
+            return Redirect("/Home/Index");
+        }
+        public IActionResult MyProfile()
+        {
+            string userID = signInManager.UserManager.GetUserId(HttpContext.User);
+            AccountMyProfileVM currentProfile = webShopDBContext.GetUserProfile(userID);
+            return PartialView("_MyProfilePartial", currentProfile);
+        }
+        public IActionResult EditProfile()
+        {
+            string userID = signInManager.UserManager.GetUserId(HttpContext.User);
+            AccountMyProfileEditVM currentProfile = webShopDBContext.GetUserEditProfile(userID);
+            return PartialView("_MyProfileEditPartial", currentProfile);
+        }
+        public IActionResult MyOrders()
+        {
+            return PartialView("", new AccountMyOrdersVM { });
+        }
+        [HttpPost]
+        public IActionResult SaveEdit(AccountMyProfileEditVM editedUser)
+        {
+            string userID = signInManager.UserManager.GetUserId(HttpContext.User);
+
+            webShopDBContext.UpdateUser(editedUser, userID);
+
+            return Redirect("/Home/Index");
         }
     }
 }

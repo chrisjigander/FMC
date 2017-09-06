@@ -1,4 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using Newtonsoft.Json.Linq;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -15,18 +16,19 @@ namespace WebshopProject.Models.Entities
         {
 
         }
-        public void AddUser(AccountRegisterVM user, string uID)
+        public void AddUser(JObject user, string uID)
         {
+            string test = (string)user["FirstName"];
             User.Add(new User
             {
                 Uid = uID,
-                Firstname = user.FirstName,
-                Lastname = user.LastName,
-                Phonenumber = user.PhoneNumber,
-                Addressline = user.AddressLine,
-                Zipcode = user.ZipCode,
-                City = user.City,
-                Email = user.Email
+                Firstname = (string)user["FirstName"],
+                Lastname = (string)user["LastName"],
+                Phonenumber = (string)user["PhoneNumber"],
+                Addressline = (string)user["AddressLine"],
+                Zipcode = (string)user["ZipCode"],
+                City = (string)user["City"],
+                Email = (string)user["Email"]
             });
             SaveChanges();
         }

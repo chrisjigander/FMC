@@ -1,0 +1,42 @@
+﻿@model AccountMyProfileVM
+
+<div id="ProfileDiv">
+    <h1>@Model.FirstName @Model.LastName</h1>
+    <table>
+        <tr>
+            <td><strong>Förnamn</strong></td>
+            <td><strong>Efternamn</strong></td>
+        </tr>
+        <tr>
+            <td>@Model.FirstName</td>
+            <td>@Model.LastName</td>
+        </tr>
+        <tr class="strongTR">
+            <td><strong>Adress</strong></td>
+            <td><strong>Telefon</strong></td>
+        </tr>
+        <tr>
+            <td>@Model.AddressLine</td>
+            <td>@Model.PhoneNumber</td>
+        </tr>
+        <tr>
+            <td>@Model.ZipCode</td>
+            <td></td>
+        </tr>
+        <tr>
+            <td>@Model.City</td>
+            <td></td>
+        </tr>
+        <tr class="strongTR">
+            <td><strong>Email</strong></td>
+            <td></td>
+        </tr>
+        <tr>
+            <td>@Model.Email</td>
+            <td></td>
+        </tr>
+
+    </table>
+    <br />
+    <button onclick="EditProfile()">Ändra uppgifter</button>
+</div>

@@ -50,3 +50,22 @@ function ShowMenu(id) {
         menuOption = id;
     }
 }
+function GetProfile() {
+
+    $.ajax({
+        url: "/Account/MyProfile",
+        type: "GET",
+        success: function (result) {
+            $(".wrapper").html(result);
+        }
+    });
+}
+function EditProfile() {
+    $.ajax({
+        url: "/Account/EditProfile",
+        type: "GET",
+        success: function (result) {
+            $(".wrapper").html(result);
+        }
+    });
+}
