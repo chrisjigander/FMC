@@ -35,9 +35,9 @@ namespace WebshopProject.Controllers
 
         public IActionResult ProductItem(string articleNum)
         {
-            //ProductProductItemVM productToView = webShopDBContext.GetProductToView(articleNum);
+            ProductProductItemVM productToView = webShopDBContext.GetProductToView(articleNum);
 
-            return View();
+            return View(productToView);
         }
     }
 }
