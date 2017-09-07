@@ -79,10 +79,26 @@ namespace WebshopProject.Models.Entities
 
         internal ProductProductItemVM GetProductToView(string articleNum)
         {
-            Product currentProduct = this.Product.First(p => p.ProdArtNr == articleNum);
+            string artNrLong;
+            string artNrShort;
+            if (articleNum.Length == 4)
+            {
+                Product product = this.Product.Where(p => p.ProdArtNr.StartsWith(articleNum)).Where(p => p.ProdQty > 0).Single();
+                //string sizeString = product.ProdId.ToString();
+                artNrLong = product.ProdArtNr;
+
+                artNrShort = articleNum;
+            }
+            else
+            {
+                artNrLong = articleNum;
+                artNrShort = articleNum.Remove(articleNum.Length - 2);
+            }
+
+            Product currentProduct = this.Product.First(p => p.ProdArtNr == artNrLong);
             var colorArray = GetAllColors(currentProduct.ProdBrandId, currentProduct.ProdModelId);
             var sizeArray = GetAllSizes(currentProduct.ProdBrandId, currentProduct.ProdModelId);
-            var imageArray = GetAllImages(articleNum);
+            var imageArray = GetAllImages(artNrLong);
 
             var prodModel = Model.First(m => m.ModelId == currentProduct.ProdModelId).ModelName;
             var prodBrand = Brand.First(b => b.BrandId == currentProduct.ProdBrandId).BrandName;
@@ -90,7 +106,7 @@ namespace WebshopProject.Models.Entities
 
             return new ProductProductItemVM
             {
-                ArticleNum = currentProduct.ProdArtNr,
+                ArticleNum = artNrShort,
                 ColorArray = colorArray,
                 Description = currentProduct.ProdDescription,
                 ImageArray = imageArray,
@@ -98,7 +114,6 @@ namespace WebshopProject.Models.Entities
                 Model = prodModel,
                 Brand = prodBrand,
                 SizeArray = sizeArray,
-                CurrentDisplayedPic = 0
             };
 
         }

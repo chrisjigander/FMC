@@ -5,13 +5,13 @@
 
 <div class="pictureDiv">
     <div class="mainPictureDiv">
-        <img id="displayPic" src="~/StaticFiles/@Model.ImageArray[Model.CurrentDisplayedPic]" />
+        <img id="displayPic" src="~/StaticFiles/@Model.ImageArray[0]" />        
     </div>
     <div class="miniPicturesDiv">
-        <img src="~/StaticFiles/@Model.ImageArray[0]" onclick="SetDisplayPic(0)" />
-        <img src="~/StaticFiles/@Model.ImageArray[1]" onclick="SetDisplayPic(1)" />
-        <img src="~/StaticFiles/@Model.ImageArray[2]" onclick="SetDisplayPic(2)" />
-        <img src="~/StaticFiles/@Model.ImageArray[3]" onclick="SetDisplayPic(3)" />
+        <img src="~/StaticFiles/@Model.ImageArray[0]" onclick="SetDisplayPic('/StaticFiles/@Model.ImageArray[0]')" />
+        <img src="~/StaticFiles/@Model.ImageArray[1]" onclick="SetDisplayPic('/StaticFiles/@Model.ImageArray[1]')" />
+        <img src="~/StaticFiles/@Model.ImageArray[2]" onclick="SetDisplayPic('/StaticFiles/@Model.ImageArray[2]')" />
+        <img src="~/StaticFiles/@Model.ImageArray[3]" onclick="SetDisplayPic('/StaticFiles/@Model.ImageArray[3]')" />
     </div>
 </div>
 
@@ -19,7 +19,7 @@
     <div class="productOptionsDiv">
         <h1>@Model.Brand</h1>
         <h2>@Model.Model</h2>
-        <p>@Model.ArticleNum</p>
+        <p id="artNr">Art. nr @Model.ArticleNum</p>
     </div>
     <div class="productDescriptionDiv">
 

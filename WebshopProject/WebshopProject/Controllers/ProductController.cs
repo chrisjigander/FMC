@@ -35,9 +35,22 @@ namespace WebshopProject.Controllers
 
         public IActionResult ProductItem(string id)
         {
-            ProductProductItemVM productToView = webShopDBContext.GetProductToView(id);
+            if (id.Length == 4 || id.Length == 6)
+            {
+                ProductProductItemVM productToView = webShopDBContext.GetProductToView(id);
+                return View(productToView);
 
-            return View(productToView);
+            }
+            else
+            {
+                return View();//FEL!
+            }
+
+        }
+        [HttpGet]
+        public IActionResult GetPicture(string id)
+        {
+            return PartialView("_PictureDivPartial", new ProductPictureDivPartialVM {PictureUrl = id });
         }
     }
 }

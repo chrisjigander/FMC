@@ -2,18 +2,20 @@
     font-family: 'lato-light';
     src: url('lato-light.ttf') format('truetype');
 }
+
 @font-face {
     font-family: 'theanooldstyle-regular';
     src: url('theanooldstyle-regular.ttf') format('truetype');
 }
 
-html{
+html {
     height: 100%;
     box-sizing: border-box;
 }
+
 *,
 *:before,
-*:after{
+*:after {
     box-sizing: inherit;
 }
 
@@ -104,7 +106,7 @@ h1 {
         padding: 4px;
         padding-right: 14px;
     }
-    
+
 .userAndCartDiv {
     height: 230px;
     width: 250px;
@@ -167,6 +169,7 @@ h1 {
     display: inline-block;
     margin-right: 24px;
 }
+
     .frontpageLeftDiv img {
         width: 500px;
         margin-bottom: 24px;
@@ -180,11 +183,59 @@ h1 {
     display: inline-block;
 }
 
-.frontpageRightDiv img {
-    width: 500px;
-    margin-bottom: 24px;
-    display: block;
+    .frontpageRightDiv img {
+        width: 500px;
+        margin-bottom: 24px;
+        display: block;
+    }
+
+/****************************************   PRODUCT ITEM PAGE   ********************************************/
+
+.pictureDiv {
+    width: 56%;
+    display: inline-block;
 }
+
+.mainPictureDiv {
+    display: inline-block;
+}
+
+    .mainPictureDiv img {
+        width: 500px;
+    }
+
+.miniPicturesDiv {
+    display: inline-block;
+    vertical-align: top;
+}
+
+    .miniPicturesDiv img {
+        border: 1px outset;
+        border-radius: 2px;
+        margin: 5px;
+        width: 50px;
+        display: block;
+    }
+
+.productContentDiv {
+    display: inline-block;
+    width: 40%;
+    vertical-align: top;
+    padding-left: 50px;
+}
+
+.productContentDiv h1, h2 {
+    font-family: lato-light;
+    margin: 0;
+}
+
+.productContentDiv #artNr {
+    font-size: 10px;
+    margin: 0;
+}
+
+
+
 
 /****************************************   FOOTER   ********************************************/
 .pageFoot {
@@ -251,11 +302,10 @@ h1 {
 
 /*****************************    Logged In   ***************************************/
 
-.loggedInDiv a,p {
+.loggedInDiv a, p {
     color: var(--dark-grey);
     text-decoration: none;
     font-family: 'lato-light';
-    
 }
 
     .loggedInDiv a:hover {
@@ -265,13 +315,13 @@ h1 {
 
 #logOut {
     color: var(--base-color);
-    position:absolute;
+    position: absolute;
     bottom: 3px;
 }
 
-#logOut:hover {
-    color: var(--light-grey);
-}
+    #logOut:hover {
+        color: var(--light-grey);
+    }
 
 /*****************************    PROFILE       ***************************************/
 
@@ -285,32 +335,33 @@ h1 {
     font-family: 'lato-light';
 }
 
-.profileSidebarMenuDiv #profileUL {
-    list-style: none;
+    .profileSidebarMenuDiv #profileUL {
+        list-style: none;
+    }
+
+        .profileSidebarMenuDiv #profileUL a {
+            text-decoration: none;
+            color: var(--dark-grey);
+        }
+
+.profileContentDiv {
+    width: 800px;
+    color: black;
+    display: inline-block;
 }
-
-    .profileSidebarMenuDiv #profileUL a {
-        text-decoration: none;
-        color: var(--dark-grey);
-        
-    }
-
-    .profileContentDiv {
-        width: 800px;
-        color: black;
-        display: inline-block;
-    }
 
 
 /*****************************    View Profil   ***************************************/
 #ProfileDiv {
     font-family: 'lato-light';
 }
-#ProfileDiv h1 {
-    color: var(--base-color);
-    font-family: 'lato-light';
-}
-tr.strongTR>td {
+
+    #ProfileDiv h1 {
+        color: var(--base-color);
+        font-family: 'lato-light';
+    }
+
+tr.strongTR > td {
     padding-top: 40px;
 }
 /*****************************    Edit Profile Form   ***************************************/
@@ -325,8 +376,7 @@ tr.strongTR>td {
     position: relative;
 }
 
-.dividedDiv .saveButtonEditProfile{
-    position: absolute;
-    right: 4px;
-}
-
+    .dividedDiv .saveButtonEditProfile {
+        position: absolute;
+        right: 4px;
+    }

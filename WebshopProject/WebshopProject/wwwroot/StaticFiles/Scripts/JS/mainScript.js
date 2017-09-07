@@ -123,5 +123,17 @@ function ProfileMenuOption(option) {
             break;
     }
 
+
+}
+
+function SetDisplayPic(source) {
+    
+    $.ajax({
+        url: "/Product/GetPicture?id=" + source,
+        type: "GET",
+        success: function (result) {
+            $(".mainPictureDiv").html(result);
+        }
+    });
 }
 
