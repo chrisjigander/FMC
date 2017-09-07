@@ -1,5 +1,27 @@
 ﻿@model ProductProductItemVM
 
-<h1>@Model.Brand</h1>
-<h2>@Model.Model</h2>
-<p>@Model.ArticleNum</p>
+
+
+
+<div class="pictureDiv">
+    <div class="mainPictureDiv">
+        <img id="displayPic" src="~/StaticFiles/@Model.ImageArray[Model.CurrentDisplayedPic]" />
+    </div>
+    <div class="miniPicturesDiv">
+        <img src="~/StaticFiles/@Model.ImageArray[0]" onclick="SetDisplayPic(0)" />
+        <img src="~/StaticFiles/@Model.ImageArray[1]" onclick="SetDisplayPic(1)" />
+        <img src="~/StaticFiles/@Model.ImageArray[2]" onclick="SetDisplayPic(2)" />
+        <img src="~/StaticFiles/@Model.ImageArray[3]" onclick="SetDisplayPic(3)" />
+    </div>
+</div>
+
+<div class="productContentDiv">
+    <div class="productOptionsDiv">
+        <h1>@Model.Brand</h1>
+        <h2>@Model.Model</h2>
+        <p>@Model.ArticleNum</p>
+    </div>
+    <div class="productDescriptionDiv">
+
+    </div>
+</div>

@@ -3,21 +3,22 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
-using WebshopProject.Models.VM;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using WebshopProject.Models.Entities;
 
+// For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+
 namespace WebshopProject.Controllers
 {
-    public class ProductController : Controller
+    public class AdminController : Controller
     {
         UserManager<IdentityUser> userManager;
         SignInManager<IdentityUser> signInManager;
         IdentityDbContext identityDbContext;
         WebShopDBContext webShopDBContext;
 
-        public ProductController(UserManager<IdentityUser> userManager,
+        public AdminController(UserManager<IdentityUser> userManager,
         SignInManager<IdentityUser> signInManager,
         IdentityDbContext identityDbContext, WebShopDBContext webShopDBContext)
         {
@@ -28,16 +29,24 @@ namespace WebshopProject.Controllers
         }
 
 
-        public IActionResult GetDropDownMenu()
+        public IActionResult Create()
         {
-            return PartialView("_DropDownMenuPartial");
+            return View();
         }
 
-        public IActionResult ProductItem(string id)
+        public IActionResult Read()
         {
-            ProductProductItemVM productToView = webShopDBContext.GetProductToView(id);
+            return View();
+        }
 
-            return View(productToView);
+        public IActionResult Update()
+        {
+            return View();
+        }
+
+        public IActionResult Delete()
+        {
+            return View();
         }
     }
 }

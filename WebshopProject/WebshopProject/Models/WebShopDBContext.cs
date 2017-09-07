@@ -97,8 +97,8 @@ namespace WebshopProject.Models.Entities
                 Price = currentProduct.ProdPrice,
                 Model = prodModel,
                 Brand = prodBrand,
-                SizeArray = sizeArray
-
+                SizeArray = sizeArray,
+                CurrentDisplayedPic = 0
             };
 
         }
@@ -113,14 +113,14 @@ namespace WebshopProject.Models.Entities
             {
                 for (int i = 1; i < 5; i++)
                 {
-                    imageFileList.Add(shortArticleNum + "_" + i + ".jpg");
+                    imageFileList.Add(shortArticleNum + "_" + i + ".JPG");
 
                 }
 
             }
             else
             {
-                imageFileList.Add(shortArticleNum + "_" + 1 + ".jpg");
+                imageFileList.Add(shortArticleNum + "_" + 1 + ".JPG");
 
             }
 
