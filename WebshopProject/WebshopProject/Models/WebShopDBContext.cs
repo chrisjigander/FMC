@@ -10,7 +10,6 @@ namespace WebshopProject.Models.Entities
 {
     public partial class WebShopDBContext
     {
-        public virtual DbSet<User> User { get; set; }
 
         public WebShopDBContext(DbContextOptions<WebShopDBContext> options) : base(options)
         {
@@ -75,6 +74,90 @@ namespace WebshopProject.Models.Entities
             currentUser.Phonenumber = editedUser.PhoneNumber;
             currentUser.Email = editedUser.Email;
             SaveChanges();
+        }
+
+
+        internal ProductProductItemVM GetProductToView(string articleNum)
+        {
+            Product currentProduct = this.Product.First(p => p.ProdArtNr == articleNum);
+            var colorArray = GetAllColors(currentProduct.ProdBrandId, currentProduct.ProdModelId);
+            var sizeArray = GetAllSizes(currentProduct.ProdBrandId, currentProduct.ProdModelId);
+            var imageArray = GetAllImages(articleNum);
+
+            var prodModel = Model.First(m => m.ModelId == currentProduct.ProdModelId).ModelName;
+            var prodBrand = Brand.First(b => b.BrandId == currentProduct.ProdBrandId).BrandName;
+
+
+            return new ProductProductItemVM
+            {
+                ArticleNum = currentProduct.ProdArtNr,
+                ColorArray = colorArray,
+                Description = currentProduct.ProdDescription,
+                ImageArray = imageArray,
+                Price = currentProduct.ProdPrice,
+                Model = prodModel,
+                Brand = prodBrand,
+                SizeArray = sizeArray
+
+            };
+
+        }
+
+        private string[] GetAllImages(string articleNum)
+        {
+            List<string> imageFileList = new List<string>();
+            string shortArticleNum = articleNum;
+            shortArticleNum = shortArticleNum.Remove(articleNum.Length - 2); //Plocka ut
+
+            if (articleNum[0] == '1')
+            {
+                for (int i = 1; i < 5; i++)
+                {
+                    imageFileList.Add(shortArticleNum + "_" + i + ".jpg");
+
+                }
+
+            }
+            else
+            {
+                imageFileList.Add(shortArticleNum + "_" + 1 + ".jpg");
+
+            }
+
+            return imageFileList.ToArray();
+
+        }
+
+        private string[] GetAllSizes(int brand, int model)
+        {
+            List<string> sizeList = new List<string>();
+            Product[] productArray = Product.Where(p => p.ProdBrandId == brand).Where(p => p.ProdModelId == model).ToArray();
+
+            foreach (var product in productArray)
+            {
+                if (product.ProdQty > 0)
+                {
+                    sizeList.Add(Size.First(s => s.SizeId == product.ProdSizeId).SizeName);
+                }
+            }
+
+            return sizeList.ToArray();
+        }
+
+        private string[] GetAllColors(int brand, int model)
+        {
+            List<string> colorList = new List<string>();
+            Product[] productArray = Product.Where(p => p.ProdBrandId == brand).Where(p => p.ProdModelId == model).ToArray();
+
+            foreach (var product in productArray)
+            {
+                if (product.ProdQty > 0)
+                {
+                    colorList.Add(Color.First(s => s.ColorId == product.ProdColorId).ColorName);
+                }
+            }
+
+            return colorList.ToArray();
         }
     }
 }
