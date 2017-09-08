@@ -52,8 +52,8 @@ namespace WebshopProject.Controllers
             }
             else if(id.StartsWith('2'))
             {
-                ProductProductItemVM productToVieW = webShopDBContext.GetAccessoriesView(id);
-                return View(productToVieW);
+                //ProductProductItemVM productToVieW = webShopDBContext.GetAccessoriesView(id);
+                return View();
             }
             else
             {
