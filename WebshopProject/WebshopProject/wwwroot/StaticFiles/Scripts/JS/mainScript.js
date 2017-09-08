@@ -12,10 +12,20 @@ $(".userAndCartDiv").click(function (e) {
     e.stopPropagation();
 });
 
+$("#menuList").click(function (e) {
+    e.stopPropagation();
+    ShowMenu();
+})
+
+$(".dropDownMenu").click(function (e) {
+    e.stopPropagation();
+})
+
 $(document).click(function () {
     loginIsDisplayed = true;
-
+    menuIsDisplayed = true;
     ShowLogin();
+    ShowMenu();
 });
 
 function ShowLogin() {
@@ -44,6 +54,8 @@ function ShowLogin() {
 }
 
 function ShowMenu(id) {
+
+    console.log(menuIsDisplayed);
 
     if (menuIsDisplayed === false) {
 
@@ -138,6 +150,23 @@ function SetDisplayPic(source) {
 }
 
 $("#colorDropDown").change(function () {
-    
+
+    colorId = $("#colorDropDown").val();
+    var tmp = window.location.href;
+    window.location.href = tmp.substring(0, tmp.length - 1) + colorId;
+
 });
 
+
+function GetSelectedProduct(id) {
+
+    window.location.href = window.location.href + "/Product/ProductItem/" + id;
+
+    $.ajax({
+        url: "/Product/ProductItem?id=" + id,
+        type: "GET",
+        success: function (result) {
+            $(".productPage").html(result);
+        }
+    });
+}
