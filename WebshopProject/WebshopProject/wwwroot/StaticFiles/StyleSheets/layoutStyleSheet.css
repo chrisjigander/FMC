@@ -34,6 +34,11 @@ body {
     color: var(--dark-grey);
 }
 
+hr {
+    background-color: var(--base-color);
+    margin: 0;
+}
+
 h1 {
     font-family: 'theanooldstyle-regular';
 }
@@ -243,11 +248,45 @@ h1 {
     margin: 0;
 }
 
+#priceSpan {
+    float: right;
+}
+
 .productContentDiv #artNr {
     font-size: 10px;
     margin: 0;
+    margin-bottom: 20px;
 }
 
+.productContentDiv label, select {
+    font-family: lato-light;
+}
+
+#sizeDropDown {
+    margin-right: 20px;
+}
+
+#placeOrderBtn {
+    margin-top: 30px;
+    margin-bottom: 30px;
+    width: 90%;
+    font-family: lato-light;
+    background-color: var(--base-color);
+    color: var(--light-grey);
+    font-size: 18px;
+    font-weight: bold;
+    height: 50px;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+
+}
+
+
+.productDescriptionDiv {
+    font-family: lato-light;
+    margin-bottom: 30px;
+}
 
 
 

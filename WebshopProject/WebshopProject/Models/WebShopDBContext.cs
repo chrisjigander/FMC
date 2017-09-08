@@ -1,4 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.AspNetCore.Mvc.Rendering;
+using Microsoft.EntityFrameworkCore;
 using Newtonsoft.Json.Linq;
 using System;
 using System.Collections.Generic;
@@ -83,7 +84,7 @@ namespace WebshopProject.Models.Entities
             string artNrShort;
             if (articleNum.Length == 4)
             {
-                Product product = this.Product.Where(p => p.ProdArtNr.StartsWith(articleNum)).Where(p => p.ProdQty > 0).Single();
+                Product product = this.Product.Where(p => p.ProdArtNr.StartsWith(articleNum)).Where(p => p.ProdQty > 0).First();
                 //string sizeString = product.ProdId.ToString();
                 artNrLong = product.ProdArtNr;
 
@@ -97,7 +98,7 @@ namespace WebshopProject.Models.Entities
 
             Product currentProduct = this.Product.First(p => p.ProdArtNr == artNrLong);
             var colorArray = GetAllColors(currentProduct.ProdBrandId, currentProduct.ProdModelId);
-            var sizeArray = GetAllSizes(currentProduct.ProdBrandId, currentProduct.ProdModelId);
+            var sizeArray = GetAllSizes(currentProduct.ProdBrandId, currentProduct.ProdModelId, colorArray[0].Text);
             var imageArray = GetAllImages(artNrLong);
 
             var prodModel = Model.First(m => m.ModelId == currentProduct.ProdModelId).ModelName;
@@ -110,7 +111,7 @@ namespace WebshopProject.Models.Entities
                 ColorArray = colorArray,
                 Description = currentProduct.ProdDescription,
                 ImageArray = imageArray,
-                Price = currentProduct.ProdPrice,
+                Price = Convert.ToInt32(currentProduct.ProdPrice),
                 Model = prodModel,
                 Brand = prodBrand,
                 SizeArray = sizeArray,
@@ -143,32 +144,58 @@ namespace WebshopProject.Models.Entities
 
         }
 
-        private string[] GetAllSizes(int brand, int model)
+        private SelectListItem[] GetAllSizes(int brand, int model, string color)
         {
-            List<string> sizeList = new List<string>();
+            int counter = 1;
+            int colorId = Color.First(c => c.ColorName == color).ColorId;
+            List<SelectListItem> sizeList = new List<SelectListItem>();
             Product[] productArray = Product.Where(p => p.ProdBrandId == brand).Where(p => p.ProdModelId == model).ToArray();
 
             foreach (var product in productArray)
             {
-                if (product.ProdQty > 0)
+                if (product.ProdQty > 0 && product.ProdColorId == colorId)
                 {
-                    sizeList.Add(Size.First(s => s.SizeId == product.ProdSizeId).SizeName);
+                    sizeList.Add(new SelectListItem { Text = Size.First(s => s.SizeId == product.ProdSizeId).SizeName, Value = counter++.ToString() });
                 }
             }
 
             return sizeList.ToArray();
         }
 
-        private string[] GetAllColors(int brand, int model)
+        private SelectListItem[] GetAllColors(int brand, int model)
         {
-            List<string> colorList = new List<string>();
+            int counter = 1;
+            List<SelectListItem> colorList = new List<SelectListItem>();
             Product[] productArray = Product.Where(p => p.ProdBrandId == brand).Where(p => p.ProdModelId == model).ToArray();
+
+            List<int> checkedProductList = new List<int>();
 
             foreach (var product in productArray)
             {
                 if (product.ProdQty > 0)
                 {
-                    colorList.Add(Color.First(s => s.ColorId == product.ProdColorId).ColorName);
+                    if (checkedProductList.Count > 0)
+                    {
+                        int iterationCount = 0;
+
+                        foreach (var item in checkedProductList)
+                        {
+                            if (item == product.ProdColorId)
+                            {
+                                iterationCount++;
+                            }
+                        }
+                        if (iterationCount == 0)
+                        {
+                            colorList.Add(new SelectListItem { Text = Color.First(s => s.ColorId == product.ProdColorId).ColorName, Value = counter++.ToString() });
+                            checkedProductList.Add(product.ProdColorId);
+                        }
+                    }
+                    else
+                    {
+                        colorList.Add(new SelectListItem { Text = Color.First(s => s.ColorId == product.ProdColorId).ColorName, Value = counter++.ToString() });
+                        checkedProductList.Add(product.ProdColorId);
+                    }
                 }
             }
 

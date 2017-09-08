@@ -17,11 +17,26 @@
 
 <div class="productContentDiv">
     <div class="productOptionsDiv">
-        <h1>@Model.Brand</h1>
+        <h1>@Model.Brand <span id="priceSpan">@Model.Price kr</span></h1>
         <h2>@Model.Model</h2>
         <p id="artNr">Art. nr @Model.ArticleNum</p>
+        <form class="placeOrderForm" asp-controller="Product" asp-action="ProductItem">
+
+            <label asp-for="SelectedSize"></label>
+            <select id="sizeDropDown" asp-for="SelectedSize"
+                    asp-items="Model.SizeArray"></select>
+
+            <label asp-for="SelectedColor"></label>
+            <select asp-for="SelectedColor"
+                    asp-items="Model.ColorArray"></select>
+            <br />
+            <center>
+                <button id="placeOrderBtn" type="submit"><span>Lägg i varukorg</span></button>
+            </center>
+        </form>
+        <hr />
     </div>
     <div class="productDescriptionDiv">
-
+        @Model.Description
     </div>
 </div>
