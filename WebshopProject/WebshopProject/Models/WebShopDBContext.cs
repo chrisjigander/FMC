@@ -82,7 +82,7 @@ namespace WebshopProject.Models.Entities
         {
             string artNrShort;
             int specificColor = int.Parse(articleNum[4].ToString());
-            
+
             if (articleNum.Length == 5)
             {
                 Product product = this.Product.Where(p => p.ProdArtNr.StartsWith(articleNum)).Where(p => p.ProdQty > 0).First();
@@ -94,15 +94,15 @@ namespace WebshopProject.Models.Entities
                 artNrShort = articleNum.Remove(articleNum.Length - 2);
             }
 
-            Product currentProduct = this.Product.First(p => p.ProdArtNr.Remove(p.ProdArtNr.Length-2) == artNrShort);
-            var colorArray = GetAllColors( artNrShort.Remove(artNrShort.Length-1));
+            Product currentProduct = this.Product.First(p => p.ProdArtNr.Remove(p.ProdArtNr.Length - 2) == artNrShort);
+            var colorArray = GetAllColors(artNrShort.Remove(artNrShort.Length - 1));
             var sizeArray = GetAllSizes(currentProduct.ProdBrandId, currentProduct.ProdModelId, colorArray.First(c => c.Value == specificColor.ToString()).Text);
             var imageArray = GetAllImages(artNrShort);
 
             var prodModel = Model.First(m => m.ModelId == currentProduct.ProdModelId).ModelName;
             var prodBrand = Brand.First(b => b.BrandId == currentProduct.ProdBrandId).BrandName;
 
-            var ret= new ProductProductItemVM
+            var ret = new ProductProductItemVM
             {
                 ArticleNum = artNrShort,
                 ColorArray = colorArray,
@@ -159,11 +159,10 @@ namespace WebshopProject.Models.Entities
             return sizeList.ToArray();
         }
 
-        private SelectListItem[] GetAllColors(/*int brand, int model*/ string artNr)
+        private SelectListItem[] GetAllColors(string artNr)
         {
             List<SelectListItem> colorList = new List<SelectListItem>();
-            //Product[] productArray = Product.Where(p => p.ProdBrandId == brand).Where(p => p.ProdModelId == model).ToArray();
-            Product[] productArray = Product.Where(p => p.ProdArtNr.Remove(p.ProdArtNr.Length-3) == artNr).ToArray();
+            Product[] productArray = Product.Where(p => p.ProdArtNr.Remove(p.ProdArtNr.Length - 3) == artNr).ToArray();
             List<int> checkedProductList = new List<int>();
 
             foreach (var product in productArray)
@@ -196,6 +195,56 @@ namespace WebshopProject.Models.Entities
             }
 
             return colorList.ToArray();
+        }
+        internal ProductProductOverviewVM GetOverview()
+        {
+            List<ProductThumbnail> thumbnailList = new List<ProductThumbnail>();
+
+            List<Product> listOfRelevantProducts = new List<Entities.Product>();
+
+            foreach (var item in Product)
+            {
+                if (listOfRelevantProducts.Count == 0)
+                {
+                    listOfRelevantProducts.Add(item);
+                }
+                else
+                {
+                    bool productFound = false;
+
+                    foreach (var product in listOfRelevantProducts)
+                    {
+                        if (product.ProdArtNr.Substring(0, 5) == item.ProdArtNr.Substring(0, 5))
+                        {
+                            productFound = true;
+                            break;
+                        }
+
+                    }
+                    if (!productFound)
+                    {
+                        listOfRelevantProducts.Add(item);
+
+                    }
+                }
+            }
+
+            foreach (var item in listOfRelevantProducts)
+            {
+                string brandName = Brand.FirstOrDefault(b => b.BrandId == item.ProdBrandId).BrandName;
+                string modelName = Model.FirstOrDefault(m => m.ModelId == item.ProdModelId).ModelName;
+                thumbnailList.Add(new ProductThumbnail
+                {
+                    ImgPath = $"{item.ProdArtNr.Remove(item.ProdArtNr.Length - 2)}_1.jpg",
+                    ArticleNrShort = item.ProdArtNr.Substring(0, 5),
+                    Brand = brandName,
+                    Model = modelName,
+                    Price = Convert.ToInt32(item.ProdPrice)
+                
+                });
+
+            }
+            return new ProductProductOverviewVM { ProdThumbnails = thumbnailList.ToArray() };
         }
     }
 }

@@ -1,6 +1,8 @@
 ﻿using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata;
+using WebshopProject.Models.VM;
+using System.Collections.Generic;
 
 namespace WebshopProject.Models.Entities
 {
@@ -157,5 +159,7 @@ namespace WebshopProject.Models.Entities
                 entity.Property(e => e.Zipcode).HasMaxLength(5);
             });
         }
+
+
     }
 }

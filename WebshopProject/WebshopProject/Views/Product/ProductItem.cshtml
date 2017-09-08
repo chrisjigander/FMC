@@ -1,42 +1,43 @@
 ﻿@model ProductProductItemVM
 
 
+<div class="productContentWrapperDiv">
 
-
-<div class="pictureDiv">
-    <div class="mainPictureDiv">
-        <img id="displayPic" src="~/StaticFiles/@Model.ImageArray[0]" />
+    <div class="pictureDiv">
+        <div class="mainPictureDiv">
+            <img id="displayPic" src="~/StaticFiles/@Model.ImageArray[0]" />
+        </div>
+        <div class="miniPicturesDiv">
+            <img src="~/StaticFiles/@Model.ImageArray[0]" onclick="SetDisplayPic('/StaticFiles/@Model.ImageArray[0]')" />
+            <img src="~/StaticFiles/@Model.ImageArray[1]" onclick="SetDisplayPic('/StaticFiles/@Model.ImageArray[1]')" />
+            <img src="~/StaticFiles/@Model.ImageArray[2]" onclick="SetDisplayPic('/StaticFiles/@Model.ImageArray[2]')" />
+            <img src="~/StaticFiles/@Model.ImageArray[3]" onclick="SetDisplayPic('/StaticFiles/@Model.ImageArray[3]')" />
+        </div>
     </div>
-    <div class="miniPicturesDiv">
-        <img src="~/StaticFiles/@Model.ImageArray[0]" onclick="SetDisplayPic('/StaticFiles/@Model.ImageArray[0]')" />
-        <img src="~/StaticFiles/@Model.ImageArray[1]" onclick="SetDisplayPic('/StaticFiles/@Model.ImageArray[1]')" />
-        <img src="~/StaticFiles/@Model.ImageArray[2]" onclick="SetDisplayPic('/StaticFiles/@Model.ImageArray[2]')" />
-        <img src="~/StaticFiles/@Model.ImageArray[3]" onclick="SetDisplayPic('/StaticFiles/@Model.ImageArray[3]')" />
-    </div>
-</div>
 
-<div class="productContentDiv">
-    <div class="productOptionsDiv">
-        <h1>@Model.Brand <span id="priceSpan">@Model.Price kr</span></h1>
-        <h2>@Model.Model</h2>
-        <p id="artNr">Art. nr @Model.ArticleNum</p>
-        <form class="placeOrderForm" asp-controller="Product" asp-action="ProductItem">
+    <div class="productContentDiv">
+        <div class="productOptionsDiv">
+            <h1>@Model.Brand <span id="priceSpan">@Model.Price kr</span></h1>
+            <h2>@Model.Model</h2>
+            <p id="artNr">Art. nr @Model.ArticleNum</p>
+            <form class="placeOrderForm" asp-controller="Product" asp-action="ProductItem">
 
-            <label asp-for="SelectedSize"></label>
-            <select id="sizeDropDown" asp-for="SelectedSize"
-                    asp-items="Model.SizeArray"></select>
+                <label asp-for="SelectedSize"></label>
+                <select id="sizeDropDown" asp-for="SelectedSize"
+                        asp-items="Model.SizeArray"></select>
 
-            <label asp-for="SelectedColor"></label>
-            <select id="colorDropDown" asp-for="SelectedColor"
-                    asp-items="Model.ColorArray"></select>
-            <br />
-            <center>
-                <button id="placeOrderBtn" type="submit"><span>Lägg i varukorg</span></button>
-            </center>
-        </form>
-        <hr />
-    </div>
-    <div class="productDescriptionDiv">
-        @Model.Description
+                <label asp-for="SelectedColor"></label>
+                <select id="colorDropDown" asp-for="SelectedColor"
+                        asp-items="Model.ColorArray"></select>
+                <br />
+                <center>
+                    <button id="placeOrderBtn" type="submit"><span>Lägg i varukorg</span></button>
+                </center>
+            </form>
+            <hr />
+        </div>
+        <div class="productDescriptionDiv">
+            @Model.Description
+        </div>
     </div>
 </div>

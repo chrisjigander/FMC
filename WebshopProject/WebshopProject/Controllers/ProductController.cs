@@ -59,5 +59,12 @@ namespace WebshopProject.Controllers
         {
             return null;
         }
+
+        public IActionResult ProductOverview()
+        {
+            ProductProductOverviewVM overviewVM = webShopDBContext.GetOverview();
+
+            return View(overviewVM);
+        }
     }
 }

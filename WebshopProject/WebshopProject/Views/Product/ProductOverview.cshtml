@@ -1,0 +1,16 @@
+﻿@model ProductProductOverviewVM
+
+<div class="productOverviewDiv">
+    @foreach (var item in @Model.ProdThumbnails)
+    {
+
+        <div class="productElementDiv">
+            <a asp-controller="Product" asp-action="ProductItem" asp-route-id="@item.ArticleNrShort">
+                <img src="~/StaticFiles/@item.ImgPath" />
+                <p id="elementBrand">@item.Brand<span id="elementPrice">@item.Price kr</span></p>
+                <p id="elementModel">@item.Model</p>
+            </a>
+        </div>
+
+    }
+</div>

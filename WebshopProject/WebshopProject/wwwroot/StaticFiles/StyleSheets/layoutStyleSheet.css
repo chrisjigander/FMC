@@ -169,8 +169,8 @@ h1 {
 .frontpageLeftDiv {
     /*position: absolute;*/
     /*margin-left: 50px;
-    margin-right: 40px;
-    margin-top: 20px;*/
+    margin-right: 40px;*/
+    margin-top: 12px;
     display: inline-block;
     margin-right: 24px;
 }
@@ -181,6 +181,7 @@ h1 {
         display: block;
         -webkit-transition: all 0.3s ease;
         transition: all 0.3s ease;
+        border-radius: 3px;
     }
 
     .frontpageLeftDiv img:hover {
@@ -190,8 +191,7 @@ h1 {
 
 
 .frontpageRightDiv {
-    /*position: absolute;*/
-    /*margin-top: 20px;*/
+    margin-top: 12px;
     display: inline-block;
 }
 
@@ -201,6 +201,7 @@ h1 {
         display: block;
         -webkit-transition: all 0.3s ease;
         transition: all 0.3s ease;
+        border-radius: 3px;
     }
 
 .frontpageRightDiv img:hover {
@@ -208,7 +209,72 @@ h1 {
     transform: scale(1.03);
 }
 
+/****************************************   PRODUCT OVERVIEW PAGE   ********************************************/
+
+
+
+.productOverviewDiv {
+    width: 100%;
+    text-align: center;
+    margin-top: 12px;
+}
+
+.productElementDiv {
+    display: inline-block;
+    width: 20%;
+    margin: 1% 2%;
+    padding: 0 1%;
+    text-align: left;
+    border: 1px outset;
+    border-radius: 2%;
+    -webkit-transition: all 0.3s ease;
+    transition: all 0.3s ease;
+}
+
+.productElementDiv:hover {
+    -webkit-transform: scale(1.05);
+    transform: scale(1.05);
+}
+
+.productOverviewDiv a{
+    text-decoration: none;
+    outline: none;
+}
+
+
+.productElementDiv img{
+    width: 100%;
+}
+
+#elementBrand {
+    font-family: lato-light;
+    color: var(--dark-grey);
+    font-weight: bold;
+    font-size: 110%;
+    margin: 0;
+}
+
+#elementPrice {
+    font-family: lato-light;
+    color: var(--dark-grey);
+    float: right;
+    margin-bottom:0;
+}
+
+#elementModel {
+    font-family: lato-light;
+    color: var(--dark-grey);
+    margin: 0;
+    margin-top: 1%;
+    margin-bottom: 9%;
+
+}
+
 /****************************************   PRODUCT ITEM PAGE   ********************************************/
+
+.productContentWrapperDiv {
+    height: 600px;
+}
 
 .pictureDiv {
     width: 56%;
@@ -228,13 +294,15 @@ h1 {
     vertical-align: top;
 }
 
-    .miniPicturesDiv img {
-        border: 1px outset;
-        border-radius: 2px;
-        margin: 5px;
-        width: 50px;
-        display: block;
-    }
+.miniPicturesDiv img {
+    border: 1px outset;
+    border-radius: 2px;
+    margin: 5px;
+    width: 50px;
+    display: block;
+    margin-top: 32%;
+    cursor: pointer;
+}
 
 .productContentDiv {
     display: inline-block;
@@ -286,6 +354,7 @@ h1 {
 .productDescriptionDiv {
     font-family: lato-light;
     margin-bottom: 30px;
+    margin-top: 20px;
 }
 
 
@@ -324,11 +393,10 @@ h1 {
     .pageFoot .copyFoot {
         height: 30px;
         background-color: var(--background-grey);
-        /*border-top: 1px solid var(--background-grey);*/
         color: var(--base-color);
         text-align: center;
         font-size: 14px;
-        padding-top: 12px;
+        padding-top: 0.2%;
     }
 
 /*****************************    Log In   ***************************************/
