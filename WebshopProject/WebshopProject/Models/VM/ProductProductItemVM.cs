@@ -15,10 +15,16 @@ namespace WebshopProject.Models.VM
         public string[] ImageArray { get; set; }
         public string Brand { get; set; }
         public string Model { get; set; }
+
+
+
         public SelectListItem[] ColorArray { get; set; }
 
         [Display(Name = "Färg: ")]
         public string SelectedColor { get; set; }
+
+
+
         public SelectListItem[] SizeArray { get; set; }
 
         [Display(Name = "Storlek: ")]

@@ -35,9 +35,10 @@ namespace WebshopProject.Controllers
 
         public IActionResult ProductItem(string id)
         {
-            if (id.Length == 4 || id.Length == 6)
+            if (id.Length == 5 || id.Length == 7)
             {
                 ProductProductItemVM productToView = webShopDBContext.GetProductToView(id);
+                
                 return View(productToView);
 
             }
@@ -47,10 +48,16 @@ namespace WebshopProject.Controllers
             }
 
         }
+
         [HttpGet]
         public IActionResult GetPicture(string id)
         {
             return PartialView("_PictureDivPartial", new ProductPictureDivPartialVM {PictureUrl = id });
+        }
+
+        public IActionResult ReloadProductItem()
+        {
+            return null;
         }
     }
 }
