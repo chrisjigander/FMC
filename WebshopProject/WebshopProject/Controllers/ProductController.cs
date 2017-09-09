@@ -7,6 +7,9 @@ using WebshopProject.Models.VM;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using WebshopProject.Models.Entities;
+using Microsoft.AspNetCore.Http;
+using WebshopProject.Models;
+using WebshopProject.Utils;
 
 namespace WebshopProject.Controllers
 {
@@ -16,6 +19,7 @@ namespace WebshopProject.Controllers
         SignInManager<IdentityUser> signInManager;
         IdentityDbContext identityDbContext;
         WebShopDBContext webShopDBContext;
+        
 
         public ProductController(UserManager<IdentityUser> userManager,
         SignInManager<IdentityUser> signInManager,
@@ -25,6 +29,7 @@ namespace WebshopProject.Controllers
             this.signInManager = signInManager;
             this.identityDbContext = identityDbContext;
             this.webShopDBContext = webShopDBContext;
+            
         }
 
 
@@ -56,12 +61,13 @@ namespace WebshopProject.Controllers
             return result;
         }
 
+        [HttpGet]
         public IActionResult ProductItem(string id)
         {
-
+            string articleCount = SessionUtils.GetSessionCount(this);
             if (id.Length == 5 || id.Length == 7)
             {
-                ProductProductItemVM productToView = webShopDBContext.GetProductToView(id);
+                ProductProductItemVM productToView = webShopDBContext.GetProductToView(id, articleCount);
 
                 return View(productToView);
 
@@ -71,6 +77,33 @@ namespace WebshopProject.Controllers
                 return View();//FEL!
             }
 
+        }
+
+        [HttpPost]
+        public IActionResult ProductItem(ProductProductItemVM addProductToCart)
+        {
+            string index = "-1";
+
+            for (int i = 0; i < 10; i++)
+            {
+                if (HttpContext.Session.GetString(i.ToString()) == null)
+                {
+                    index = i.ToString();
+                    break;
+                }
+            }
+
+            if (index == "-1")
+            {
+
+            }
+            else
+            {
+                HttpContext.Session.SetString(index, addProductToCart.ArticleNum + addProductToCart.SelectedSize);
+
+            }
+
+            return RedirectToAction(nameof(ProductItem), addProductToCart.ArticleNum);
         }
 
         [HttpGet]
@@ -90,6 +123,10 @@ namespace WebshopProject.Controllers
             ProductProductOverviewVM overviewVM = webShopDBContext.GetOverview(id);
 
             return View(overviewVM);
+        }
+        public string GetCartCount()
+        {
+            return SessionUtils.GetSessionCount(this);
         }
     }
 }

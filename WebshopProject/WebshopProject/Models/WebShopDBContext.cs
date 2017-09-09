@@ -78,7 +78,7 @@ namespace WebshopProject.Models.Entities
         }
 
 
-        internal ProductProductItemVM GetProductToView(string articleNum)
+        internal ProductProductItemVM GetProductToView(string articleNum, string articleCount)
         {
             string artNrShort;
             int specificColor = int.Parse(articleNum[4].ToString());
@@ -103,6 +103,7 @@ namespace WebshopProject.Models.Entities
             var prodModel = Model.First(m => m.ModelId == currentProduct.ProdModelId).ModelName;
             var prodBrand = Brand.First(b => b.BrandId == currentProduct.ProdBrandId).BrandName;
 
+            
             var ret = new ProductProductItemVM
             {
                 ArticleNum = artNrShort,
@@ -113,7 +114,8 @@ namespace WebshopProject.Models.Entities
                 Model = prodModel,
                 Brand = prodBrand,
                 SizeArray = sizeArray,
-                SelectedColor = specificColor.ToString()
+                SelectedColor = specificColor.ToString(),
+                ArticleCount = articleCount
             };
             return ret;
         }

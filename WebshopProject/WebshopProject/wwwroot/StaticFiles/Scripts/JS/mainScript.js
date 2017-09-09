@@ -2,6 +2,16 @@
 var menuIsDisplayed = false;
 var menuOption = 0;
 
+$(document).ready(function () {
+    $.ajax({
+        url: "/Product/GetCartCount/",
+        type: "GET",
+        success: function (result) {
+            $("#cartCount").html(result);
+        }
+    });
+})
+
 
 $("#userLogo").click(function (e) {
     e.stopPropagation();

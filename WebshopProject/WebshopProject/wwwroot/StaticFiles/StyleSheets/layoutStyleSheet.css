@@ -129,6 +129,17 @@ h1 {
     z-index: 1;
 }
 
+#cartCount{
+    color: white;
+    position:relative;
+    display: inline-block;
+    right: 39px;
+    top: 10px;
+    vertical-align: top;
+    /*margin-bottom: 10px;*/
+    z-index: 99;
+}
+
 .dropDownMenu {
     width: 1100px;
     margin-left: auto;
@@ -183,20 +194,20 @@ h1 {
 
 }
 
-    .guideContentDiv h1, h2 {
-        font-family: theanooldstyle-regular;
-        color: var(--base-color);
-    }
+.guideContentDiv h1, h2 {
+    font-family: theanooldstyle-regular;
+    color: var(--base-color);
+}
 
-    .guideContentDiv h3 {
-        font-family: lato-light;
-        color: var(--base-color);
-    }
+.guideContentDiv h3 {
+    font-family: lato-light;
+    color: var(--base-color);
+}
 
-    .guideContentDiv ol {
-        font-family: lato-light;
-        color: var(--base-grey);
-    }
+.guideContentDiv ol {
+    font-family: lato-light;
+    color: var(--base-grey);
+}
 
 
 

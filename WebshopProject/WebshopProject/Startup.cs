@@ -25,6 +25,7 @@ namespace WebshopProject
 
         public void ConfigureServices(IServiceCollection services)
         {
+
             services.AddDbContext<WebShopDBContext>(o => o.UseSqlServer(ConnString));
             services.AddDbContext<IdentityDbContext>(o => o.UseSqlServer(ConnString));
 
@@ -38,7 +39,8 @@ namespace WebshopProject
 
             services.ConfigureApplicationCookie(o => o.LoginPath = "/Account/Login");
 
-
+            services.AddSession();
+            services.AddMemoryCache();
             services.AddMvc();
         }
 
@@ -51,8 +53,9 @@ namespace WebshopProject
                 app.UseDeveloperExceptionPage();
             }
 
-            app.UseMvcWithDefaultRoute();
             app.UseStaticFiles();
+            app.UseSession();
+            app.UseMvcWithDefaultRoute();
         }
     }
 }
