@@ -95,6 +95,7 @@ namespace WebshopProject.Models.Entities
             }
 
             Product currentProduct = this.Product.First(p => p.ProdArtNr.Remove(p.ProdArtNr.Length - 2) == artNrShort);
+
             var colorArray = GetAllColors(artNrShort.Remove(artNrShort.Length - 1));
             var sizeArray = GetAllSizes(currentProduct.ProdBrandId, currentProduct.ProdModelId, colorArray.First(c => c.Value == specificColor.ToString()).Text);
             var imageArray = GetAllImages(artNrShort);
@@ -196,13 +197,13 @@ namespace WebshopProject.Models.Entities
 
             return colorList.ToArray();
         }
-        internal ProductProductOverviewVM GetOverview()
+
+        internal ProductProductOverviewVM GetOverview(char id)
         {
             List<ProductThumbnail> thumbnailList = new List<ProductThumbnail>();
-
             List<Product> listOfRelevantProducts = new List<Entities.Product>();
 
-            foreach (var item in Product)
+            foreach (var item in Product.Where(p => p.ProdArtNr.StartsWith(id)))
             {
                 if (listOfRelevantProducts.Count == 0)
                 {
@@ -245,6 +246,11 @@ namespace WebshopProject.Models.Entities
 
             }
             return new ProductProductOverviewVM { ProdThumbnails = thumbnailList.ToArray() };
+        }
+
+        internal ProductProductItemVM GetAccessoriesView(string id)
+        {
+            return null;
         }
     }
 }

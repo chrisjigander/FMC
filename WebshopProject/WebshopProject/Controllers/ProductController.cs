@@ -35,29 +35,17 @@ namespace WebshopProject.Controllers
 
         public IActionResult ProductItem(string id)
         {
-            if (id.StartsWith('1'))
+
+            if (id.Length == 5 || id.Length == 7)
             {
+                ProductProductItemVM productToView = webShopDBContext.GetProductToView(id);
 
-                if (id.Length == 5 || id.Length == 7)
-                {
-                    ProductProductItemVM productToView = webShopDBContext.GetProductToView(id);
+                return View(productToView);
 
-                    return View(productToView);
-
-                }
-                else
-                {
-                    return View();//FEL!
-                }
-            }
-            else if(id.StartsWith('2'))
-            {
-                //ProductProductItemVM productToVieW = webShopDBContext.GetAccessoriesView(id);
-                return View();
             }
             else
             {
-                return View();
+                return View();//FEL!
             }
 
         }
@@ -66,7 +54,7 @@ namespace WebshopProject.Controllers
         public IActionResult GetPicture(string id)
         {
 
-            return PartialView("_PictureDivPartial", new ProductPictureDivPartialVM {PictureUrl = id });
+            return PartialView("_PictureDivPartial", new ProductPictureDivPartialVM { PictureUrl = id });
         }
 
         public IActionResult ReloadProductItem()
@@ -74,9 +62,9 @@ namespace WebshopProject.Controllers
             return null;
         }
 
-        public IActionResult ProductOverview()
+        public IActionResult ProductOverview(char id)
         {
-            ProductProductOverviewVM overviewVM = webShopDBContext.GetOverview();
+            ProductProductOverviewVM overviewVM = webShopDBContext.GetOverview(id);
 
             return View(overviewVM);
         }
