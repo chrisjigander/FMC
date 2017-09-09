@@ -1,1 +1,10 @@
-﻿
+﻿@model DropdownVM
+
+<h2>@Model.DropdownMenuTitle</h2>
+<hr />
+<div class="dropDownLinksDiv">
+    @foreach (var item in Model.DropDownLinks)
+    {
+        <a href="">@item</a>
+    }
+</div>

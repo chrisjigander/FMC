@@ -12,16 +12,18 @@ $(".userAndCartDiv").click(function (e) {
     e.stopPropagation();
 });
 
-$("#menuList").click(function (e) {
-    e.stopPropagation();
-    ShowMenu();
-})
+//$("#menuList").click(function (e) {
+//    e.stopPropagation();
+//    menuIsDisplayed = false;
+//    ShowMenu();
+//})
 
 $(".dropDownMenu").click(function (e) {
     e.stopPropagation();
 })
 
-$(document).click(function () {
+$(document).click(function (e) {
+    //e.stopPropagation();
     loginIsDisplayed = true;
     menuIsDisplayed = true;
     ShowLogin();
@@ -29,9 +31,7 @@ $(document).click(function () {
 });
 
 function ShowLogin() {
-
-
-
+    
     if (loginIsDisplayed === false) {
 
         $(".userAndCartDiv").css('display', 'block');
@@ -56,12 +56,12 @@ function ShowLogin() {
 function ShowMenu(id) {
 
     console.log(menuIsDisplayed);
-
+    console.log(id);
     if (menuIsDisplayed === false) {
 
         $(".dropDownMenu").css('display', 'block');
         $.ajax({
-            url: "/Product/GetDropDownMenu",
+            url: "/Product/GetDropDownMenu/" + id,
             type: "GET",
             success: function (result) {
                 $(".dropDownMenu").html(result);
@@ -77,6 +77,10 @@ function ShowMenu(id) {
             $(".dropDownMenu").html("");
             menuIsDisplayed = false;
             menuOption = 0;
+        }
+        else {
+            menuIsDisplayed = false;
+            ShowMenu(id);
         }
         menuOption = id;
     }
@@ -102,14 +106,6 @@ function EditProfile() {
     });
 }
 function EditedProfile(editedUser) {
-    //window.location.href = window.location.host + "/Home/Index";
-    //console.log(window.location.host);
-    //console.log(window.location.host + "/Home/Index");
-
-    //$("#editForm").submit(e){
-    //    e.preventDefault();
-    //    $.post("@URL.Action('")
-    //};
    
     $.ajax({
         url: "/Profile/SaveEdit",

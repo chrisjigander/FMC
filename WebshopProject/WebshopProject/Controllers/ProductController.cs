@@ -28,9 +28,32 @@ namespace WebshopProject.Controllers
         }
 
 
-        public IActionResult GetDropDownMenu()
+        public IActionResult GetDropDownMenu(string id)
         {
-            return PartialView("_DropDownMenuPartial");
+            DropdownVM content = GetDropDownVMContent(id);
+            return PartialView("_DropDownMenuPartial", content);
+        }
+
+        private DropdownVM GetDropDownVMContent(string id)
+        {
+            DropdownVM result = new DropdownVM();
+            switch (id)
+            {
+                case "1":
+                    result.DropdownMenuTitle = "Skor";
+                    result.DropDownLinks = new string[] { "Visa alla", "Casualskor", "Businesskor", "Outdoorskor", "Finskor" };
+                    break;
+                case "2":
+                    result.DropdownMenuTitle = "Varumärken";
+                    result.DropDownLinks = new string[] { "Sandberg", "Dahlin", "Woolrish", "Johansson", "Jigander", "Fanny", "Kingsley" };
+                    break;
+                case "3":
+                    result.DropdownMenuTitle = "Accessoarer";
+                    result.DropDownLinks = new string[] { "Bälten", "Slipsar" };
+                    break;
+
+            }
+            return result;
         }
 
         public IActionResult ProductItem(string id)
