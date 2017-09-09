@@ -87,6 +87,9 @@ h1 {
     .menuBar ul li {
         float: left;
     }
+    .menuBar ul li:hover {
+        cursor:pointer;
+    }
 
         .menuBar ul li a {
             display: inline-block;
@@ -97,7 +100,6 @@ h1 {
         }
 
 #menuIcons {
-    display: inline-block;
     float: right;
     padding: 0 0 0 0;
     height: 50px;
@@ -109,7 +111,6 @@ h1 {
         height: 50px;
         margin: 0;
         padding: 4px;
-        padding-right: 14px;
     }
 
 .userAndCartDiv {
@@ -133,12 +134,13 @@ h1 {
     color: white;
     position:relative;
     display: inline-block;
-    right: 39px;
+    right: 34px;
     top: 10px;
     vertical-align: top;
     z-index: 99;
     font-family: lato-light;
     font-weight: bold;
+    width: 1px;
 }
 
 .dropDownMenu {
@@ -190,10 +192,6 @@ h1 {
 }
 
 /****************************************   GUIDE PAGE   ********************************************/
-
-.guideContentDiv {
-
-}
 
 .guideContentDiv h1, h2 {
     font-family: theanooldstyle-regular;

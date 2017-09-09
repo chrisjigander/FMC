@@ -13,16 +13,7 @@ namespace WebshopProject.Controllers
     {
         public IActionResult Index()
         {
-            string nrOfArticlesInCart = SessionUtils.GetSessionCount(this);
-            if (nrOfArticlesInCart == "-1")
-            {
-                nrOfArticlesInCart = "0";
-            }
-
-            HomeIndexVM indexVM = new HomeIndexVM { NrOfArticlesInCart = Convert.ToInt32(nrOfArticlesInCart) };
-
-            return View(indexVM);
-            
+            return View();
         }
         public IActionResult Guide()
         {

@@ -105,7 +105,7 @@ namespace WebshopProject.Controllers
 
             }
 
-            return RedirectToAction(nameof(ProductItem)/*, addProductToCart.ArticleNum*/);
+            return RedirectToAction(nameof(ProductItem));
         }
 
         [HttpGet]
