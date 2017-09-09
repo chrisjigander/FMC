@@ -78,7 +78,7 @@ namespace WebshopProject.Models.Entities
         }
 
 
-        internal ProductProductItemVM GetProductToView(string articleNum, string articleCount)
+        internal ProductProductItemVM GetProductToView(string articleNum)
         {
             string artNrShort;
             int specificColor = int.Parse(articleNum[4].ToString());
@@ -114,8 +114,7 @@ namespace WebshopProject.Models.Entities
                 Model = prodModel,
                 Brand = prodBrand,
                 SizeArray = sizeArray,
-                SelectedColor = specificColor.ToString(),
-                ArticleCount = articleCount
+                SelectedColor = specificColor.ToString()
             };
             return ret;
         }
@@ -155,7 +154,7 @@ namespace WebshopProject.Models.Entities
             {
                 if (product.ProdQty > 0 && product.ProdColorId == colorId)
                 {
-                    sizeList.Add(new SelectListItem { Text = Size.First(s => s.SizeId == product.ProdSizeId).SizeName, Value = product.ProdColorId.ToString() });
+                    sizeList.Add(new SelectListItem { Text = Size.First(s => s.SizeId == product.ProdSizeId).SizeName, Value = product.ProdSizeId.ToString() });
                 }
             }
 

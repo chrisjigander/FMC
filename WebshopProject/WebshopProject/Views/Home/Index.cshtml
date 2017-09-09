@@ -14,10 +14,6 @@
         <a asp-controller="Product" asp-action="ProductOverview" asp-route-id="1"><img src="~/StaticFiles/fallnews.jpg" /></a>
         <a asp-controller="Product" asp-action="ProductOverview" asp-route-id="2"><img src="~/StaticFiles/accesories.jpg" /></a>
         <a href=""><img src="~/StaticFiles/shoecare.jpg" /></a>
-        @if (Model.NrOfArticlesInCart != 0)
-        {
-            <span>@Model.NrOfArticlesInCart</span>
-        }
     </div>
 
 </div>

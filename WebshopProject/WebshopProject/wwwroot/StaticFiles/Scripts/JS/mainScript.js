@@ -1,4 +1,5 @@
 ﻿var loginIsDisplayed = false;
+var cartIsDisplayed = false;
 var menuIsDisplayed = false;
 var menuOption = 0;
 
@@ -7,15 +8,25 @@ $(document).ready(function () {
         url: "/Product/GetCartCount/",
         type: "GET",
         success: function (result) {
+            if (result == "-1") {
+                result = "9+"
+            }
+            else if (result == "0") {
+                result = "";
+            }
             $("#cartCount").html(result);
         }
     });
 })
 
-
 $("#userLogo").click(function (e) {
     e.stopPropagation();
     ShowLogin();
+});
+
+$("#cartLogo").click(function (e) {
+    e.stopPropagation();
+    ShowCart();
 });
 
 $(".userAndCartDiv").click(function (e) {
@@ -36,8 +47,10 @@ $(document).click(function (e) {
     //e.stopPropagation();
     loginIsDisplayed = true;
     menuIsDisplayed = true;
+    cartIsDisplayed = true;
     ShowLogin();
     ShowMenu();
+    ShowCart();
 });
 
 function ShowLogin() {
@@ -59,6 +72,29 @@ function ShowLogin() {
 
         $(".userAndCartDiv").html("");
         loginIsDisplayed = false;
+
+    }
+}
+function ShowCart() {
+
+
+    if (cartIsDisplayed === false) {
+
+        $(".userAndCartDiv").css('display', 'block');
+        $.ajax({
+            url: "/Product/GetCartPartial",
+            type: "GET",
+            success: function (result) {
+                $(".userAndCartDiv").html(result);
+            }
+        });
+        cartIsDisplayed = true;
+    }
+    else {
+        $(".userAndCartDiv").css('display', 'none');
+
+        $(".userAndCartDiv").html("");
+        cartIsDisplayed = false;
 
     }
 }

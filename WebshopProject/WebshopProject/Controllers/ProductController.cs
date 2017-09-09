@@ -54,7 +54,7 @@ namespace WebshopProject.Controllers
                     break;
                 case "3":
                     result.DropdownMenuTitle = "Accessoarer";
-                    result.DropDownLinks = new string[] { "Bälten", "Slipsar" };
+                    result.DropDownLinks = new string[] { "Bälten", "Slipsar", "Näsdukar" };
                     break;
 
             }
@@ -64,10 +64,10 @@ namespace WebshopProject.Controllers
         [HttpGet]
         public IActionResult ProductItem(string id)
         {
-            string articleCount = SessionUtils.GetSessionCount(this);
+            
             if (id.Length == 5 || id.Length == 7)
             {
-                ProductProductItemVM productToView = webShopDBContext.GetProductToView(id, articleCount);
+                ProductProductItemVM productToView = webShopDBContext.GetProductToView(id);
 
                 return View(productToView);
 
@@ -99,11 +99,13 @@ namespace WebshopProject.Controllers
             }
             else
             {
-                HttpContext.Session.SetString(index, addProductToCart.ArticleNum + addProductToCart.SelectedSize);
+                string size = webShopDBContext.Size.First(s => s.SizeId == Convert.ToInt32(addProductToCart.SelectedSize)).SizeName;
+                string artNr = $"{addProductToCart.ArticleNum}{size}";
+                HttpContext.Session.SetString(index, artNr);
 
             }
 
-            return RedirectToAction(nameof(ProductItem), addProductToCart.ArticleNum);
+            return RedirectToAction(nameof(ProductItem)/*, addProductToCart.ArticleNum*/);
         }
 
         [HttpGet]
@@ -124,9 +126,17 @@ namespace WebshopProject.Controllers
 
             return View(overviewVM);
         }
+
         public string GetCartCount()
         {
             return SessionUtils.GetSessionCount(this);
+        }
+
+        public IActionResult GetCartPartial()
+        {
+            MyShoppingCartPartialVM shoppingCart =  SessionUtils.GetArticles(this, webShopDBContext);
+
+            return PartialView("_MyShoppingCartPartial", shoppingCart);
         }
     }
 }

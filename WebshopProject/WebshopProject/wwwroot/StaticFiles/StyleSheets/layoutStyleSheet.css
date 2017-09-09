@@ -136,15 +136,16 @@ h1 {
     right: 39px;
     top: 10px;
     vertical-align: top;
-    /*margin-bottom: 10px;*/
     z-index: 99;
+    font-family: lato-light;
+    font-weight: bold;
 }
 
 .dropDownMenu {
-    width: 1100px;
+    width: 710px;
     margin-left: auto;
     margin-right: auto;
-    height: 200px;
+    height: 208px;
     display: none;
     background-color: white;
     border-bottom: 1px solid var(--base-color);

@@ -13,7 +13,7 @@
                 <img src="~/StaticFiles/@Model.ImageArray[i]" onclick="SetDisplayPic('/StaticFiles/@Model.ImageArray[i]')" />
 
             }
-            
+
         </div>
     </div>
 
@@ -22,8 +22,9 @@
             <h1>@Model.Brand <span id="priceSpan">@Model.Price kr</span></h1>
             <h2>@Model.Model</h2>
             <p id="artNr">Art. nr @Model.ArticleNum</p>
-            <form class="placeOrderForm" asp-controller="Product" asp-action="ProductItem">
 
+            <form class="placeOrderForm" asp-controller="Product" asp-action="ProductItem">
+                <input asp-for="ArticleNum" type="hidden"/>
                 <label asp-for="SelectedSize"></label>
                 <select id="sizeDropDown" asp-for="SelectedSize"
                         asp-items="Model.SizeArray"></select>

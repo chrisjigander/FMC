@@ -4,6 +4,10 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using WebshopProject.Controllers;
+using WebshopProject.Models;
+using WebshopProject.Models.Entities;
+using WebshopProject.Models.VM;
 
 namespace WebshopProject.Utils
 {
@@ -17,12 +21,50 @@ namespace WebshopProject.Utils
             {
                 if (controller.HttpContext.Session.GetString(i.ToString()) == null)
                 {
-                    count= i.ToString();
+                    count = i.ToString();
                     break;
                 }
 
             }
             return count;
+        }
+
+        internal static MyShoppingCartPartialVM GetArticles(Controller controller, WebShopDBContext context)
+        {
+            int count = Convert.ToInt32(GetSessionCount(controller));
+            int totalCost = 0;
+            MyShoppingCartPartialVM myCart = new MyShoppingCartPartialVM();
+            List<ProductThumbnail> prodThumbList = new List<ProductThumbnail>();
+            string currentArtNr;
+
+            if (count != 0)
+            {
+                for (int i = 0; i < count; i++)
+                {
+                    currentArtNr = (controller.HttpContext.Session.GetString(i.ToString()));
+                    Product currentProduct = context.Product.First(p => p.ProdArtNr == currentArtNr);
+                    totalCost += Convert.ToInt32(currentProduct.ProdPrice);
+
+                    Brand currentBrand = context.Brand.First(b => b.BrandId == currentProduct.ProdBrandId);
+                    Model currentModel = context.Model.First(m => m.ModelId == currentProduct.ProdModelId);
+
+
+                    ProductThumbnail currentThumbnail = new ProductThumbnail
+                    {
+                        Brand = currentBrand.BrandName,
+                        Model = currentModel.ModelName,
+                        Price = Convert.ToInt32(currentProduct.ProdPrice)
+                    };
+                    prodThumbList.Add(currentThumbnail);
+                }
+                myCart.Products = prodThumbList.ToArray();
+
+            }
+
+            myCart.TotalCost = totalCost;
+            return myCart;
+
+
         }
     }
 }
