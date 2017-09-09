@@ -1,2 +1,5 @@
-﻿insert into fmc.Product values ('100144', 4, 1499.00, 'En sko..', 1, 8, 3, 3)
-go
+﻿select * from fmc.Model
+select * from fmc.Brand
+
+
+insert into fmc.Product values ('20137OS', 10, 599, 'Näsduken i bröstfickan ger sista touchen. Matcha gärna med slips eller fluga.', 8, 12, 7, 15)

@@ -13,6 +13,11 @@ namespace WebshopProject.Controllers
         {
             return View();
         }
+
+        public IActionResult Guide()
+        {
+            return View();
+        }
         
     }
     

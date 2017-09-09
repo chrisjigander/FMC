@@ -78,7 +78,8 @@ function ShowMenu(id) {
             menuIsDisplayed = false;
             menuOption = 0;
         }
-        else {
+        else if (menuOption != 0)
+        {
             menuIsDisplayed = false;
             ShowMenu(id);
         }
