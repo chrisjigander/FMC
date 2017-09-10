@@ -19,9 +19,11 @@ $(document).ready(function () {
         }
     });
 });
+
 $(document).click(function (e) {
     CheckIfDisplayed();
 });
+
 function CheckIfDisplayed() {
 
     if (loginIsDisplayed === true) {
@@ -44,17 +46,21 @@ $("#skorMenuLi").click(function (e) {
     e.stopPropagation();
     ShowMenu(1);
 });
+
 $("#varumarkenMenuLi").click(function (e) {
     e.stopPropagation();
     ShowMenu(2);
 });
+
 $("#accessoarerMenuLi").click(function (e) {
     e.stopPropagation();
     ShowMenu(3);
 });
+
 $(".dropDownMenu").click(function (e) {
     e.stopPropagation();
 });
+
 function ShowMenu(id) {
     
     if (menuIsDisplayed === false) {
@@ -91,17 +97,21 @@ $("#userLogo").click(function (e) {
     e.stopPropagation();
     ShowLogin();
 });
+
 $("#cartLogo").click(function (e) {
     e.stopPropagation();
     ShowCart();
 });
+
 $("#cartCount").click(function (e) {
     e.stopPropagation();
     ShowCart();
 });
+
 $(".userAndCartDiv").click(function (e) {
     e.stopPropagation();
 });
+
 function ShowLogin() {
     if (loginIsDisplayed === false) {
         CheckIfDisplayed();
@@ -123,6 +133,7 @@ function ShowLogin() {
         cartIsDisplayed = false;
     }
 }
+
 function ShowCart() {
     
     if (cartIsDisplayed === false) {
@@ -160,6 +171,7 @@ function GetProfile() {
         }
     });
 }
+
 function EditProfile() {
     $.ajax({
         url: "/Profile/EditProfile",
@@ -169,6 +181,7 @@ function EditProfile() {
         }
     });
 }
+
 function EditedProfile(editedUser) {
 
     $.ajax({
@@ -181,6 +194,7 @@ function EditedProfile(editedUser) {
     });
 
 }
+
 function ProfileMenuOption(option) {
 
     switch (option) {
