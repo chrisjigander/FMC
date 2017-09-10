@@ -1,18 +1,24 @@
 ﻿@model MyShoppingCartPartialVM
 
 <div class="cartDiv">
-@if (Model.TotalCost > 0)
-{
-    @foreach (var item in Model.Products)
+    @if (Model.TotalCost > 0)
     {
-        <p>@item.Brand @item.Model @item.Price kr</p>
-    }
-    <p>Totalt: @Model.TotalCost kr</p>
-}
-else
-{
-    <p>Din varukorg är tom</p>
 
-}
+        @foreach (var item in Model.Products)
+        {
+
+            <p>@item.Brand @item.Model @item.Price kr</p>
+
+        }
+
+        <p><strong>Antal produkter:</strong> @Model.TotalNumberOfProducts</p>
+        <p><strong>Totalt:</strong> @Model.TotalCost kr</p>
+
+    }
+    else
+    {
+        <p>Din varukorg är tom</p>
+
+    }
 
 </div>

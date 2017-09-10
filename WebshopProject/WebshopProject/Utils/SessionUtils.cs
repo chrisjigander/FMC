@@ -17,7 +17,7 @@ namespace WebshopProject.Utils
         {
             string count = "-1";
 
-            for (int i = 0; i < 10; i++)
+            for (int i = 0; i < 20; i++)
             {
                 if (controller.HttpContext.Session.GetString(i.ToString()) == null)
                 {
@@ -33,6 +33,7 @@ namespace WebshopProject.Utils
         {
             int count = Convert.ToInt32(GetSessionCount(controller));
             int totalCost = 0;
+            int totalNumberOfProducts = 0;
             MyShoppingCartPartialVM myCart = new MyShoppingCartPartialVM();
             List<ProductThumbnail> prodThumbList = new List<ProductThumbnail>();
             string currentArtNr;
@@ -44,23 +45,29 @@ namespace WebshopProject.Utils
                     currentArtNr = (controller.HttpContext.Session.GetString(i.ToString()));
                     Product currentProduct = context.Product.First(p => p.ProdArtNr == currentArtNr);
                     totalCost += Convert.ToInt32(currentProduct.ProdPrice);
+                    totalNumberOfProducts++;
 
-                    Brand currentBrand = context.Brand.First(b => b.BrandId == currentProduct.ProdBrandId);
-                    Model currentModel = context.Model.First(m => m.ModelId == currentProduct.ProdModelId);
-
-
-                    ProductThumbnail currentThumbnail = new ProductThumbnail
+                    if (i < 3)
                     {
-                        Brand = currentBrand.BrandName,
-                        Model = currentModel.ModelName,
-                        Price = Convert.ToInt32(currentProduct.ProdPrice)
-                    };
-                    prodThumbList.Add(currentThumbnail);
+                        Model currentModel = context.Model.First(m => m.ModelId == currentProduct.ProdModelId);
+                        Brand currentBrand = context.Brand.First(b => b.BrandId == currentProduct.ProdBrandId);
+
+
+                        ProductThumbnail currentThumbnail = new ProductThumbnail
+                        {
+                            Brand = currentBrand.BrandName,
+                            Model = currentModel.ModelName,
+                            Price = Convert.ToInt32(currentProduct.ProdPrice)
+                        };
+                        prodThumbList.Add(currentThumbnail);
+                    }
+
                 }
                 myCart.Products = prodThumbList.ToArray();
 
             }
 
+            myCart.TotalNumberOfProducts = totalNumberOfProducts;
             myCart.TotalCost = totalCost;
             return myCart;
 

@@ -4,12 +4,13 @@ var menuIsDisplayed = false;
 var menuOption = 0;
 
 //******************************************   DOCUMENT   **************************************************//
+
 $(document).ready(function () {
     $.ajax({
         url: "/Product/GetCartCount/",
         type: "GET",
         success: function (result) {
-            if (result == "-1") {
+            if (result > 9) {
                 result = "9+";
             }
             else if (result == "0") {
