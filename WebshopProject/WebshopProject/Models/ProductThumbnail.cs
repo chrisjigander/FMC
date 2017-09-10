@@ -12,6 +12,8 @@ namespace WebshopProject.Models
         public string Model { get; set; }
         public int Price { get; set; }
         public string ArticleNrShort { get; set; }
-
+        public int NumberOfSameArticle { get; set; }
+        public string Size { get; set; }
+        public string Color { get; set; }
     }
 }

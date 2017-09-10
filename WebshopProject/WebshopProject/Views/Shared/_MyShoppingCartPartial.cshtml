@@ -1,19 +1,39 @@
 ﻿@model MyShoppingCartPartialVM
 
 <div class="cartDiv">
-    @if (Model.TotalCost > 0)
+    @if (Model.TotalNumberOfProducts > 0)
     {
 
         @foreach (var item in Model.Products)
         {
+            @if (item.NumberOfSameArticle > 1)
+            {
+                <div class="mainRowCartDiv">@item.Brand @item.Model <span>x</span><span>@item.NumberOfSameArticle</span> <div class="prodPriceInCartDiv">@item.Price kr</div></div>
 
-            <p>@item.Brand @item.Model @item.Price kr</p>
+
+            }
+            else
+            {
+                <div class="mainRowCartDiv">@item.Brand @item.Model <div class="prodPriceInCartDiv">@item.Price kr</div></div>
+
+            }
+
+            <p class="subRowCartPara">@item.Color, @item.Size</p>
 
         }
 
-        <p><strong>Antal produkter:</strong> @Model.TotalNumberOfProducts</p>
-        <p><strong>Totalt:</strong> @Model.TotalCost kr</p>
+        <hr id="cartDividerHR" />
 
+        <div class="bottomOfCartDiv">
+
+            <div class="totalsCartDiv">
+                <p><strong>Antal produkter:</strong> @Model.TotalNumberOfProducts</p>
+                <p><strong>Totalt:</strong> @Model.TotalCost kr</p>
+            </div>
+
+            <a href="">Gå till varukorg</a>
+
+        </div>
     }
     else
     {

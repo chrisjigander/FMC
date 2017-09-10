@@ -130,9 +130,55 @@ h1 {
     z-index: 1;
 }
 
-#cartCount{
+
+.mainRowCartDiv {
+    margin: 0;
+    line-height: 90%;
+    font-family: lato-light;
+}
+
+.mainRowCartDiv span {
+    font-weight: bolder;
+}
+
+
+.prodPriceInCartDiv {
+    float: right;
+    font-weight: bold;
+    font-family: lato-light;
+    margin-right: 2%;
+}
+
+
+.subRowCartPara {
+    margin: 0 0 6% 0;
+    font-family: lato-light;
+    font-size: 70%;
+}
+
+.totalsCartDiv p {
+    margin: 0;
+}
+
+.bottomOfCartDiv a {
+    text-decoration: none;
+    cursor: pointer;
+    font-family: lato-light;
+    color: var(--base-color);
+    position: absolute;
+    bottom: 2%;
+    right: 2%;
+
+}
+
+.bottomOfCartDiv a:hover {
+    color: var(--dark-grey);
+}
+
+
+#cartCount {
     color: white;
-    position:relative;
+    position: relative;
     display: inline-block;
     right: 34px;
     top: 10px;
@@ -365,6 +411,7 @@ h1 {
 
 .productContentDiv h1, h2 {
     font-family: lato-light;
+    color: var(--dark-grey);
     margin: 0;
 }
 

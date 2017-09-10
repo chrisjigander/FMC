@@ -19,7 +19,7 @@ namespace WebshopProject.Controllers
         SignInManager<IdentityUser> signInManager;
         IdentityDbContext identityDbContext;
         WebShopDBContext webShopDBContext;
-        
+
 
         public ProductController(UserManager<IdentityUser> userManager,
         SignInManager<IdentityUser> signInManager,
@@ -29,7 +29,7 @@ namespace WebshopProject.Controllers
             this.signInManager = signInManager;
             this.identityDbContext = identityDbContext;
             this.webShopDBContext = webShopDBContext;
-            
+
         }
 
 
@@ -64,7 +64,7 @@ namespace WebshopProject.Controllers
         [HttpGet]
         public IActionResult ProductItem(string id)
         {
-            
+
             if (id.Length == 5 || id.Length == 7)
             {
                 ProductProductItemVM productToView = webShopDBContext.GetProductToView(id);
@@ -101,8 +101,22 @@ namespace WebshopProject.Controllers
             {
                 string size = webShopDBContext.Size.First(s => s.SizeId == Convert.ToInt32(addProductToCart.SelectedSize)).SizeName;
                 string artNr = $"{addProductToCart.ArticleNum}{size}";
-                HttpContext.Session.SetString(index, artNr);
+                int numberOfSame = SessionUtils.GetNumberOfSame(this, artNr);
 
+                if (numberOfSame == -1)
+                {
+                    string sessionString = $"{artNr};1";
+                    HttpContext.Session.SetString(index, sessionString);
+
+                }
+                else
+                {
+                    string[] splitt = HttpContext.Session.GetString(numberOfSame.ToString()).Split(';');
+                    int numberOfArt = Convert.ToInt32(splitt[1]);
+                    int newNumberOfArt = ++numberOfArt;
+                    string sessionString = $"{artNr};{newNumberOfArt}";
+                    HttpContext.Session.SetString(numberOfSame.ToString(), sessionString);
+                }
             }
 
             return RedirectToAction(nameof(ProductItem));
@@ -129,12 +143,12 @@ namespace WebshopProject.Controllers
 
         public string GetCartCount()
         {
-            return SessionUtils.GetSessionCount(this);
+            return SessionUtils.GetMultipleSessionCount(this);
         }
 
         public IActionResult GetCartPartial()
         {
-            MyShoppingCartPartialVM shoppingCart =  SessionUtils.GetArticles(this, webShopDBContext);
+            MyShoppingCartPartialVM shoppingCart = SessionUtils.GetArticles(this, webShopDBContext);
 
             return PartialView("_MyShoppingCartPartial", shoppingCart);
         }
