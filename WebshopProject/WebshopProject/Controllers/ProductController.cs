@@ -82,42 +82,7 @@ namespace WebshopProject.Controllers
         [HttpPost]
         public IActionResult ProductItem(ProductProductItemVM addProductToCart)
         {
-            string index = "-1";
-
-            for (int i = 0; i < 20; i++)
-            {
-                if (HttpContext.Session.GetString(i.ToString()) == null)
-                {
-                    index = i.ToString();
-                    break;
-                }
-            }
-
-            if (index == "-1")
-            {
-
-            }
-            else
-            {
-                string size = webShopDBContext.Size.First(s => s.SizeId == Convert.ToInt32(addProductToCart.SelectedSize)).SizeName;
-                string artNr = $"{addProductToCart.ArticleNum}{size}";
-                int numberOfSame = SessionUtils.GetNumberOfSame(this, artNr);
-
-                if (numberOfSame == -1)
-                {
-                    string sessionString = $"{artNr};1";
-                    HttpContext.Session.SetString(index, sessionString);
-
-                }
-                else
-                {
-                    string[] splitt = HttpContext.Session.GetString(numberOfSame.ToString()).Split(';');
-                    int numberOfArt = Convert.ToInt32(splitt[1]);
-                    int newNumberOfArt = ++numberOfArt;
-                    string sessionString = $"{artNr};{newNumberOfArt}";
-                    HttpContext.Session.SetString(numberOfSame.ToString(), sessionString);
-                }
-            }
+            DataManager.AddToCart(this, addProductToCart, webShopDBContext);
 
             return RedirectToAction(nameof(ProductItem));
         }

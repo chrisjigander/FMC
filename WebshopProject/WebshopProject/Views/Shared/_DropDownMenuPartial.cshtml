@@ -3,8 +3,43 @@
 <h2>@Model.DropdownMenuTitle</h2>
 <hr />
 <div class="dropDownLinksDiv">
-    @foreach (var item in Model.DropDownLinks)
+
+    @foreach (var item in @Model.DropDownLinks)
     {
-        <a href="">@item</a>
+        <a href="">@item</a><br />
     }
+
+    @*@{
+        int indexcount = Model.DropDownLinks.Length;
+    }
+    @for (int i = 0; i < 3; i++)
+    {
+        <div>
+            @for (int j = indexcount; j > 0; j--)
+            {
+                
+                <a href="">@Model.DropDownLinks[j-1]</a><br />
+                @indexcount = j;
+            }
+        </div>
+
+    }*@
+    @*<div>
+            @{
+                int idCount = 0;
+                for (int i = 0; i < Model.DropDownLinks.Length; i++)
+                {
+                    if (i % 6 == 0)
+                    {
+                        idCount++;
+
+                    }
+
+                    <a id="test-@idCount" href="">@Model.DropDownLinks[i]</a><br />
+
+                }
+            }
+        </div>*@
+
+
 </div>

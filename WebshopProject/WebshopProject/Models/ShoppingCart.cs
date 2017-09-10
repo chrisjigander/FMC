@@ -9,6 +9,8 @@ namespace WebshopProject.Models
     public class ShoppingCart
     {
         public List<string> MyShoppingCart { get; set; }
+
+
     
     }
 }

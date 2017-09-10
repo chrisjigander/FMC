@@ -158,7 +158,8 @@ namespace WebshopProject.Models.Entities
                 }
             }
 
-            return sizeList.ToArray();
+           // sizeList.OrderBy(s => Convert.ToInt32(s.Value));
+            return sizeList.OrderBy(s => Convert.ToInt32(s.Value)).ToArray();
         }
 
         private SelectListItem[] GetAllColors(string artNr)

@@ -51,6 +51,7 @@ h1 {
 
 
 /*********************************************     HEADER     ***********/
+
 .pageHead {
     height: 390px;
     width: 100%;
@@ -58,21 +59,21 @@ h1 {
     padding: 0;
 }
 
-    .pageHead .topHead {
-        height: 341px;
-        background-image: url('header1.png');
-        background-size: cover;
-        background-position: center center;
-        background-repeat: no-repeat;
-    }
+.pageHead .topHead {
+    height: 341px;
+    background-image: url('header1.png');
+    background-size: cover;
+    background-position: center center;
+    background-repeat: no-repeat;
+}
 
-    .pageHead .menuBar {
-        height: 50px;
-        width: 100%;
-        position: absolute;
-        background-color: var(--base-color);
-        background: linear-gradient(#200000, var(--base-color));
-    }
+.pageHead .menuBar {
+    height: 50px;
+    width: 100%;
+    position: absolute;
+    background-color: var(--base-color);
+    background: linear-gradient(#200000, var(--base-color));
+}
 
 
 .menuBar ul {
@@ -84,20 +85,21 @@ h1 {
     display: inline-block;
 }
 
-    .menuBar ul li {
-        float: left;
-    }
-    .menuBar ul li:hover {
-        cursor:pointer;
-    }
+.menuBar ul li {
+    float: left;
+}
 
-        .menuBar ul li a {
-            display: inline-block;
-            padding: 13px 60px;
-            font-size: 16px;
-            text-decoration: none;
-            color: var(--light-grey);
-        }
+.menuBar ul li:hover {
+    cursor:pointer;
+}
+
+.menuBar ul li a {
+    display: inline-block;
+    padding: 13px 60px;
+    font-size: 16px;
+    text-decoration: none;
+    color: var(--light-grey);
+}
 
 #menuIcons {
     float: right;
@@ -107,11 +109,11 @@ h1 {
     cursor: pointer;
 }
 
-    #menuIcons img {
-        height: 50px;
-        margin: 0;
-        padding: 4px;
-    }
+#menuIcons img {
+    height: 50px;
+    margin: 0;
+    padding: 4px;
+}
 
 .userAndCartDiv {
     height: 230px;
@@ -130,7 +132,6 @@ h1 {
     z-index: 1;
 }
 
-
 .mainRowCartDiv {
     margin: 0;
     line-height: 90%;
@@ -141,14 +142,12 @@ h1 {
     font-weight: bolder;
 }
 
-
 .prodPriceInCartDiv {
     float: right;
     font-weight: bold;
     font-family: lato-light;
     margin-right: 2%;
 }
-
 
 .subRowCartPara {
     margin: 0 0 6% 0;
@@ -174,7 +173,6 @@ h1 {
 .bottomOfCartDiv a:hover {
     color: var(--dark-grey);
 }
-
 
 #cartCount {
     color: white;
@@ -206,9 +204,11 @@ h1 {
     z-index: 1;
 }
 
+
 .dropDownLinksDiv {
     /*height: 160px;*/
 }
+
 
 .dropDownMenu h2 {
     color: var(--dark-grey);
@@ -220,11 +220,12 @@ h1 {
 }
 
 .dropDownMenu a {
-    display: block;
+    display: inline;
     text-decoration:none;
     color: var(--dark-grey);
     font-family: lato-light;
 }
+
 
 /****************************************   CONTENT   ********************************************/
 
@@ -256,12 +257,13 @@ h1 {
 
 
 
-    /****************************************   INDEX   ********************************************/
-    .startPageContentDiv {
-        width: 1100px;
-        position: relative;
-        padding: 6px 15px 0 15px;
-    }
+/****************************************   INDEX   ********************************************/
+
+.startPageContentDiv {
+    width: 1100px;
+    position: relative;
+    padding: 6px 15px 0 15px;
+}
 
 
 .frontpageLeftDiv {
@@ -273,19 +275,19 @@ h1 {
     margin-right: 24px;
 }
 
-    .frontpageLeftDiv img {
-        width: 500px;
-        margin-bottom: 24px;
-        display: block;
-        -webkit-transition: all 0.3s ease;
-        transition: all 0.3s ease;
-        border-radius: 3px;
-    }
+.frontpageLeftDiv img {
+    width: 500px;
+    margin-bottom: 24px;
+    display: block;
+    -webkit-transition: all 0.3s ease;
+    transition: all 0.3s ease;
+    border-radius: 3px;
+}
 
-    .frontpageLeftDiv img:hover {
-        -webkit-transform:scale(1.03);
-        transform:scale(1.03); 
-    }
+.frontpageLeftDiv img:hover {
+    -webkit-transform:scale(1.03);
+    transform:scale(1.03); 
+}
 
 
 .frontpageRightDiv {
@@ -308,8 +310,6 @@ h1 {
 }
 
 /****************************************   PRODUCT OVERVIEW PAGE   ********************************************/
-
-
 
 .productOverviewDiv {
     width: 100%;
@@ -383,9 +383,9 @@ h1 {
     display: inline-block;
 }
 
-    .mainPictureDiv img {
-        width: 500px;
-    }
+.mainPictureDiv img {
+    width: 500px;
+}
 
 .miniPicturesDiv {
     display: inline-block;
@@ -456,9 +456,8 @@ h1 {
     margin-top: 20px;
 }
 
-
-
 /****************************************   FOOTER   ********************************************/
+
 .pageFoot {
     position: absolute;
     right: 0;
@@ -467,36 +466,36 @@ h1 {
     height: 280px;
 }
 
-    .pageFoot .infoFoot {
-        height: 250px;
-        background-color: var(--base-color);
-    }
+.pageFoot .infoFoot {
+    height: 250px;
+    background-color: var(--base-color);
+}
 
-        .pageFoot .infoFoot .footTable {
-            padding-left: 30px;
-            padding-top: 30px;
-            color: var(--light-grey);
-        }
+.pageFoot .infoFoot .footTable {
+    padding-left: 30px;
+    padding-top: 30px;
+    color: var(--light-grey);
+}
 
-            .pageFoot .infoFoot .footTable th {
-                width: 200px;
-                text-align: left;
-                font-family: 'theanooldstyle-regular';
-            }
+.pageFoot .infoFoot .footTable th {
+    width: 200px;
+    text-align: left;
+    font-family: 'theanooldstyle-regular';
+}
 
-            .pageFoot .infoFoot .footTable td {
-                font-family: 'lato-light';
-                padding-top: 10px;
-            }
+.pageFoot .infoFoot .footTable td {
+    font-family: 'lato-light';
+    padding-top: 10px;
+}
 
-    .pageFoot .copyFoot {
-        height: 30px;
-        background-color: var(--background-grey);
-        color: var(--base-color);
-        text-align: center;
-        font-size: 14px;
-        padding-top: 0.2%;
-    }
+.pageFoot .copyFoot {
+    height: 30px;
+    background-color: var(--background-grey);
+    color: var(--base-color);
+    text-align: center;
+    font-size: 14px;
+    padding-top: 0.2%;
+}
 
 /*****************************    Log In   ***************************************/
 
@@ -506,10 +505,10 @@ h1 {
     font-family: 'lato-light';
 }
 
-    .loginForm a:hover {
-        color: var(--light-grey);
-        cursor: pointer;
-    }
+.loginForm a:hover {
+    color: var(--light-grey);
+    cursor: pointer;
+}
 
 .loginForm label {
     font-family: 'lato-light';
@@ -528,10 +527,10 @@ h1 {
     font-family: 'lato-light';
 }
 
-    .loggedInDiv a:hover {
-        color: var(--light-grey);
-        cursor: pointer;
-    }
+.loggedInDiv a:hover {
+    color: var(--light-grey);
+    cursor: pointer;
+}
 
 #logOut {
     color: var(--base-color);
@@ -539,9 +538,9 @@ h1 {
     bottom: 3px;
 }
 
-    #logOut:hover {
-        color: var(--light-grey);
-    }
+#logOut:hover {
+    color: var(--light-grey);
+}
 
 /*****************************    PROFILE       ***************************************/
 
@@ -555,14 +554,14 @@ h1 {
     font-family: 'lato-light';
 }
 
-    .profileSidebarMenuDiv #profileUL {
-        list-style: none;
-    }
+.profileSidebarMenuDiv #profileUL {
+    list-style: none;
+}
 
-        .profileSidebarMenuDiv #profileUL a {
-            text-decoration: none;
-            color: var(--dark-grey);
-        }
+.profileSidebarMenuDiv #profileUL a {
+    text-decoration: none;
+    color: var(--dark-grey);
+}
 
 .profileContentDiv {
     width: 800px;
@@ -572,6 +571,7 @@ h1 {
 
 
 /*****************************    View Profil   ***************************************/
+
 #ProfileDiv {
     font-family: 'lato-light';
 }
@@ -584,7 +584,9 @@ h1 {
 tr.strongTR > td {
     padding-top: 40px;
 }
+
 /*****************************    Edit Profile Form   ***************************************/
+
 .EditForm {
     font-family: 'lato-light';
 }
@@ -600,3 +602,4 @@ tr.strongTR > td {
         position: absolute;
         right: 4px;
     }
+
