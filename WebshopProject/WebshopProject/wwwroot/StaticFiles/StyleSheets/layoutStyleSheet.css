@@ -30,8 +30,7 @@ body {
     margin: 0;
     padding: 0 0 300px 0;
     font-family: 'theanooldstyle-regular';
-    /*background-color: var(--background-grey);*/
-    background-color: brown;
+    background-color: var(--background-grey);
     color: var(--dark-grey);
 }
 
