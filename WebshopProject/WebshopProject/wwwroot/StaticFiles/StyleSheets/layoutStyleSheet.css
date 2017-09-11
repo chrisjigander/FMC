@@ -520,6 +520,17 @@ h1 {
     border-radius: 2px;
 }
 
+.logInBtn{
+    font-family: lato-light;
+    background-color: var(--base-color);
+    color: var(--light-grey);
+    border: none;
+    font-size: 16px;
+    padding: 0.5%;
+    width: 60%;
+    margin-bottom: 0.4%
+}
+
 /*****************************    Logged In   ***************************************/
 
 .loggedInDiv a, p {
@@ -543,8 +554,46 @@ h1 {
     color: var(--light-grey);
 }
 
-/*****************************    PROFILE       ***************************************/
+/*****************************    REGISTER       ***************************************/
+.registerForm {
+    color: var(--dark-grey);
+    padding-bottom: 10%
+}
 
+.registerForm h1{
+    color:var(--base-color);
+    font-family:lato-light;
+}
+
+.registerForm hr{
+    background-color: var(--base-color);
+    margin-bottom: 2%;
+}
+
+.registerForm label {
+    font-family: lato-light;
+    font-weight: bolder;
+}
+
+.registerFormBtn {
+    font-family: lato-light;
+    background-color: var(--base-color);
+    color: var(--light-grey);
+    border: none;
+    font-size: 16px;
+    padding: 0.5%;
+    width: 80%   
+}
+
+.dividedRegisterDiv {
+    display: inline-block;
+    vertical-align: top;
+    margin-right: 20px;
+    position: relative;
+}
+
+
+/*****************************    PROFILE       ***************************************/
 .profileSidebarMenuDiv {
     width: 170px;
     color: black;
@@ -570,17 +619,16 @@ h1 {
     display: inline-block;
 }
 
-
 /*****************************    View Profil   ***************************************/
 
 #ProfileDiv {
     font-family: 'lato-light';
 }
 
-    #ProfileDiv h1 {
-        color: var(--base-color);
-        font-family: 'lato-light';
-    }
+ #ProfileDiv h1 {
+     color: var(--base-color);
+     font-family: 'lato-light';
+ }
 
 tr.strongTR > td {
     padding-top: 40px;
