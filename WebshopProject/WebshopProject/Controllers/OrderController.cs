@@ -12,7 +12,7 @@ namespace WebshopProject.Controllers
     public class OrderController : Controller
     {
 
-        public IActionResult Index()
+        public IActionResult MyCart()
         {
             return View();
         }

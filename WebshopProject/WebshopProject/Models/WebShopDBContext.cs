@@ -273,6 +273,11 @@ namespace WebshopProject.Models.Entities
                     allProductsToFilter = allProductsToFilter.Where(p => p.ProdArtNr.StartsWith(id)).Where(p => p.ProdBrandId == prodbrand).ToList();
 
                 }
+                else if (id == '3')
+                {
+                    int brandID = Brand.First(b => b.BrandName == link).BrandId;
+                    allProductsToFilter = allProductsToFilter.Where(p => p.ProdBrandId == brandID).ToList();
+                }
             }
             else if (link != null)
             {
