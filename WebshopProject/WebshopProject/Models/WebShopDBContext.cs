@@ -103,7 +103,7 @@ namespace WebshopProject.Models.Entities
             var prodModel = Model.First(m => m.ModelId == currentProduct.ProdModelId).ModelName;
             var prodBrand = Brand.First(b => b.BrandId == currentProduct.ProdBrandId).BrandName;
 
-            
+
             var ret = new ProductProductItemVM
             {
                 ArticleNum = artNrShort,
@@ -158,7 +158,7 @@ namespace WebshopProject.Models.Entities
                 }
             }
 
-           // sizeList.OrderBy(s => Convert.ToInt32(s.Value));
+            // sizeList.OrderBy(s => Convert.ToInt32(s.Value));
             return sizeList.OrderBy(s => Convert.ToInt32(s.Value)).ToArray();
         }
 
@@ -200,22 +200,97 @@ namespace WebshopProject.Models.Entities
             return colorList.ToArray();
         }
 
-        internal ProductProductOverviewVM GetOverview(char id)
+        internal ProductProductOverviewVM GetOverview(char id, string link)
         {
             List<ProductThumbnail> thumbnailList = new List<ProductThumbnail>();
-            List<Product> listOfRelevantProducts = new List<Entities.Product>();
+            List<Product> listOfProductsToReturn = new List<Entities.Product>();
+            List<Product> allProductsToFilter = new List<Entities.Product>();
+            allProductsToFilter = Product.ToList();
 
-            foreach (var item in Product.Where(p => p.ProdArtNr.StartsWith(id)))
+            //check if id is not null
+            if (int.TryParse(id.ToString(), out int result))
             {
-                if (listOfRelevantProducts.Count == 0)
+                if (link == "Visa alla")
                 {
-                    listOfRelevantProducts.Add(item);
+                    if (id == '3')
+                    {
+                        allProductsToFilter = allProductsToFilter.Where(p => p.ProdQty > 0).ToList();
+
+                    }
+                    else
+                    {
+                        allProductsToFilter = allProductsToFilter.Where(p => p.ProdArtNr.StartsWith(id)).ToList();
+
+                    }
+                }
+                else if (id == '1' && link != null)
+                {
+                    string[] arr = new string[3];
+                    arr[0] = "10013";
+                    arr[1] = "10082";
+                    arr[2] = "10083";
+
+                    if (link == "Businesskor")
+                    {
+                        arr[0] = "10043";
+                        arr[1] = "10073";
+                        arr[2] = "10022";
+                    }
+
+                    else if (link == "Outdoorskor")
+                    {
+                        arr[0] = "10052";
+                        arr[1] = "10066";
+                        arr[2] = "10032";
+                    }
+
+                    else if (link == "Finskor")
+                    {
+                        arr[0] = "10106";
+                        arr[1] = "10092";
+                        arr[2] = "10093";
+                    }
+                    List<Product> tempList = new List<Product>();
+
+                    for (int i = 0; i < arr.Length; i++)
+                    {
+                        tempList.Add(allProductsToFilter.First(p => p.ProdArtNr.Contains(arr[i])));
+                    }
+                    allProductsToFilter = tempList;
+                }
+                else if (id == '2')
+                {
+                    int prodbrand = 6;
+
+                    if (link == "Bälten")
+                    {
+                        prodbrand = 7;
+                    }
+                    else if (link == "Näsdukar")
+                    {
+                        prodbrand = 8;
+                    }
+                    allProductsToFilter = allProductsToFilter.Where(p => p.ProdArtNr.StartsWith(id)).Where(p => p.ProdBrandId == prodbrand).ToList();
+
+                }
+            }
+            else if (link != null)
+            {
+                int brandID = Brand.First(b => b.BrandName == link).BrandId;
+                allProductsToFilter = allProductsToFilter.Where(p => p.ProdBrandId == brandID).ToList();
+            }
+
+            foreach (var item in allProductsToFilter)
+            {
+                if (listOfProductsToReturn.Count == 0)
+                {
+                    listOfProductsToReturn.Add(item);
                 }
                 else
                 {
                     bool productFound = false;
 
-                    foreach (var product in listOfRelevantProducts)
+                    foreach (var product in listOfProductsToReturn)
                     {
                         if (product.ProdArtNr.Substring(0, 5) == item.ProdArtNr.Substring(0, 5))
                         {
@@ -226,24 +301,24 @@ namespace WebshopProject.Models.Entities
                     }
                     if (!productFound)
                     {
-                        listOfRelevantProducts.Add(item);
+                        listOfProductsToReturn.Add(item);
 
                     }
                 }
             }
 
-            foreach (var item in listOfRelevantProducts)
+            foreach (var item in listOfProductsToReturn)
             {
-                string brandName = Brand.FirstOrDefault(b => b.BrandId == item.ProdBrandId).BrandName;
-                string modelName = Model.FirstOrDefault(m => m.ModelId == item.ProdModelId).ModelName;
+                string currBrandName = Brand.FirstOrDefault(b => b.BrandId == item.ProdBrandId).BrandName;
+                string currModelName = Model.FirstOrDefault(m => m.ModelId == item.ProdModelId).ModelName;
                 thumbnailList.Add(new ProductThumbnail
                 {
                     ImgPath = $"{item.ProdArtNr.Remove(item.ProdArtNr.Length - 2)}_1.jpg",
                     ArticleNrShort = item.ProdArtNr.Substring(0, 5),
-                    Brand = brandName,
-                    Model = modelName,
+                    Brand = currBrandName,
+                    Model = currModelName,
                     Price = Convert.ToInt32(item.ProdPrice)
-                
+
                 });
 
             }

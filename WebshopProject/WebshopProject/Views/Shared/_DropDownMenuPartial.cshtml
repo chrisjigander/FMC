@@ -6,40 +6,21 @@
 
     @foreach (var item in @Model.DropDownLinks)
     {
-        <a href="">@item</a><br />
+        if (item.CategoryId == 1)
+        {
+
+        <a asp-controller="Product" asp-action="ProductOverview" asp-route-id="1" asp-route-link="@item.LinkName">@item.LinkName</a><br />
+        }
+        else if (item.CategoryId == 2)
+        {
+            <a asp-controller="Product" asp-action="ProductOverview" asp-route-id="3" asp-route-link="@item.LinkName">@item.LinkName</a><br />
+
+        }
+        else if (item.CategoryId == 3)
+        {
+            <a asp-controller="Product" asp-action="ProductOverview" asp-route-id="2" asp-route-link="@item.LinkName">@item.LinkName</a><br />
+
+        }
     }
-
-    @*@{
-        int indexcount = Model.DropDownLinks.Length;
-    }
-    @for (int i = 0; i < 3; i++)
-    {
-        <div>
-            @for (int j = indexcount; j > 0; j--)
-            {
-                
-                <a href="">@Model.DropDownLinks[j-1]</a><br />
-                @indexcount = j;
-            }
-        </div>
-
-    }*@
-    @*<div>
-            @{
-                int idCount = 0;
-                for (int i = 0; i < Model.DropDownLinks.Length; i++)
-                {
-                    if (i % 6 == 0)
-                    {
-                        idCount++;
-
-                    }
-
-                    <a id="test-@idCount" href="">@Model.DropDownLinks[i]</a><br />
-
-                }
-            }
-        </div>*@
-
 
 </div>

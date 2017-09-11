@@ -202,6 +202,7 @@ h1 {
     padding: 6px 20px 0 20px;
     position: absolute;
     z-index: 1;
+    overflow:auto;
 }
 
 

@@ -46,15 +46,22 @@ namespace WebshopProject.Controllers
             {
                 case "1":
                     result.DropdownMenuTitle = "Skor";
-                    result.DropDownLinks = new string[] { "Visa alla", "Casualskor", "Businesskor", "Outdoorskor", "Finskor" };
+                    result.DropDownLinks =  new DropDownLink[] {
+                        new DropDownLink("Visa alla",1 ), new DropDownLink("Casualskor", 1), new DropDownLink("Businesskor", 1),
+                        new DropDownLink("Outdoorskor", 1), new DropDownLink("Finskor", 1) };
                     break;
                 case "2":
                     result.DropdownMenuTitle = "Varumärken";
-                    result.DropDownLinks = new string[] { "Sandberg", "Dahlin", "Woolrish", "Johansson", "Jigander", "Fanny", "Kingsley" };
+                    result.DropDownLinks = new DropDownLink[] {
+                        new DropDownLink("Visa alla", 2), new DropDownLink("Sandberg", 2), new DropDownLink("Dahlin",2),
+                        new DropDownLink("Woolrish",2), new DropDownLink("Johansson",2), new DropDownLink("Jigander",2),
+                        new DropDownLink("Fanny",2), new DropDownLink("Kingsley",2) };
                     break;
                 case "3":
                     result.DropdownMenuTitle = "Accessoarer";
-                    result.DropDownLinks = new string[] { "Bälten", "Slipsar", "Näsdukar" };
+                    result.DropDownLinks = new DropDownLink[] {
+                        new DropDownLink("Visa alla", 3), new DropDownLink("Bälten", 3), new DropDownLink("Slipsar", 3),
+                        new DropDownLink("Näsdukar", 3) };
                     break;
 
             }
@@ -99,9 +106,16 @@ namespace WebshopProject.Controllers
             return null;
         }
 
-        public IActionResult ProductOverview(char id)
+        //public IActionResult ProductOverview(char id)
+        //{
+        //    ProductProductOverviewVM overviewVM = webShopDBContext.GetOverview(id, null);
+
+        //    return View(overviewVM);
+        //}
+
+        public IActionResult ProductOverview(char id, string link)
         {
-            ProductProductOverviewVM overviewVM = webShopDBContext.GetOverview(id);
+            ProductProductOverviewVM overviewVM = webShopDBContext.GetOverview(id, link);
 
             return View(overviewVM);
         }

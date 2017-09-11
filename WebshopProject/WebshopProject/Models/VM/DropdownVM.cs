@@ -8,6 +8,6 @@ namespace WebshopProject.Models.VM
     public class DropdownVM
     {
         public string DropdownMenuTitle { get; set; }
-        public string[] DropDownLinks { get; set; }
+        public DropDownLink[] DropDownLinks { get; set; }
     }
 }
