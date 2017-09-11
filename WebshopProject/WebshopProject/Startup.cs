@@ -29,7 +29,8 @@ namespace WebshopProject
             services.AddDbContext<WebShopDBContext>(o => o.UseSqlServer(ConnString));
             services.AddDbContext<IdentityDbContext>(o => o.UseSqlServer(ConnString));
 
-            services.AddIdentity<IdentityUser, IdentityRole>(o => {
+            services.AddIdentity<IdentityUser, IdentityRole>(o =>
+            {
                 o.Password.RequireNonAlphanumeric = false;
                 o.Password.RequiredLength = 6;
                 o.Password.RequireUppercase = true;
@@ -52,6 +53,12 @@ namespace WebshopProject
             {
                 app.UseDeveloperExceptionPage();
             }
+            else
+            {
+                app.UseExceptionHandler("/Error/ServerError");
+            }
+
+            app.UseStatusCodePagesWithRedirects("/Error/HttpError/{0}");
 
             app.UseStaticFiles();
             app.UseSession();

@@ -498,8 +498,12 @@ h1 {
     padding-top: 0.2%;
 }
 
-/*****************************    Log In   ***************************************/
+.pageFoot .custServiceA{
+    text-decoration: none;
+    color: var(--light-grey)
+}
 
+/*****************************    Log In   ***************************************/
 .loginForm a {
     color: var(--base-color);
     text-decoration-style: none;
@@ -628,7 +632,7 @@ h1 {
 /*****************************    PROFILE       ***************************************/
 .profileSidebarMenuDiv {
     width: 170px;
-    color: black;
+    color: var(--dark-grey);
     display: inline-block;
     vertical-align: top;
     border-right: 1px solid var(--base-color);
@@ -647,7 +651,7 @@ h1 {
 
 .profileContentDiv {
     width: 800px;
-    color: black;
+    color: var(--dark-grey);
     display: inline-block;
 }
 
@@ -684,3 +688,41 @@ tr.strongTR > td {
     right: 4px;
 }
 
+/*****************************   ERROR VIEWS  ***************************************/
+
+.serverErrorPage h1, .httpErrorPage h1, .httpErrorPage h2 {
+    font-family: lato-light;
+    color: var(--base-color);
+}
+
+.serverErrorPage p, .httpErrorPage p, .serverErrorPage a, .httpErrorPage a{
+    font-family: lato-light;
+    color: var(--dark-grey);
+}
+
+/*****************************   CUSTOMER SUPPORT  ***************************************/
+
+.customerSupportSidebarMenuDiv {
+    width: 170px;
+    color: var(--dark-grey);
+    display: inline-block;
+    vertical-align: top;
+    border-right: 1px solid var(--base-color);
+    margin-right: 50px;
+    font-family: 'lato-light';
+}
+
+.customerSupportSidebarMenuDiv #customerSupportUL {
+    list-style: none;
+}
+
+.customerSupportSidebarMenuDiv #customerSupportUL a {
+    text-decoration: none;
+    color: var(--dark-grey);
+}
+
+.customerSupportContentDiv {
+    width: 800px;
+    color: var(--dark-grey);
+    display: inline-block;
+}

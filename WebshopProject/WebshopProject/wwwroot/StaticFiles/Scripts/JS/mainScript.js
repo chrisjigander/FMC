@@ -211,6 +211,35 @@ function ProfileMenuOption(option) {
     }
 
 }
+//**************************************   CUSTOMER SUPPORT   *********************************************//
+
+
+function GetCustomerSupport() {
+
+    $.ajax({
+        url: "/CustomerSupport/Index",
+        type: "GET",
+        success: function (result) {
+            $(".profileContentDiv").html(result);
+        }
+    });
+}
+
+function CustomerSupportMenuOption(option) {
+
+    switch (option) {
+        case 1:
+            GetProfile();
+            break;
+        case 2:
+            GetOrders();
+            break;
+        case 3:
+            EditProfile();
+            break;
+    }
+
+}
 
 //******************************************   OTHER   ****************************************************//
 
