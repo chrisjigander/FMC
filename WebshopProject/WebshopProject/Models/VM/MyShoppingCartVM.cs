@@ -5,11 +5,12 @@ using System.Threading.Tasks;
 
 namespace WebshopProject.Models.VM
 {
-    public class MyShoppingCartPartialVM
+    public class MyShoppingCartVM
     {
         public ProductThumbnail[] Products { get; set; }
         public int TotalCost { get; set; }
         public int TotalNumberOfProducts { get; set; }
+        public bool IsLoggedIn { get; set; }
 
     }
 }

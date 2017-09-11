@@ -56,13 +56,13 @@ namespace WebshopProject.Utils
             return count.ToString();
         }
 
-        internal static MyShoppingCartPartialVM GetArticles(Controller controller, WebShopDBContext context)
+        internal static MyShoppingCartVM GetArticles(Controller controller, WebShopDBContext context)
         {
             //int count = Convert.ToInt32(GetSessionCount(controller));
             int count = Convert.ToInt32(GetSingleSessionCount(controller));
             int totalCost = 0;
             int totalNumberOfProducts = 0;
-            MyShoppingCartPartialVM myCart = new MyShoppingCartPartialVM();
+            MyShoppingCartVM myCart = new MyShoppingCartVM();
             List<ProductThumbnail> prodThumbList = new List<ProductThumbnail>();
             string currentArtNr;
 
@@ -92,8 +92,10 @@ namespace WebshopProject.Utils
                             Price = Convert.ToInt32(currentProduct.ProdPrice),
                             NumberOfSameArticle = Convert.ToInt32(splitString[1]),
                             Size = currentSize.SizeName,
-                            Color = currentColor.ColorName
-                            
+                            Color = currentColor.ColorName,
+                            ImgPath = $"{currentProduct.ProdArtNr.Remove(currentProduct.ProdArtNr.Length - 2)}_1.jpg",
+                            ArticleNrShort = currentProduct.ProdArtNr.Substring(0, 5)
+
                         };
                         prodThumbList.Add(currentThumbnail);
                     }
@@ -108,6 +110,22 @@ namespace WebshopProject.Utils
             return myCart;
 
 
+        }
+
+        internal static string[] GetArticleNumbersInCart(Controller controller)
+        {
+            int count = Convert.ToInt32(GetSingleSessionCount(controller));
+
+            List<string> listOfSessionStrings = new List<string>();
+
+            if (count != 0)
+            {
+                for (int i = 0; i < count; i++)
+                {
+                    listOfSessionStrings.Add(controller.HttpContext.Session.GetString(i.ToString()));
+                }
+            }
+            return listOfSessionStrings.ToArray();
         }
 
         internal static int GetNumberOfSame(Controller controller, string artNr)

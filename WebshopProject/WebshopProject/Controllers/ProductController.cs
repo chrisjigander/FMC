@@ -127,7 +127,7 @@ namespace WebshopProject.Controllers
 
         public IActionResult GetCartPartial()
         {
-            MyShoppingCartPartialVM shoppingCart = SessionUtils.GetArticles(this, webShopDBContext);
+            MyShoppingCartVM shoppingCart = SessionUtils.GetArticles(this, webShopDBContext);
 
             return PartialView("_MyShoppingCartPartial", shoppingCart);
         }
