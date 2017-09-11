@@ -3,7 +3,7 @@
 
 <div class="registerForm">
     <h1>Registrera ny användare</h1>
-    <hr/>
+    <hr />
     <form asp-controller="Account" asp-action="Register">
         <div class="dividedRegisterDiv">
             <label asp-for="FirstName"></label>
@@ -31,7 +31,7 @@
             <span asp-validation-for="PhoneNumber"></span>
             <br />
         </div>
-        <div class="dividedRegisterDiv">
+        <div class="dividedRegisterDiv" id="addressRegisterDiv">
             <label asp-for="AddressLine"></label>
             <br />
             <input asp-for="AddressLine" />
@@ -50,18 +50,26 @@
             <br />
             <span asp-validation-for="City"></span>
             <br />
-            <label asp-for="UserName"></label>
-            <br />
-            <input asp-for="UserName" />
-            <br />
-            <span asp-validation-for="UserName"></span>
-            <br />
-            <label asp-for="PassWord"></label>
-            <br />
-            <input asp-for="PassWord" />
-            <br />
-            <span asp-validation-for="PassWord"></span>
-            <br />
+        </div>
+        <div class="registerUserPassSubmitDiv">
+            <div class="userAndPassDiv">
+                <div class="registerUserNameDiv">
+                    <label asp-for="UserName"></label>
+                    <br />
+                    <input asp-for="UserName" />
+                    <br />
+                    <span asp-validation-for="UserName"></span>
+                    <br />
+                </div>
+                <div class="registerPassWordDiv">
+                    <label asp-for="PassWord"></label>
+                    <br />
+                    <input asp-for="PassWord" />
+                    <br />
+                    <span asp-validation-for="PassWord"></span>
+                    <br />
+                </div>
+            </div>
             <input type="submit" value="Registrera" class="registerFormBtn" />
         </div>
     </form>
