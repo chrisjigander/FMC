@@ -565,9 +565,13 @@ h1 {
     padding-bottom: 4%
 }
 
-.registerForm h1{
-    color:var(--base-color);
-    font-family:lato-light;
+.registerForm input{
+    margin-bottom:0.2%
+}
+
+.registerForm h1 {
+    color: var(--base-color);
+    font-family: lato-light;
 }
 
 .registerForm hr{
@@ -587,8 +591,8 @@ h1 {
     border: none;
     font-size: 16px;
     padding: 0.5%;
-    width: 70%;
-   cursor:pointer;
+    width: 74%;
+    cursor:pointer;
 }
 
 .registerUserPassSubmitDiv {
