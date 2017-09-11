@@ -2,6 +2,7 @@
 var cartIsDisplayed = false;
 var menuIsDisplayed = false;
 var menuOption = 0;
+var tesmp = 0;
 
 //******************************************   DOCUMENT   **************************************************//
 
