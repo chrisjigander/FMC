@@ -16,6 +16,15 @@ namespace WebshopProject.Controllers
         {
             return View();
         }
+
+        public IActionResult CheckOut()
+        {
+            return null;
+        }
         
+        public IActionResult Confirmation()
+        {
+            return null;
+        }
     }
 }
