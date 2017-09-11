@@ -23,6 +23,7 @@ namespace WebshopProject.Controllers
             return null;
         }
         
+        //Vill kunna kopplas med en emailbekräftelse
         public IActionResult Confirmation()
         {
             return null;
