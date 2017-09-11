@@ -17,6 +17,7 @@ namespace WebshopProject.Controllers
             return View();
         }
 
+        //Olika beroende på inloggad eller inte
         public IActionResult CheckOut()
         {
             return null;
