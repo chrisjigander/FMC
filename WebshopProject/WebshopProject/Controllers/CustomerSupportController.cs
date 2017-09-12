@@ -18,7 +18,7 @@ namespace WebshopProject.Controllers
 
         public IActionResult HandleContactForm()
         {
-            return null;
+            return Redirect("/Home/Index/");
         }
 
         public IActionResult CustomerSupport(int id)

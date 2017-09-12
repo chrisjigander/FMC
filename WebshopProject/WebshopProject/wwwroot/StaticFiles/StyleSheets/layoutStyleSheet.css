@@ -751,7 +751,11 @@ tr.strongTR > td {
     display: inline-block;
 }
 
-
+.messageTextBox {
+    width: 350px;
+    height: 200px;
+    resize: none;
+}
 
 /*****************************   ORDER / MYCART  ***************************************/
 
