@@ -256,10 +256,12 @@ h1 {
     color: var(--base-grey);
 }
 
-
+.guideContentDiv hr {
+    background-color: var(--base-color);
+    margin: 1% 0 5% 0;
+}
 
 /****************************************   INDEX   ********************************************/
-
 .startPageContentDiv {
     width: 1100px;
     position: relative;
@@ -709,6 +711,21 @@ tr.strongTR > td {
 
 /*****************************   CUSTOMER SUPPORT  ***************************************/
 
+.customerSupportContentDiv h1{
+    font-family: theanooldstyle-regular;
+    color: var(--base-color);
+}
+
+.customerSupportContentDiv h2 {
+    font-family: lato-light;
+    color: var(--base-color);
+}
+
+.customerSupportContentDiv hr {
+    background-color: var(--base-color);
+    margin: 1% 0 5% 0;
+}
+
 .customerSupportSidebarMenuDiv {
     width: 170px;
     color: var(--dark-grey);
@@ -734,10 +751,7 @@ tr.strongTR > td {
     display: inline-block;
 }
 
-.customerSupportContentDiv h1{
-    font-family: lato-light;
-    color: var(--dark-grey);
-}
+
 
 /*****************************   ORDER / MYCART  ***************************************/
 
