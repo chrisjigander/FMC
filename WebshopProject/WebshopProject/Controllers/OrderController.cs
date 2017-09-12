@@ -59,5 +59,18 @@ namespace WebshopProject.Controllers
         {
             return View();
         }
+
+        public IActionResult EditProduct(string artNr, string size, int plusOrMinus)
+        {
+ 
+            SessionUtils.EditProduct(this, artNr, size, plusOrMinus);
+            return RedirectToAction(nameof(MyCart));
+        }
+
+        public IActionResult RemoveProduct(string artNr, string size)
+        {
+            SessionUtils.RemoveProduct(this, artNr, size);
+            return RedirectToAction(nameof(MyCart));
+        }
     }
 }

@@ -112,6 +112,46 @@ namespace WebshopProject.Utils
 
         }
 
+        internal static void EditProduct(OrderController orderController, string artNr, string size, int plusOrMinus)
+        {
+            string[] articlesInCart = GetArticleNumbersInCart(orderController);
+            string article = articlesInCart.First(a => a.StartsWith($"{artNr}{size}"));
+            string[] articleSplit = article.Split(';');
+            int sessionKey = GetNumberOfSame(orderController, articleSplit[0]);
+            
+            int count = Convert.ToInt32(articleSplit[1]);
+            if (plusOrMinus == 1) // Minus
+            {
+                if (articleSplit[1] == "1")
+                {
+                    orderController.HttpContext.Session.Remove(sessionKey.ToString());
+
+                }
+
+                count--;
+
+            }
+            else if (plusOrMinus == 2) // Plus
+            {
+                count++;
+            }
+
+            string newArticleString = $"{artNr};{count.ToString()}";
+            orderController.HttpContext.Session.SetString(sessionKey.ToString(), newArticleString);
+            
+        }
+
+        internal static void RemoveProduct(OrderController orderController, string artNr, string size)
+        {
+            string[] articlesInCart = GetArticleNumbersInCart(orderController);
+            string article = articlesInCart.First(a => a.StartsWith($"{artNr}{size}"));
+            string[] articleSplit = article.Split(';');
+            int sessionKey = GetNumberOfSame(orderController, articleSplit[0]);
+
+            orderController.HttpContext.Session.Remove(sessionKey.ToString());
+
+        }
+
         internal static string[] GetArticleNumbersInCart(Controller controller)
         {
             int count = Convert.ToInt32(GetSingleSessionCount(controller));

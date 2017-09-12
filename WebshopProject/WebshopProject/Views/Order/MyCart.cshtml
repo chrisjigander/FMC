@@ -2,15 +2,38 @@
 
 <div class="displayingProductsDiv">
 
+    @if (Model.Products != null)
+    {
+
+
         @foreach (var item in Model.Products)
         {
             <span id="cartPictureSpan"><img src="~/StaticFiles/@item.ImgPath" /></span>
-            <span id="cartProductBrand">@item.Brand</span>            
+            <span id="cartProductBrand">@item.Brand</span>
             <span id="cartProductModel">@item.Model</span>
             <span id="cartProductPrice">@item.Price</span>
-            <span id="cartProductColor">@item.Color</span><br />
+            <span id="cartProductColor">@item.Color</span>
+            <span id="cartRemoveProductBtn"><a asp-controller="Order" asp-action="EditProduct" asp-route-artNr="@item.ArticleNrShort" asp-route-size="@item.Size" asp-route-plusOrMinus="1">-</a></span>
+            <span id="cartRemoveProductBtn"><a asp-controller="Order" asp-action="EditProduct" asp-route-artNr="@item.ArticleNrShort" asp-route-size="@item.Size" asp-route-plusOrMinus="2">+</a></span>
+            <span id="cartRemoveProductBtn"><a asp-controller="Order" asp-action="RemoveProduct" asp-route-artNr="@item.ArticleNrShort" asp-route-size="@item.Size">x</a></span>
+            <br />
             <span id="cartArticleNum">@item.ArticleNrShort</span>
             <br />
         }
+    }
 </div>
-<a asp-controller="Order" asp-action="CheckOut" class="toCheckOutFakeBtn">Checkout</a>
+
+<div class="cartOptionsDiv">
+    <a asp-controller="Home" asp-action="Index">Fortsätt handla</a>
+
+    @if (Model.IsLoggedIn)
+    {
+        <a asp-controller="Order" asp-action="CheckOut" class="toCheckOutFakeBtn">Gå vidare</a>
+    }
+    else
+    {
+        <a asp-controller="Account" asp-action="Register">Bli medlem</a><br />
+        <a asp-controller="Account" asp-action="Login">Redan medlem? Logga in</a><br />
+        <a asp-controller="Order" asp-action="CheckOut">Gå vidare utan att logga in</a><br />
+    }
+</div>

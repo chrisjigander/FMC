@@ -784,3 +784,6 @@ tr.strongTR > td {
     text-decoration: none;
     padding: 0.5%
 }
+#cartPictureSpan img{
+    width: 40px;
+}
