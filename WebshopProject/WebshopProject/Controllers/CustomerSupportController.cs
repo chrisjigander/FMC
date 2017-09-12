@@ -16,7 +16,10 @@ namespace WebshopProject.Controllers
             return View(new CustomerSupportIndexVM { PageId = id });
         }
 
-
+        public IActionResult HandleContactForm()
+        {
+            return null;
+        }
 
         public IActionResult CustomerSupport(int id)
         {

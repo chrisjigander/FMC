@@ -1,1 +1,34 @@
-﻿<h1>Kontakta oss</h1>
+﻿@model CustomerSupportHandleContactFormVM
+
+
+<h1>Kontakta oss</h1>
+
+<hr />
+
+<form asp-controller="CustomerSupport" asp-action="HandleContactForm">
+    <label asp-for="FirstName"></label>
+    <br />
+    <input asp-for="FirstName" />
+    <span asp-validation-for="FirstName"></span>
+    <br />
+    <br />
+    <label asp-for="LastName"></label>
+    <br />
+    <input asp-for="LastName" />
+    <span asp-validation-for="LastName"></span>
+    <br />
+    <br />
+    <label asp-for="Email"></label>
+    <br />
+    <input asp-for="Email" />
+    <span asp-validation-for="Email"></span>
+    <br />
+    <br />
+    <label asp-for="Message"></label>
+    <br />
+    <input asp-for="Message" />
+    <span asp-validation-for="Message"></span>
+    <br />
+    <br />
+    <input type="submit" value="Skicka meddelande" />
+</form>
