@@ -49,7 +49,7 @@ namespace WebshopProject.Controllers
 
                 if (!result.Succeeded)
                 {
-                    ModelState.AddModelError(nameof(AccountLoginVM.UserName), result.ToString());
+                    ModelState.AddModelError(nameof(AccountLoginVM.UserName), "Felaktigt användarnamn eller lösenord.");
                 }
                 else
                 {

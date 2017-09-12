@@ -1,7 +1,9 @@
 ﻿@* ****** PROFIL / INDEX **********@
+@model ProfileIndexVM
+
 <script>
     window.onload = function () {
-        ProfileMenuOption(1);
+        ProfileMenuOption(@Model.PageId);
     };
 </script>
 

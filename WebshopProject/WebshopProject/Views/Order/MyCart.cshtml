@@ -4,7 +4,7 @@
 
         @foreach (var item in Model.Products)
         {
-            @*<span id="cartPictureSpan"><img src="~/StaticFiles/   .JPG" /></span>*@
+            <span id="cartPictureSpan"><img src="~/StaticFiles/@item.ImgPath" /></span>
             <span id="cartProductBrand">@item.Brand</span>            
             <span id="cartProductModel">@item.Model</span>
             <span id="cartProductPrice">@item.Price</span>

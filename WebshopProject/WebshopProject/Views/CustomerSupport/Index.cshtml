@@ -1,16 +1,25 @@
 ﻿@* ****** CUSTOMERSUPPORT / INDEX **********@
+@model CustomerSupportIndexVM
 
 
-@*<script>
+<script>
     window.onload = function () {
-        ProfileMenuOption(1);
+        CustomerSupportMenuOption(@Model.PageId);
     };
-</script>*@
+</script>
 
 <div class="customerSupportSidebarMenuDiv">
+
+    <h2>Kundservice</h2>
     <ul id="customerSupportUL">
+        <li><a href="" onclick="CustomerSupportMenuOption(5); return false;">Köpvillkor</a></li>
+        <li><a href="" onclick="CustomerSupportMenuOption(3); return false;">Retur & byten</a></li>
+        <li><a href="" onclick="CustomerSupportMenuOption(4); return false;">Leverans</a></li>
+        <li><a href="" onclick="CustomerSupportMenuOption(2); return false;">Om oss</a></li>
         <li><a href="" onclick="CustomerSupportMenuOption(1); return false;">Kontakta oss</a></li>
-        <li><a href="" onclick="CustomerSupportMenuOption(2); return false;">Retur & byten</a></li>
+
+
+        <br />
         <li><a asp-controller="Account" asp-action="Register">Registrera dig här!</a></li>
 
     </ul>

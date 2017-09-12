@@ -4,8 +4,8 @@
 <div class="loggedInDiv">
 
     <p>Du är inloggad som <strong>@Model.UserName</strong></p>
-    <a asp-controller="Profile" asp-action="Index"@*onclick="GetProfile()"*@>Min profil</a><br />
-    <a asp-controller="Account" asp-action="MyOrders">Mina ordrar</a><br /><br /><br />
+    <a asp-controller="Profile" asp-action="Index" asp-route-id="1">Min profil</a><br />
+    <a asp-controller="Profile" asp-action="Index" asp-route-id="2">Mina ordrar</a><br /><br /><br />
     <a id="logOut" asp-controller="Account" asp-action="LogOut">Logga ut</a>
     
 </div>

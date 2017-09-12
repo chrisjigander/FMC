@@ -8,11 +8,11 @@ namespace WebshopProject.Models.VM
 {
     public class AccountLoginVM
     {
-        [Required]
+        [Required(ErrorMessage = "Vänligen ange ett användarnamn.")]
         [Display(Name = "Användarnamn")]
         public string UserName { get; set; }
 
-        [Required]
+        [Required(ErrorMessage = "Vänligen ange ett lösenord.")]
         [DataType(DataType.Password)]
         [Display(Name = "Lösenord")]
         public string PassWord { get; set; }

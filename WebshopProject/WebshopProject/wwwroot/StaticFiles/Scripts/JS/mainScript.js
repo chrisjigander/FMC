@@ -216,28 +216,18 @@ function ProfileMenuOption(option) {
 
 function GetCustomerSupport() {
 
-    $.ajax({
-        url: "/CustomerSupport/Index",
-        type: "GET",
-        success: function (result) {
-            $(".profileContentDiv").html(result);
-        }
-    });
+
 }
 
-function CustomerSupportMenuOption(option) {
-
-    switch (option) {
-        case 1:
-            GetProfile();
-            break;
-        case 2:
-            GetOrders();
-            break;
-        case 3:
-            EditProfile();
-            break;
-    }
+function CustomerSupportMenuOption(id) {
+ 
+    $.ajax({
+        url: "/CustomerSupport/CustomerSupport/" + id,
+        type: "GET",
+        success: function (result) {
+            $(".customerSupportContentDiv").html(result);
+        }
+    });
 
 }
 

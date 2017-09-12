@@ -28,9 +28,9 @@ namespace WebshopProject.Controllers
             this.identityDbContext = identityDbContext;
             this.webShopDBContext = webShopDBContext;
         }
-        public IActionResult Index()
+        public IActionResult Index(int id)
         {
-            return View();
+            return View(new ProfileIndexVM { PageId=id});
         }
         
         public IActionResult EditProfile()

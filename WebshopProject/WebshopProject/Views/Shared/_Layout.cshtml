@@ -55,21 +55,20 @@
             <table class="footTable">
                 
                 <tr>
-                    <th><a asp-controller="CustomerSupport" asp-action="Index" class="custServiceA">KUNDSERVICE</a></th>
+                    <th>KUNDSERVICE</th>
                     <th>INFORMATION</th>
                 </tr>
                 <tr>
-                    @*<td><a asp-controller="CustomerSupport" asp-action="CustomerSupport" asp-route-option=1>Kontakta oss</a></td>*@
-                    <td>Kontakta oss</td>
-                    <td>Om oss</td>
+                    <td><a asp-controller="CustomerSupport" asp-action="Index" asp-route-id=1>Kontakta oss</a></td>
+                    <td><a asp-controller="CustomerSupport" asp-action="Index" asp-route-id=2>Om oss</a></td>
                 </tr>
                 <tr>
-                    <td>Retur & Byten</td>
-                    <td>Leverans</td>
+                    <td><a asp-controller="CustomerSupport" asp-action="Index" asp-route-id=3>Retur & Byten</a></td>
+                    <td><a asp-controller="CustomerSupport" asp-action="Index" asp-route-id=4>Leverans</a></td>
                 </tr>
                 <tr>
-                    <td>Registrera dig</td>
-                    <td>Köpvillkor</td>
+                    <td><a asp-controller="Account" asp-action="Register">Registrera dig</a></td>
+                    <td><a asp-controller="CustomerSupport" asp-action="Index" asp-route-id=5>Köpvillkor</a></td>
                 </tr>
             </table>
         </div>
@@ -81,6 +80,8 @@
     </footer>
 
     <script src="http://ajax.aspnetcdn.com/ajax/jquery/jquery-3.2.1.min.js"></script>
+    <script src="http://ajax.aspnetcdn.com/ajax/jquery.validate/1.16.0/jquery.validate.js"></script>
+    <script src="http://ajax.aspnetcdn.com/ajax/mvc/5.2.3/jquery.validate.unobtrusive.js"></script>
     <script src="~/StaticFiles/Scripts/JS/mainScript.js"></script>
 </body>
 </html>
