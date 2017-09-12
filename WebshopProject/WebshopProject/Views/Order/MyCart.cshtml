@@ -1,3 +1,16 @@
 ﻿@model MyShoppingCartVM
 
-<a asp-controller="Order" asp-action="CheckOut">Checkout</a>
+<div class="displayingProductsDiv">
+
+        @foreach (var item in Model.Products)
+        {
+            @*<span id="cartPictureSpan"><img src="~/StaticFiles/   .JPG" /></span>*@
+            <span id="cartProductBrand">@item.Brand</span>            
+            <span id="cartProductModel">@item.Model</span>
+            <span id="cartProductPrice">@item.Price</span>
+            <span id="cartProductColor">@item.Color</span><br />
+            <span id="cartArticleNum">@item.ArticleNrShort</span>
+            <br />
+        }
+</div>
+<a asp-controller="Order" asp-action="CheckOut" class="toCheckOutFakeBtn">Checkout</a>

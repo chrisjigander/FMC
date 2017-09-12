@@ -17,7 +17,7 @@ namespace WebshopProject.Controllers
 
         public IActionResult HttpError(int id)
         {
-            return View();
+            return View(id);
         }
     }
 }

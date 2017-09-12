@@ -726,3 +726,31 @@ tr.strongTR > td {
     color: var(--dark-grey);
     display: inline-block;
 }
+
+/*****************************   ORDER / MYCART  ***************************************/
+
+.displayingProductsDiv {
+    color: var(--dark-grey);
+    font-family: lato-light;
+    margin-bottom:5%
+}
+
+#cartProductBrand {
+    font-weight:bolder;
+    font-size:18px;
+}
+
+.toCheckOutFakeBtn {
+    width: 15%;
+    font-family: lato-light;
+    background-color: var(--base-color);
+    color: var(--light-grey);
+    font-size: 18px;
+    font-weight: bold;
+    height: 50px;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    text-decoration: none;
+    padding: 0.5%
+}
