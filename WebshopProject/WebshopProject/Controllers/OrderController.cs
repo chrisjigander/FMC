@@ -46,7 +46,27 @@ namespace WebshopProject.Controllers
         //Olika beroende på inloggad eller inte
         public IActionResult CheckOut()
         {
-            return View();
+            AccountMyProfileEditVM currentProfile;
+            if (User.Identity.IsAuthenticated)
+            {
+                string userID = signInManager.UserManager.GetUserId(HttpContext.User);
+                currentProfile = webShopDBContext.GetUserEditProfile(userID);
+            }
+            else
+            {
+                currentProfile = new AccountMyProfileEditVM()
+                {
+                    FirstName = "",
+                    LastName = "",
+                    Email = "",
+                    PhoneNumber = "",
+                    AddressLine = "",
+                    ZipCode = "",
+                    City = "",
+                    
+                };
+            }
+            return View(currentProfile);
         }
 
         [HttpPost]
