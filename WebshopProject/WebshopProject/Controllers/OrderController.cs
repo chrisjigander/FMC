@@ -52,16 +52,16 @@ namespace WebshopProject.Controllers
         [HttpPost]
         public IActionResult CheckOut(AccountMyProfileEditVM account)
         {
-            OrderConfirmOrderVM thingsNeededToCompletePurchase = new OrderConfirmOrderVM();
-            thingsNeededToCompletePurchase.Account = account;
-            thingsNeededToCompletePurchase.ProductsToPurchase = SessionUtils.GetArticles(this, webShopDBContext);
-            return RedirectToAction(nameof(ConfirmOrder), thingsNeededToCompletePurchase);
+            return RedirectToAction(nameof(ConfirmOrder), account);
         }
 
         //Vill kunna kopplas med en emailbekräftelse
         [HttpGet]
-        public IActionResult ConfirmOrder(OrderConfirmOrderVM thingsNeededToCompletePurchase)
+        public IActionResult ConfirmOrder(AccountMyProfileEditVM account)
         {
+            OrderConfirmOrderVM thingsNeededToCompletePurchase = new OrderConfirmOrderVM();
+            thingsNeededToCompletePurchase.Account = account;
+            thingsNeededToCompletePurchase.ProductsToPurchase = SessionUtils.GetArticles(this, webShopDBContext);
             return View(thingsNeededToCompletePurchase);
         }
 

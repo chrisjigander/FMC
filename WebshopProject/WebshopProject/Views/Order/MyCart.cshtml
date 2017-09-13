@@ -1,41 +1,54 @@
 ﻿@model MyShoppingCartVM
 
-<div class="displayingProductsDiv">
 
-    @if (Model.Products != null)
-    {
+<div class="myCartWrapper">
+    <div class="displayingProductsDiv">
 
-
-        @foreach (var item in Model.Products)
+        @if (Model.Products != null)
         {
-            <span id="cartPictureSpan"><img src="~/StaticFiles/@item.ImgPath" /></span>
-            <span id="cartProductBrand">@item.Brand</span>
-            <span id="cartProductModel">@item.Model</span>
-            <span id="cartProductPrice">@item.Price</span>
-            <span id="cartProductColor">@item.Color</span>
-            <span id="cartNumberOfSame"><span>x</span>@item.NumberOfSameArticle</span>
-            <div class="cartEditButtons">
-                <div id="cartRemoveProductBtn"><a asp-controller="Order" asp-action="EditProduct" asp-route-artNr="@item.ArticleNrShort" asp-route-size="@item.Size" asp-route-plusOrMinus="1">-</a></div>
-                <div id="cartRemoveProductBtn"><a asp-controller="Order" asp-action="EditProduct" asp-route-artNr="@item.ArticleNrShort" asp-route-size="@item.Size" asp-route-plusOrMinus="2">+</a></div>
-                <div id="cartRemoveProductBtn"><a asp-controller="Order" asp-action="RemoveProduct" asp-route-artNr="@item.ArticleNrShort" asp-route-size="@item.Size">x</a></div>
-            </div><br />
-            <span id="cartArticleNum">@item.ArticleNrShort</span>
-            <br />
+
+
+            @foreach (var item in Model.Products)
+            {
+                <span id="cartPictureSpan"><img src="~/StaticFiles/@item.ImgPath" /></span>
+                <span id="cartProductBrand">@item.Brand</span>
+                <span id="cartProductModel">@item.Model</span>
+                <span id="cartProductColor">@item.Color, @item.Size</span>
+                <span id="cartProductPrice">, @item.Price kr</span>
+                <div class="cartEditButtons">
+                    <span id="cartNumberOfSame">Antal: @item.NumberOfSameArticle</span>
+                    <a asp-controller="Order" asp-action="EditProduct" asp-route-artNr="@item.ArticleNrShort" asp-route-size="@item.Size" asp-route-plusOrMinus="1"><button class="cartEditBtn">-</button></a>
+                    <a asp-controller="Order" asp-action="EditProduct" asp-route-artNr="@item.ArticleNrShort" asp-route-size="@item.Size" asp-route-plusOrMinus="2"><button class="cartEditBtn">+</button></a>
+                    <a asp-controller="Order" asp-action="RemoveProduct" asp-route-artNr="@item.ArticleNrShort" asp-route-size="@item.Size"><button class="cartEditBtn">x</button></a>
+                </div><br />
+                <span id="cartArticleNum">Art nr: @item.ArticleNrShort@item.Size</span>
+                <br />
+                <hr id="separateProdHr"/>
+                <br />
+            }
         }
-    }
+
+        <strong>Totalt antal varor:</strong> @Model.TotalNumberOfProducts <br />
+        <strong>Summa:</strong> @Model.TotalCost kr
 </div>
 
-<div class="cartOptionsDiv">
-    <a asp-controller="Home" asp-action="Index">Fortsätt handla</a>
+    <div class="cartOptionsDiv">
 
-    @if (Model.IsLoggedIn)
-    {
-        <a asp-controller="Order" asp-action="CheckOut" class="toCheckOutFakeBtn">Gå vidare</a>
-    }
-    else
-    {
-        <a asp-controller="Account" asp-action="Register">Bli medlem</a><br />
-        <a asp-controller="Account" asp-action="Login">Redan medlem? Logga in</a><br />
-        <a asp-controller="Order" asp-action="CheckOut">Gå vidare utan att logga in</a><br />
-    }
+        <div class="keepShoppingBtnDiv">
+            <a asp-controller="Home" asp-action="Index"><button class="proceedToCheckOutBtn">Fortsätt handla</button></a>
+        </div>
+
+        <div class="proceedToCheckOutBtnsDiv">
+            @if (Model.IsLoggedIn)
+            {
+                <a asp-controller="Order" asp-action="CheckOut"><button class="proceedToCheckOutBtn">Gå vidare</button></a>
+            }
+            else
+            {
+                <a asp-controller="Account" asp-action="Register"><button class="proceedToCheckOutBtn">Bli medlem</button></a><br />
+                <a asp-controller="Account" asp-action="Login"><button class="proceedToCheckOutBtn">Redan medlem? Logga in</button></a><br />
+                <a asp-controller="Order" asp-action="CheckOut"><button class="proceedToCheckOutBtn">Gå vidare utan att logga in</button></a><br />
+            }
+        </div>
+    </div>
 </div>

@@ -759,6 +759,12 @@ tr.strongTR > td {
 
 /*****************************   ORDER / MYCART  ***************************************/
 
+.myCartWrapper {
+    position: relative;
+    width: 100%;
+    padding-bottom: 10px;
+}
+
 .displayingProductsDiv {
     color: var(--dark-grey);
     font-family: lato-light;
@@ -771,14 +777,52 @@ tr.strongTR > td {
     font-size:18px;
 }
 
-.toCheckOutFakeBtn {
-    width: 15%;
+#toCheckOutFakeBtn {
+    /*width: 15%;*/
+}
+
+.keepShoppingBtnDiv {
+    width: 220px;
+    display: inline-block;
+}
+
+.proceedToCheckOutBtnsDiv {
+    display: inline-block;
+    width: 220px;
+    text-align: center;
+    position: absolute;
+    right: 10px;
+    bottom: 10px;
+    /*margin-left: 56%;*/
+    /*float: right;*/
+    
+}
+
+#cartOptionsFakeBtn {
+    display: block;
+}
+
+.proceedToCheckOutBtn {
     font-family: lato-light;
     background-color: var(--base-color);
     color: var(--light-grey);
     font-size: 18px;
     font-weight: bold;
-    height: 50px;
+    height: 26px;
+    border: none;
+    border-radius: 6px;
+    width: 220px;
+    cursor: pointer;
+}
+
+
+.fakeBtn {
+    font-family: lato-light;
+    background-color: var(--base-color);
+    color: var(--light-grey);
+    font-size: 18px;
+    font-weight: bold;
+    height: 26px;
     border: none;
     border-radius: 6px;
     cursor: pointer;
@@ -817,8 +861,30 @@ tr.strongTR > td {
     font-weight: bolder;
 }
 
-.cartEditButtons{
+.cartEditButtons {
     display: inline-block;
-    width: 100px;
+    width: 150px;
     margin-left: 6%;
+    position: absolute;
+    left: 350px;
+}
+
+.cartEditBtn {
+    font-family: lato-light;
+    background-color: var(--base-color);
+    color: var(--light-grey);
+    font-size: 10px;
+    font-weight: bold;
+    height: 17px;
+    border: none;
+    border-radius: 2px;
+    width: 17px;
+    display: inline-block;
+    cursor: pointer;
+}
+
+#separateProdHr {
+    background-color: var(--light-grey);
+    margin: 1% 0;
+    width: 560px;
 }
