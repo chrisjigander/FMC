@@ -13,11 +13,12 @@
             <span id="cartProductModel">@item.Model</span>
             <span id="cartProductPrice">@item.Price</span>
             <span id="cartProductColor">@item.Color</span>
-            <span id="cartProductColor"><span>x</span>@item.NumberOfSameArticle</span>
-            <span id="cartRemoveProductBtn"><a asp-controller="Order" asp-action="EditProduct" asp-route-artNr="@item.ArticleNrShort" asp-route-size="@item.Size" asp-route-plusOrMinus="1">-</a></span>
-            <span id="cartRemoveProductBtn"><a asp-controller="Order" asp-action="EditProduct" asp-route-artNr="@item.ArticleNrShort" asp-route-size="@item.Size" asp-route-plusOrMinus="2">+</a></span>
-            <span id="cartRemoveProductBtn"><a asp-controller="Order" asp-action="RemoveProduct" asp-route-artNr="@item.ArticleNrShort" asp-route-size="@item.Size">x</a></span>
-            <br />
+            <span id="cartNumberOfSame"><span>x</span>@item.NumberOfSameArticle</span>
+            <div class="cartEditButtons">
+                <div id="cartRemoveProductBtn"><a asp-controller="Order" asp-action="EditProduct" asp-route-artNr="@item.ArticleNrShort" asp-route-size="@item.Size" asp-route-plusOrMinus="1">-</a></div>
+                <div id="cartRemoveProductBtn"><a asp-controller="Order" asp-action="EditProduct" asp-route-artNr="@item.ArticleNrShort" asp-route-size="@item.Size" asp-route-plusOrMinus="2">+</a></div>
+                <div id="cartRemoveProductBtn"><a asp-controller="Order" asp-action="RemoveProduct" asp-route-artNr="@item.ArticleNrShort" asp-route-size="@item.Size">x</a></div>
+            </div><br />
             <span id="cartArticleNum">@item.ArticleNrShort</span>
             <br />
         }

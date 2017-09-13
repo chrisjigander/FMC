@@ -762,7 +762,8 @@ tr.strongTR > td {
 .displayingProductsDiv {
     color: var(--dark-grey);
     font-family: lato-light;
-    margin-bottom:5%
+    margin-bottom:5%;
+   
 }
 
 #cartProductBrand {
@@ -784,6 +785,40 @@ tr.strongTR > td {
     text-decoration: none;
     padding: 0.5%
 }
+
+#cartPictureSpan {
+    width: 40px;
+    
+}
+
 #cartPictureSpan img{
     width: 40px;
+    vertical-align: top;
+}
+
+#cartNumberOfSame {
+    font-family: lato-light;
+    font-weight: bolder;
+}
+
+#cartRemoveProductBtn {
+    display: inline-block;
+    /*height: 10%;*/
+    width: 20%;
+    background-color: var(--base-color);
+    border-radius: 20%;
+}
+
+#cartRemoveProductBtn a {
+    color: var(--light-grey);
+    text-decoration: none;
+    padding: 0 36%;
+    font-family: lato-light;
+    font-weight: bolder;
+}
+
+.cartEditButtons{
+    display: inline-block;
+    width: 100px;
+    margin-left: 6%;
 }
