@@ -48,13 +48,24 @@ namespace WebshopProject.Controllers
         {
             return View();
         }
-        
-        //Vill kunna kopplas med en emailbekräftelse
-        public IActionResult ConfirmOrder()
+
+        [HttpPost]
+        public IActionResult CheckOut(AccountMyProfileEditVM account)
         {
-            return View();
+            OrderConfirmOrderVM thingsNeededToCompletePurchase = new OrderConfirmOrderVM();
+            thingsNeededToCompletePurchase.Account = account;
+            thingsNeededToCompletePurchase.ProductsToPurchase = SessionUtils.GetArticles(this, webShopDBContext);
+            return RedirectToAction(nameof(ConfirmOrder), thingsNeededToCompletePurchase);
         }
 
+        //Vill kunna kopplas med en emailbekräftelse
+        [HttpGet]
+        public IActionResult ConfirmOrder(OrderConfirmOrderVM thingsNeededToCompletePurchase)
+        {
+            return View(thingsNeededToCompletePurchase);
+        }
+
+        [HttpPost]
         public IActionResult Confirmed()
         {
             return View();

@@ -1,1 +1,83 @@
-﻿
+﻿@model AccountMyProfileEditVM
+
+<div class="EditForm">
+    <h2>Välj leveransadress</h2>
+    <form id="editForm" asp-controller="Order" asp-action="CheckOut">
+        <div class="dividedDiv">
+            <label asp-for="FirstName"></label>
+            <br />
+            <input asp-for="FirstName" />
+            <br />
+            <span asp-validation-for="FirstName"></span>
+            <br />
+            <label asp-for="LastName"></label>
+            <br />
+            <input asp-for="LastName" />
+            <br />
+            <span asp-validation-for="LastName"></span>
+            <br />
+            <label asp-for="Email"></label>
+            <br />
+            <input asp-for="Email" />
+            <br />
+            <span asp-validation-for="Email"></span>
+            <br />
+            <label asp-for="PhoneNumber"></label>
+            <br />
+            <input asp-for="PhoneNumber" />
+            <br />
+            <span asp-validation-for="PhoneNumber"></span>
+            <br />
+        </div>
+        <div class="dividedDiv">
+            <label asp-for="AddressLine"></label>
+            <br />
+            <input asp-for="AddressLine" />
+            <br />
+            <span asp-validation-for="AddressLine"></span>
+            <br />
+            <label asp-for="ZipCode"></label>
+            <br />
+            <input asp-for="ZipCode" />
+            <br />
+            <span asp-validation-for="ZipCode"></span>
+            <br />
+            <label asp-for="City"></label>
+            <br />
+            <input asp-for="City" />
+            <br />
+            <span asp-validation-for="City"></span>
+            <br />
+
+        </div>
+
+<div class="deliveryMethodDiv">
+    <h2>Välj leveransmetod</h2>
+    
+        <input type="radio" value="Postnord" />Postnord <br />
+        <input type="radio" value="Hemleverans" />Hemleverans <br />
+        <input type="radio" value="Hämta i butik" />Hämta i butik <br />
+    
+</div>
+    <div class="paymentMethodDiv">
+        <h2>Välj betalningsalternativ</h2>
+        <input type="radio" value="Kort" />Kort <br />
+        <input type="radio" value="Faktura" />Faktura <br />
+        <input type="radio" value="Swish" />Swish <br />
+
+        <label id="cardNumberInputLabel">Kortnummer</label>
+        <input type="text" id="cardNumberInput" />
+        <label id="cardNameLabel">Kortinnehavare</label>
+        <input type="text" id="cardNameInput" />
+        <label id="cardDateLabel">MM/YY</label>
+        <input type="text" id="cardExpirationMonthInput" /> / 
+        <input type="text" id="cardExpirationYearInput" />
+        <label id="cardCVCLabel">CVC</label>
+        <input type="text" id="cardCVCInput" />
+    </div>
+<div class="chooseNextStepOptions">
+    <a asp-controller="Order" asp-action="MyCart">Gå tillbaka</a>
+    <input type="submit" value="Gå vidare"/>
+</div>
+    </form>
+</div>

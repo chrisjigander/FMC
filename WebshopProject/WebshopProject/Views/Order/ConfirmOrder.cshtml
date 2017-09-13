@@ -1,1 +1,61 @@
-﻿
+﻿@model OrderConfirmOrderVM
+
+<h2>Kontrollera dina uppgifter</h2>
+<div class="displayingProductsDiv">
+
+    @if (Model.ProductsToPurchase.Products != null)
+    {
+
+
+        @foreach (var item in Model.ProductsToPurchase.Products)
+        {
+            <span id="cartPictureSpan"><img src="~/StaticFiles/@item.ImgPath" /></span>
+            <span id="cartProductBrand">@item.Brand</span>
+            <span id="cartProductModel">@item.Model</span>
+            <span id="cartProductPrice">@item.Price</span>
+            <span id="cartProductColor">@item.Color</span>
+            <span id="cartProductColor"><span>x</span>@item.NumberOfSameArticle</span>
+            <span id="cartArticleNum">@item.ArticleNrShort</span>
+            <br />
+        }
+    }
+</div>
+<div id="confirmOrderDiv">
+    <h1>@Model.Account.FirstName @Model.Account.LastName</h1>
+    <table>
+        <tr>
+            <td><strong>Förnamn</strong></td>
+            <td><strong>Efternamn</strong></td>
+        </tr>
+        <tr>
+            <td>@Model.Account.FirstName</td>
+            <td>@Model.Account.LastName</td>
+        </tr>
+        <tr class="strongTR">
+            <td><strong>Adress</strong></td>
+            <td><strong>Telefon</strong></td>
+        </tr>
+        <tr>
+            <td>@Model.Account.AddressLine</td>
+            <td>@Model.Account.PhoneNumber</td>
+        </tr>
+        <tr>
+            <td>@Model.Account.ZipCode</td>
+            <td></td>
+        </tr>
+        <tr>
+            <td>@Model.Account.City</td>
+            <td></td>
+        </tr>
+        <tr class="strongTR">
+            <td><strong>Email</strong></td>
+            <td></td>
+        </tr>
+        <tr>
+            <td>@Model.Account.Email</td>
+            <td></td>
+        </tr>
+
+    </table>
+    <br />
+</div>
