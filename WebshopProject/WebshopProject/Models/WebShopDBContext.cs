@@ -334,5 +334,25 @@ namespace WebshopProject.Models.Entities
         {
             return null;
         }
+
+        internal void AddOrder(int customerId, MyShoppingCartVM myCart)
+        {
+            DateTime timeStamp = DateTime.Now;
+            Order.Add(new Order { DateTime = timeStamp, CustomerId = customerId });
+            SaveChanges();
+            int OID = Order.First( o => o.DateTime == timeStamp).Id;
+
+            foreach (var article in myCart.Products)
+            {
+                OrderArticles.Add(new OrderArticles
+                {
+                    Oid = OID,
+                    ArticleNumber = $"{article.ArticleNrShort}{article.Size}",
+                    Price = article.Price
+                });
+                SaveChanges();
+            };
+
+        }
     }
 }

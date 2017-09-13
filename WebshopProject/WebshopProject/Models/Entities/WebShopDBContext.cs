@@ -1,9 +1,6 @@
 ﻿using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata;
-using WebshopProject.Models.VM;
-using System.Collections.Generic;
-using Microsoft.AspNetCore.Mvc;
 
 namespace WebshopProject.Models.Entities
 {
@@ -12,9 +9,12 @@ namespace WebshopProject.Models.Entities
         public virtual DbSet<Brand> Brand { get; set; }
         public virtual DbSet<Color> Color { get; set; }
         public virtual DbSet<Model> Model { get; set; }
+        public virtual DbSet<Order> Order { get; set; }
+        public virtual DbSet<OrderArticles> OrderArticles { get; set; }
         public virtual DbSet<Product> Product { get; set; }
         public virtual DbSet<Size> Size { get; set; }
         public virtual DbSet<User> User { get; set; }
+
 
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
@@ -53,6 +53,32 @@ namespace WebshopProject.Models.Entities
                     .IsRequired()
                     .HasColumnName("Model_Name")
                     .HasMaxLength(25);
+            });
+
+            modelBuilder.Entity<Order>(entity =>
+            {
+                entity.ToTable("Order", "fmc");
+
+                entity.Property(e => e.DateTime).HasColumnType("datetime");
+            });
+
+            modelBuilder.Entity<OrderArticles>(entity =>
+            {
+                entity.ToTable("OrderArticles", "fmc");
+
+                entity.Property(e => e.ArticleNumber)
+                    .IsRequired()
+                    .HasMaxLength(30);
+
+                entity.Property(e => e.Oid).HasColumnName("OID");
+
+                entity.Property(e => e.Price).HasColumnType("money");
+
+                entity.HasOne(d => d.O)
+                    .WithMany(p => p.OrderArticles)
+                    .HasForeignKey(d => d.Oid)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("FK__OrderArticl__OID__0B91BA14");
             });
 
             modelBuilder.Entity<Product>(entity =>
@@ -153,17 +179,10 @@ namespace WebshopProject.Models.Entities
 
                 entity.Property(e => e.Phonenumber).HasMaxLength(12);
 
-                entity.Property(e => e.Uid)
-                    .IsRequired()
-                    .HasColumnName("UID");
+                entity.Property(e => e.Uid).HasColumnName("UID");
 
                 entity.Property(e => e.Zipcode).HasMaxLength(5);
             });
-        }
-
-        internal void AddOrder(string userID, Func<IActionResult> myCart)
-        {
-            throw new NotImplementedException();
         }
     }
 }

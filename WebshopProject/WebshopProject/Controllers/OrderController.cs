@@ -88,7 +88,15 @@ namespace WebshopProject.Controllers
         [HttpGet]
         public IActionResult Confirmed()
         {
-            return View();
+            if (User.Identity.IsAuthenticated)
+            {
+                string userID = signInManager.UserManager.GetUserId(HttpContext.User);
+                int customerID = webShopDBContext.User.First(u => u.Uid == userID).Id;
+                MyShoppingCartVM myCartVM = SessionUtils.GetArticles(this, webShopDBContext);
+                webShopDBContext.AddOrder(customerID, myCartVM);
+            }
+
+            return Redirect("/Home/Index");
         }
 
         public IActionResult EditProduct(string artNr, string size, int plusOrMinus)
