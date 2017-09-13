@@ -892,10 +892,43 @@ tr.strongTR > td {
 /*************************************** ORDER / CHECKOUT *******************************************/
 
 .checkOutRadioBtns {
-    border: 1px solid var(--light-grey);
-    width: 100%
+    width: 300px;
 }
 
 .deliveryMethodDiv {
+    display: inline-block;
+    vertical-align: top;
+}
+
+
+#cardExpirationMonthInput {
+    width: 24px;
+}
+
+#cardExpirationYearInput {
+    width: 24px;
+}
+
+#cardCVCInput {
+    width: 30px;
+}
+
+#cardNumberInput {
+    width: 80%;
+}
+
+#cardNameInput {
+    width: 80%;
+}
+
+.paymentMethodInnerDiv {
+    width: 300px;
+}
+
+.paymentMethodDiv {
+    display: inline-block;
+}
+
+.paymentMethodDiv {
     display: inline-block;
 }

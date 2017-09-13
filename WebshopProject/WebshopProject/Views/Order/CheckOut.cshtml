@@ -19,13 +19,13 @@
             <br />
             <label asp-for="Email"></label>
             <br />
-            <input asp-for="Email" value="@Model.Email"/>
+            <input asp-for="Email" value="@Model.Email" />
             <br />
             <span asp-validation-for="Email"></span>
             <br />
             <label asp-for="PhoneNumber"></label>
             <br />
-            <input asp-for="PhoneNumber" value="@Model.PhoneNumber"/>
+            <input asp-for="PhoneNumber" value="@Model.PhoneNumber" />
             <br />
             <span asp-validation-for="PhoneNumber"></span>
             <br />
@@ -33,57 +33,70 @@
         <div class="dividedDiv">
             <label asp-for="AddressLine"></label>
             <br />
-            <input asp-for="AddressLine" value="@Model.AddressLine"/>
+            <input asp-for="AddressLine" value="@Model.AddressLine" />
             <br />
             <span asp-validation-for="AddressLine"></span>
             <br />
             <label asp-for="ZipCode"></label>
             <br />
-            <input asp-for="ZipCode" value="@Model.ZipCode"/>
+            <input asp-for="ZipCode" value="@Model.ZipCode" />
             <br />
             <span asp-validation-for="ZipCode"></span>
             <br />
             <label asp-for="City"></label>
             <br />
-            <input asp-for="City" value="@Model.City"/>
+            <input asp-for="City" value="@Model.City" />
             <br />
             <span asp-validation-for="City"></span>
             <br />
 
         </div>
 
-        <div class="deliveryMethodDiv">
-            <h2>Välj leveransmetod</h2>
-            <br />
-            <div class="checkOutRadioBtns">
-                <input type="radio" value="Postnord" />Postnord <br />
-                <input type="radio" value="Hemleverans" />Hemleverans <br />
-                <input type="radio" value="Hämta i butik" />Hämta i butik <br />
-            </div>
-        </div>
 
-        <div class="paymentMethodDiv">
-            <h2>Välj betalningsalternativ</h2>
-            <div class="paymentMethodInnerDiv">
-                <div class="checkOutRadioBtns">
-                    <input type="radio" value="Kort" />Kort <br />
-                    <input type="radio" value="Faktura" />Faktura <br />
-                    <input type="radio" value="Swish" />Swish <br />
+        <div class="delPayDiv">
+
+
+
+            <div class="paymentMethodDiv">
+                <h2>Välj betalningsalternativ</h2>
+                <br />
+                <div class="paymentMethodInnerDiv">
+
+                    <input name ="payment" type="radio" value="Kort" checked="checked" />Kort <br />
+                    <input name ="payment" type="radio" value="Faktura" />Faktura <br />
+                    <input name ="payment" type="radio" value="Swish" />Swish <br />
+                    <br />
+                    <label id="cardNumberInputLabel">Kortnummer</label>
+                    <br />
+                    <input type="text" id="cardNumberInput" />
+                    <br />
+                    <label id="cardNameLabel">Kortinnehavare</label>
+                    <br />
+                    <input type="text" id="cardNameInput" />
+                    <br />
+                    <label id="cardDateLabel">MM/YY</label>
+                    <input type="text" id="cardExpirationMonthInput" /> /
+                    <input type="text" id="cardExpirationYearInput" />
+                    <label id="cardCVCLabel">CVC</label>
+                    <input type="text" id="cardCVCInput" />
                 </div>
-                <label id="cardNumberInputLabel">Kortnummer</label>
-                <input type="text" id="cardNumberInput" />
-                <label id="cardNameLabel">Kortinnehavare</label>
-                <input type="text" id="cardNameInput" />
-                <label id="cardDateLabel">MM/YY</label>
-                <input type="text" id="cardExpirationMonthInput" /> /
-                <input type="text" id="cardExpirationYearInput" />
-                <label id="cardCVCLabel">CVC</label>
-                <input type="text" id="cardCVCInput" />
             </div>
+
+            <div class="deliveryMethodDiv">
+                <h2>Välj leveransmetod</h2>
+                <br />
+                <div class="checkOutRadioBtns">
+                    <input name ="delivery" type="radio" value="Postnord" checked="checked" />Postnord <br />
+                    <input name ="delivery" type="radio" value="Hemleverans" />Hemleverans <br />
+                    <input name ="delivery" type="radio" value="Hämta i butik" />Hämta i butik <br />
+                </div>
+            </div>
+
         </div>
         <div class="chooseNextStepOptions">
-            <a asp-controller="Order" asp-action="MyCart">Gå tillbaka</a>
-            <input type="submit" value="Gå vidare" />
+            <br />
+            <a asp-controller="Order" asp-action="MyCart"><button class="proceedToCheckOutBtn">Gå tillbaka</button></a>
+            <input class="proceedToCheckOutBtn" type="submit" value="Gå vidare" />
         </div>
     </form>
 </div>
