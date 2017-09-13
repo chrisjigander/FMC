@@ -15,6 +15,8 @@ namespace WebshopProject.Utils
     {
         public static string GetMultipleSessionCount(Controller controller)
         {
+            //Returnerar hur många produkter det finns totalt i session
+
             int count = 0;
 
             for (int i = 0; i < 20; i++)
@@ -37,6 +39,8 @@ namespace WebshopProject.Utils
 
         public static string GetSingleSessionCount(Controller controller)
         {
+            //Returnerar antal sessionrader
+
             int count = 0;
 
             for (int i = 0; i < 20; i++)
@@ -77,28 +81,27 @@ namespace WebshopProject.Utils
                     totalNumberOfProducts += Convert.ToInt32(splitString[1]);
 
 
-                    if (i < 3)
+
+                    Model currentModel = context.Model.First(m => m.ModelId == currentProduct.ProdModelId);
+                    Brand currentBrand = context.Brand.First(b => b.BrandId == currentProduct.ProdBrandId);
+                    Size currentSize = context.Size.First(s => s.SizeId == currentProduct.ProdSizeId);
+                    Color currentColor = context.Color.First(c => c.ColorId == currentProduct.ProdColorId);
+
+
+                    ProductThumbnail currentThumbnail = new ProductThumbnail
                     {
-                        Model currentModel = context.Model.First(m => m.ModelId == currentProduct.ProdModelId);
-                        Brand currentBrand = context.Brand.First(b => b.BrandId == currentProduct.ProdBrandId);
-                        Size currentSize = context.Size.First(s => s.SizeId == currentProduct.ProdSizeId);
-                        Color currentColor = context.Color.First(c => c.ColorId == currentProduct.ProdColorId);
+                        Brand = currentBrand.BrandName,
+                        Model = currentModel.ModelName,
+                        Price = Convert.ToInt32(currentProduct.ProdPrice),
+                        NumberOfSameArticle = Convert.ToInt32(splitString[1]),
+                        Size = currentSize.SizeName,
+                        Color = currentColor.ColorName,
+                        ImgPath = $"{currentProduct.ProdArtNr.Remove(currentProduct.ProdArtNr.Length - 2)}_1.jpg",
+                        ArticleNrShort = currentProduct.ProdArtNr.Substring(0, 5)
 
+                    };
+                    prodThumbList.Add(currentThumbnail);
 
-                        ProductThumbnail currentThumbnail = new ProductThumbnail
-                        {
-                            Brand = currentBrand.BrandName,
-                            Model = currentModel.ModelName,
-                            Price = Convert.ToInt32(currentProduct.ProdPrice),
-                            NumberOfSameArticle = Convert.ToInt32(splitString[1]),
-                            Size = currentSize.SizeName,
-                            Color = currentColor.ColorName,
-                            ImgPath = $"{currentProduct.ProdArtNr.Remove(currentProduct.ProdArtNr.Length - 2)}_1.jpg",
-                            ArticleNrShort = currentProduct.ProdArtNr.Substring(0, 5)
-
-                        };
-                        prodThumbList.Add(currentThumbnail);
-                    }
 
                 }
                 myCart.Products = prodThumbList.ToArray();
@@ -118,27 +121,52 @@ namespace WebshopProject.Utils
             string article = articlesInCart.First(a => a.StartsWith($"{artNr}{size}"));
             string[] articleSplit = article.Split(';');
             int sessionKey = GetNumberOfSame(orderController, articleSplit[0]);
-            
-            int count = Convert.ToInt32(articleSplit[1]);
-            if (plusOrMinus == 1) // Minus
+
+            if (articleSplit[1] == "1" && plusOrMinus == 1)
             {
-                if (articleSplit[1] == "1")
+                int totalRows = Convert.ToInt32(GetSingleSessionCount(orderController));
+                orderController.HttpContext.Session.Remove(sessionKey.ToString());
+                UpdateCartSessions(orderController, sessionKey, totalRows);
+            }
+            else
+            {
+                int count = Convert.ToInt32(articleSplit[1]);
+                if (plusOrMinus == 1) // Ta bort EN produkt
                 {
-                    orderController.HttpContext.Session.Remove(sessionKey.ToString());
+
+                    count--;
 
                 }
+                else if (plusOrMinus == 2) // Lägg till EN produkt
+                {
+                    count++;
+                }
 
-                count--;
+                string newArticleString = $"{articleSplit[0]};{count.ToString()}";
+                orderController.HttpContext.Session.SetString(sessionKey.ToString(), newArticleString);
 
             }
-            else if (plusOrMinus == 2) // Plus
-            {
-                count++;
-            }
 
-            string newArticleString = $"{artNr};{count.ToString()}";
-            orderController.HttpContext.Session.SetString(sessionKey.ToString(), newArticleString);
+
+        }
+
+        private static void UpdateCartSessions(OrderController orderController, int sessionKey, int totalRows)
+        {
             
+            for (int i = sessionKey + 1; i <= totalRows; i++)
+            {
+
+                if (orderController.HttpContext.Session.GetString(i.ToString()) != null)
+                {
+                    string currentSessionString = orderController.HttpContext.Session.GetString(i.ToString());
+                    orderController.HttpContext.Session.SetString((i - 1).ToString(), currentSessionString);
+                }
+                if (i == totalRows-1)
+                {
+                    orderController.HttpContext.Session.Remove(i.ToString());
+                }
+
+            }
         }
 
         internal static void RemoveProduct(OrderController orderController, string artNr, string size)
@@ -148,7 +176,9 @@ namespace WebshopProject.Utils
             string[] articleSplit = article.Split(';');
             int sessionKey = GetNumberOfSame(orderController, articleSplit[0]);
 
+            int totalRows = Convert.ToInt32(GetSingleSessionCount(orderController));
             orderController.HttpContext.Session.Remove(sessionKey.ToString());
+            UpdateCartSessions(orderController, sessionKey, totalRows);
 
         }
 

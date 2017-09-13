@@ -4,23 +4,27 @@
     @if (Model.TotalNumberOfProducts > 0)
     {
 
-        @foreach (var item in Model.Products)
+
+        @for (int i = 0; i < Model.Products.Length; i++)
         {
-            @if (item.NumberOfSameArticle > 1)
+
+            @if (Model.Products[i].NumberOfSameArticle > 1 && i < 4)
             {
-                <div class="mainRowCartDiv">@item.Brand @item.Model <span>x</span><span>@item.NumberOfSameArticle</span> <div class="prodPriceInCartDiv">@item.Price kr</div></div>
+                <div class="mainRowCartDiv">@Model.Products[i].Brand @Model.Products[i].Model <span>x</span><span>@Model.Products[i].NumberOfSameArticle</span> <div class="prodPriceInCartDiv">@Model.Products[i].Price kr</div></div>
+                <p class="subRowCartPara">@Model.Products[i].Color, @Model.Products[i].Size</p>
 
 
             }
-            else
+            else if (i < 4)
             {
-                <div class="mainRowCartDiv">@item.Brand @item.Model <div class="prodPriceInCartDiv">@item.Price kr</div></div>
+                <div class="mainRowCartDiv">@Model.Products[i].Brand @Model.Products[i].Model <div class="prodPriceInCartDiv">@Model.Products[i].Price kr</div></div>
 
+            <p class="subRowCartPara">@Model.Products[i].Color, @Model.Products[i].Size</p>
             }
-
-            <p class="subRowCartPara">@item.Color, @item.Size</p>
 
         }
+
+
 
         <hr id="cartDividerHR" />
 
