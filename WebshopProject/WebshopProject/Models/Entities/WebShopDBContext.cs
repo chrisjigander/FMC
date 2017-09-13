@@ -3,6 +3,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata;
 using WebshopProject.Models.VM;
 using System.Collections.Generic;
+using Microsoft.AspNetCore.Mvc;
 
 namespace WebshopProject.Models.Entities
 {
@@ -160,6 +161,9 @@ namespace WebshopProject.Models.Entities
             });
         }
 
-
+        internal void AddOrder(string userID, Func<IActionResult> myCart)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

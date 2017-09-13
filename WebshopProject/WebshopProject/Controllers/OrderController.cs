@@ -85,7 +85,7 @@ namespace WebshopProject.Controllers
             return View(thingsNeededToCompletePurchase);
         }
 
-        [HttpPost]
+        [HttpGet]
         public IActionResult Confirmed()
         {
             return View();
