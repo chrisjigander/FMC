@@ -41,7 +41,20 @@ namespace WebshopProject.Controllers
         }
         public IActionResult MyOrders()
         {
-            return PartialView("", new AccountMyOrdersVM { });
+            string userID = signInManager.UserManager.GetUserId(HttpContext.User);
+            int customerID = webShopDBContext.User.First(u => u.Uid == userID).Id;
+
+            ProfileMyOrdersPartialVM currentProfile = webShopDBContext.GetMyOrders(customerID);
+
+            return PartialView("_MyOrdersPartial", currentProfile);
+        }
+
+        public IActionResult MySpecificOrder(int id)
+        {
+            ProfileMySpecificOrderPartialVM myOrder = webShopDBContext.GetSpecificOrder(id);
+
+
+            return PartialView("_MySpecificOrderPartial", myOrder);
         }
 
         [HttpPost]

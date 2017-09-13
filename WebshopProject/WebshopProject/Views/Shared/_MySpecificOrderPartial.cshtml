@@ -1,0 +1,25 @@
+﻿@model ProfileMySpecificOrderPartialVM
+
+<div class="displayingProductsDiv">
+
+    @if (Model.OrderArticles != null)
+    {
+        
+
+        @foreach (var item in Model.OrderArticles)
+        {
+            <span id="cartPictureSpan"><img src="~/StaticFiles/@item.ImgPath" /></span>
+                <span id="cartProductBrand">@item.Brand</span>
+                <span id="cartProductModel">@item.Model</span>
+                <span id="cartProductColor">@item.Color, @item.Size</span>
+                <span id="cartProductPrice">, @item.Price kr</span>
+                <div class="cartEditButtons">
+                    <span id="cartNumberOfSame">Antal: @item.NumberOfSameArticle</span>
+                </div><br />
+                <span id="cartArticleNum">Art nr: @item.ArticleNrShort@item.Size</span>
+                <br />
+                <hr id="separateProdHr" />
+                <br />
+        }
+    }
+</div>

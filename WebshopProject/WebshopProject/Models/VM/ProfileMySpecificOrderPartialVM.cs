@@ -2,10 +2,14 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using WebshopProject.Models.Entities;
 
 namespace WebshopProject.Models.VM
 {
-    public class AccountMyOrdersVM
+    public class ProfileMySpecificOrderPartialVM
     {
+        public ProductThumbnail[] OrderArticles { get; set; }
+
+
     }
 }

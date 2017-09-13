@@ -1,0 +1,30 @@
+﻿@model ProfileMyOrdersPartialVM
+
+<h1>MINA ORDRAR</h1>
+<hr />
+
+@if (Model.MyOrders.Length == 0)
+{
+    <h2>Du har inga tidigare ordrar.</h2>
+}
+else
+{
+    <table class="myOrderTable">
+        <tr>
+            <th>Ordernummer</th>
+            <th>Datum</th>
+            <th>Summa</th>
+        </tr>
+
+        @for (int i = 0; i < Model.MyOrders.Length; i++)
+        {
+            <tr>
+                <td><a href="" onclick="GetSpecificOrder(@Model.MyOrders[i].Id); return false;">@Model.MyOrders[i].Id</a></td>
+                <td>@Model.MyOrders[i].DateTime.ToShortDateString()</td>
+                <td>@Model.TotalSum[i]</td>
+            </tr>
+        }
+
+    </table>
+
+}

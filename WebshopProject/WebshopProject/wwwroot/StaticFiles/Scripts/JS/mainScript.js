@@ -196,6 +196,28 @@ function EditedProfile(editedUser) {
 
 }
 
+function GetOrders() {
+    $.ajax({
+        url: "/Profile/MyOrders",
+        type: "GET",
+        success: function (result) {
+            $(".profileContentDiv").html(result);
+        }
+    });
+
+
+}
+
+function GetSpecificOrder(id) {
+    $.ajax({
+        url: "/Profile/MySpecificOrder/" + id,
+        type: "GET",
+        success: function (result) {
+            $(".profileContentDiv").html(result);
+        }
+    });
+}
+
 function ProfileMenuOption(option) {
 
     switch (option) {

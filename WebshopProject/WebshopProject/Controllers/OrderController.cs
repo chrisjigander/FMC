@@ -63,7 +63,7 @@ namespace WebshopProject.Controllers
                     AddressLine = "",
                     ZipCode = "",
                     City = "",
-                    
+
                 };
             }
             return View(currentProfile);
@@ -95,13 +95,17 @@ namespace WebshopProject.Controllers
                 MyShoppingCartVM myCartVM = SessionUtils.GetArticles(this, webShopDBContext);
                 webShopDBContext.AddOrder(customerID, myCartVM);
             }
-
-            return Redirect("/Home/Index");
+            else
+            {
+                // 
+            }
+            HttpContext.Session.Clear();
+            return View();
         }
 
         public IActionResult EditProduct(string artNr, string size, int plusOrMinus)
         {
- 
+
             SessionUtils.EditProduct(this, artNr, size, plusOrMinus);
             return RedirectToAction(nameof(MyCart));
         }

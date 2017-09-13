@@ -340,7 +340,7 @@ namespace WebshopProject.Models.Entities
             DateTime timeStamp = DateTime.Now;
             Order.Add(new Order { DateTime = timeStamp, CustomerId = customerId });
             SaveChanges();
-            int OID = Order.First( o => o.DateTime == timeStamp).Id;
+            int OID = Order.First(o => o.DateTime == timeStamp).Id;
 
             foreach (var article in myCart.Products)
             {
@@ -353,6 +353,93 @@ namespace WebshopProject.Models.Entities
                 SaveChanges();
             };
 
+        }
+
+        internal ProfileMyOrdersPartialVM GetMyOrders(int customerID)
+        {
+            ProfileMyOrdersPartialVM profileMyOrders = new ProfileMyOrdersPartialVM();
+
+            profileMyOrders.MyOrders = Order.Where(o => o.CustomerId == customerID).ToArray();
+
+            profileMyOrders.TotalSum = new int[profileMyOrders.MyOrders.Length];
+
+            for (int i = 0; i < profileMyOrders.MyOrders.Length; i++)
+            {
+                int price = 0;
+
+                OrderArticles[] orderArticles = OrderArticles.Where(o => o.Oid == profileMyOrders.MyOrders[i].Id).ToArray();
+
+                foreach (var item in orderArticles)
+                {
+                    price += Convert.ToInt32(item.Price);
+                }
+
+                profileMyOrders.TotalSum[i] = price;
+            }
+
+            return profileMyOrders;
+        }
+
+        internal ProfileMySpecificOrderPartialVM GetSpecificOrder(int id)
+        {
+            ProfileMySpecificOrderPartialVM myOrder = new ProfileMySpecificOrderPartialVM();
+            OrderArticles[] orderArticles = OrderArticles.Where(o => o.Oid == id).ToArray();
+            List<ProductThumbnail> prodThumbList = new List<ProductThumbnail>();
+
+            myOrder.OrderArticles = new ProductThumbnail[orderArticles.Length];
+
+            foreach (var item in orderArticles)
+            {
+                bool IsExisting = false;
+                if (prodThumbList.Count > 0)
+                {
+
+                    foreach (var prod in prodThumbList)
+                    {
+                        if (item.ArticleNumber == $"{prod.ArticleNrShort}{prod.Size}")
+                        {
+                            int articleCount = prod.NumberOfSameArticle;
+                            articleCount++;
+
+                            prod.NumberOfSameArticle = articleCount;
+                            IsExisting = true;
+
+                        }
+
+                    }
+
+                }
+                if (!IsExisting)
+                {
+
+                    Product currentProduct = Product.First(p => p.ProdArtNr == item.ArticleNumber);
+                    Brand currentBrand = Brand.First(b => b.BrandId == currentProduct.ProdBrandId);
+                    Model currentModel = Model.First(m => m.ModelId == currentProduct.ProdModelId);
+                    Size currentSize = Size.First(s => s.SizeId == currentProduct.ProdSizeId);
+                    Color currentColor = Color.First(c => c.ColorId == currentProduct.ProdColorId);
+
+
+                    ProductThumbnail currentThumbnail = new ProductThumbnail
+                    {
+                        Brand = currentBrand.BrandName,
+                        Model = currentModel.ModelName,
+                        Price = Convert.ToInt32(currentProduct.ProdPrice),
+                        NumberOfSameArticle = 1,
+                        Size = currentSize.SizeName,
+                        Color = currentColor.ColorName,
+                        ImgPath = $"{currentProduct.ProdArtNr.Remove(currentProduct.ProdArtNr.Length - 2)}_1.jpg",
+                        ArticleNrShort = currentProduct.ProdArtNr.Substring(0, 5)
+
+                    };
+                    prodThumbList.Add(currentThumbnail);
+
+
+                }
+            }
+
+            myOrder.OrderArticles = prodThumbList.ToArray();
+            return myOrder;
+            
         }
     }
 }
