@@ -549,8 +549,20 @@ h1 {
     margin-top: 1%;
 }
 
-/*****************************    Logged In   ***************************************/
+.goToCartBtn {
+    font-family: lato-light;
+    background-color: var(--base-color);
+    color: var(--light-grey);
+    border: none;
+    font-size: 16px;
+    padding: 0.5%;
+    width: 150px;
+    margin-bottom: 0.4%;
+    cursor: pointer;
+    border-radius: 2px;
+}
 
+/*****************************    Logged In   ***************************************/
 .loggedInDiv a, p {
     color: var(--dark-grey);
     text-decoration: none;
