@@ -888,3 +888,14 @@ tr.strongTR > td {
     margin: 1% 0;
     width: 560px;
 }
+
+/*************************************** ORDER / CHECKOUT *******************************************/
+
+.checkOutRadioBtns {
+    border: 1px solid var(--light-grey);
+    width: 100%
+}
+
+.deliveryMethodDiv {
+    display: inline-block;
+}
