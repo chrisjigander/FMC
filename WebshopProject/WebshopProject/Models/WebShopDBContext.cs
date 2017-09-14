@@ -213,6 +213,7 @@ namespace WebshopProject.Models.Entities
             List<Product> allProductsToFilter = new List<Entities.Product>();
             allProductsToFilter = Product.ToList();
 
+
             //check if id is not null
             if (int.TryParse(id.ToString(), out int result))
             {
@@ -322,20 +323,69 @@ namespace WebshopProject.Models.Entities
             {
                 string currBrandName = Brand.FirstOrDefault(b => b.BrandId == item.ProdBrandId).BrandName;
                 string currModelName = Model.FirstOrDefault(m => m.ModelId == item.ProdModelId).ModelName;
+                string currSizeName = Size.FirstOrDefault(s => s.SizeId == item.ProdSizeId).SizeName;
+                string currColorName = Color.FirstOrDefault(c => c.ColorId == item.ProdColorId).ColorName;
                 thumbnailList.Add(new ProductThumbnail
                 {
                     ImgPath = $"{item.ProdArtNr.Remove(item.ProdArtNr.Length - 2)}_1.jpg",
                     ArticleNrShort = item.ProdArtNr.Substring(0, 5),
                     Brand = currBrandName,
                     Model = currModelName,
-                    Price = Convert.ToInt32(item.ProdPrice)
+                    Price = Convert.ToInt32(item.ProdPrice),
+                    Size = currSizeName,
+                    Color = currColorName
 
                 });
 
             }
-            return new ProductProductOverviewVM { ProdThumbnails = thumbnailList.ToArray() };
+            ProductProductOverviewVM PPOVM = new ProductProductOverviewVM { ProdThumbnails = thumbnailList.ToArray() };
+            SetSelectListItems(PPOVM);
+
+            return PPOVM;
+            //return new ProductProductOverviewVM { ProdThumbnails = thumbnailList.ToArray(), BrandArray = brandList.ToArray(), ColorArray = colorList.ToArray(), SizeArray = sizeList.ToArray(), PriceArray = priceSpans };
         }
 
+        internal void SetSelectListItems(ProductProductOverviewVM PPOVM)
+        {
+            var sizeArray = Size.ToArray();
+            var colorArray = Color.ToArray();
+            var brandArray = Brand.ToArray();
+
+            SelectListItem[] priceSpans = new SelectListItem[] {new SelectListItem { Text = "Maxpris", Value = "0"},
+            new SelectListItem { Text = "1000", Value = "1"},
+            new SelectListItem { Text = "1500", Value = "2"}, new SelectListItem { Text = "2000", Value = "3"},
+            new SelectListItem { Text = "2500", Value = "4"}};
+
+            List<SelectListItem> sizeList = new List<SelectListItem>();
+            List<SelectListItem> colorList = new List<SelectListItem>();
+            List<SelectListItem> brandList = new List<SelectListItem>();
+
+            sizeList.Add(new SelectListItem { Text = "Storlek", Value = "0" });
+            colorList.Add(new SelectListItem { Text = "Färg", Value = "0" });
+            brandList.Add(new SelectListItem { Text = "Märke", Value = "0" });
+
+            for (int i = 0; i < sizeArray.Length; i++)
+            {
+                var tempSize = new SelectListItem { Text = sizeArray[i].SizeName, Value = (i + 2).ToString() };
+                sizeList.Add(tempSize);
+            }
+
+            for (int i = 0; i < colorArray.Length; i++)
+            {
+                var tempColor = new SelectListItem { Text = colorArray[i].ColorName, Value = (i + 1).ToString() };
+                colorList.Add(tempColor);
+            }
+
+            for (int i = 0; i < brandArray.Length; i++)
+            {
+                var tempBrand = new SelectListItem { Text = brandArray[i].BrandName, Value = (i + 1).ToString() };
+                brandList.Add(tempBrand);
+            }
+            PPOVM.BrandArray = brandList.ToArray();
+            PPOVM.SizeArray = sizeList.ToArray();
+            PPOVM.ColorArray = colorList.ToArray();
+            PPOVM.PriceArray = priceSpans;
+        }
 
         internal void AddOrder(int customerId, MyShoppingCartVM myCart, WebShopDBContext context)
         {
@@ -455,7 +505,7 @@ namespace WebshopProject.Models.Entities
         {
 
             bool IsInStock = true;
-            
+
 
             if (controller.HttpContext.Session.GetString(sessionKey) != null)
             {
@@ -472,6 +522,54 @@ namespace WebshopProject.Models.Entities
                 }
             }
             return IsInStock;
+        }
+
+        internal ProductProductOverviewVM GetFiltered(ProductProductOverviewVM productVM)
+        {
+            ProductProductOverviewVM newProductsOverview = GetOverview('i', null);
+            ProductThumbnail[] newProducts = newProductsOverview.ProdThumbnails;
+
+            if (productVM.SelectedBrand != "0")
+            {
+                string brandName = Brand.First(b => b.BrandId == Convert.ToInt32(productVM.SelectedBrand)).BrandName;
+                newProducts = newProducts.Where(p => p.Brand == brandName).ToArray();
+            }
+
+            if (productVM.SelectedSize != "0")
+            {
+                string sizeName = Size.First(b => b.SizeId == Convert.ToInt32(productVM.SelectedSize)).SizeName;
+                newProducts = newProducts.Where(p => p.Size == sizeName).ToArray();
+            }
+
+            if (productVM.SelectedColor != "0")
+            {
+                string colorName = Color.First(b => b.ColorId == Convert.ToInt32(productVM.SelectedColor)).ColorName;
+                newProducts = newProducts.Where(p => p.Color == colorName).ToArray();
+            }
+
+            if (productVM.SelectedPrice != "0")
+            {
+                // newProducts = newProducts.Where(p => p.Price <= Convert.ToInt32(productVM.SelectedPrice)).ToArray();
+                switch (productVM.SelectedPrice)
+                {
+                    case "1":
+                        newProducts = newProducts.Where(p => p.Price <= 1000).ToArray();
+                        break;
+                    case "2":
+                        newProducts = newProducts.Where(p => p.Price <= 1500).ToArray();
+                        break;
+                    case "3":
+                        newProducts = newProducts.Where(p => p.Price <= 2000).ToArray();
+                        break;
+                    case "4":
+                        newProducts = newProducts.Where(p => p.Price <= 2500).ToArray();
+                        break;
+                }
+
+            }
+
+            productVM.ProdThumbnails = newProducts;
+            return productVM;
         }
     }
 }

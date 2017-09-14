@@ -46,7 +46,7 @@ namespace WebshopProject.Controllers
             {
                 case "1":
                     result.DropdownMenuTitle = "Skor";
-                    result.DropDownLinks =  new DropDownLink[] {
+                    result.DropDownLinks = new DropDownLink[] {
                         new DropDownLink("Visa alla",1 ), new DropDownLink("Casualskor", 1), new DropDownLink("Businesskor", 1),
                         new DropDownLink("Outdoorskor", 1), new DropDownLink("Finskor", 1) };
                     break;
@@ -89,7 +89,7 @@ namespace WebshopProject.Controllers
         [HttpPost]
         public IActionResult ProductItem(ProductProductItemVM addProductToCart)
         {
-            
+
             DataManager.AddToCart(this, addProductToCart, webShopDBContext);
 
             return RedirectToAction(nameof(ProductItem));
@@ -107,11 +107,34 @@ namespace WebshopProject.Controllers
             return null;
         }
 
-        public IActionResult ProductOverview(char id, string link)
+        public IActionResult ProductOverview(char id, string link, ProductProductOverviewVM filteredVM)
         {
-            ProductProductOverviewVM overviewVM = webShopDBContext.GetOverview(id, link);
+            ProductProductOverviewVM overviewVM;
+            if (filteredVM.ShouldFilter == false)
+            {
+                overviewVM = webShopDBContext.GetOverview(id, link);
+            }
+            else
+            {
+                ProductProductOverviewVM filteredProductsVM = webShopDBContext.GetFiltered(filteredVM);
+                webShopDBContext.SetSelectListItems(filteredProductsVM);
+                overviewVM = filteredProductsVM;
+
+            }
 
             return View(overviewVM);
+        }
+
+        [HttpPost]
+        public IActionResult ProductOverview(ProductProductOverviewVM productVM)
+        {
+            return RedirectToAction(nameof(FilterOverView), productVM);
+        }
+
+        public IActionResult FilterOverView(ProductProductOverviewVM productVM)
+        {
+            productVM.ShouldFilter = true;
+            return RedirectToAction(nameof(ProductOverview), productVM);
         }
 
         public string GetCartCount()

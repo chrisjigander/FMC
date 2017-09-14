@@ -368,11 +368,20 @@ h1 {
     margin: 0;
     margin-top: 1%;
     margin-bottom: 9%;
+}
 
+.filterBarDiv hr {
+    background-color: var(--base-color);
+    margin: 4px 0;
+}
+
+#filterBtn{
+    width: 120px;
+    height: 26px;
+    font-size: 14px;
 }
 
 /****************************************   PRODUCT ITEM PAGE   ********************************************/
-
 .productContentWrapperDiv {
     height: 600px;
 }
@@ -903,8 +912,16 @@ tr.strongTR > td {
     width: 560px;
 }
 
-/*************************************** ORDER / CHECKOUT *******************************************/
+.proceedToCheckOutBtn:disabled {
+    opacity: 0.5;
+    cursor:default;
+}
 
+.paymentMethodInnerInnerDiv {
+    visibility: visible;
+}
+
+/*************************************** ORDER / CHECKOUT *******************************************/
 .checkOutRadioBtns {
     width: 300px;
 }

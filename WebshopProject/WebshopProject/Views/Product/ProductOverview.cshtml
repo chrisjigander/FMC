@@ -1,5 +1,26 @@
 ﻿@model ProductProductOverviewVM
 
+<div class="filterBarDiv">
+    <form class="filterProductsForm" asp-controller="Product" asp-action="ProductOverview">
+
+        <select id="sizeDropDown2" asp-for="SelectedSize"
+                asp-items="Model.SizeArray"></select>
+
+        <select id="colorDropDown2" asp-for="SelectedColor"
+                asp-items="Model.ColorArray"></select>
+
+        <select id="brandDropDown" asp-for="SelectedBrand"
+                asp-items="Model.BrandArray"></select>
+
+        <select id="priceDropDown" asp-for="SelectedPrice"
+                asp-items="Model.PriceArray"></select>
+        <input class="proceedToCheckOutBtn" id="filterBtn" type="submit" value="Applicera filter" />
+        @*<button type="submit"><span>Rensa filter</span></button>*@
+    </form>
+<hr />
+</div>
+
+
 <div class="productOverviewDiv">
     @foreach (var item in @Model.ProdThumbnails)
     {

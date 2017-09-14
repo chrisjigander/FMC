@@ -299,3 +299,12 @@ function EnableButton() {
     }
     
 }
+
+function ToggleCardInput(id) {
+    if (id == 1) {
+        $('.paymentMethodInnerInnerDiv').css("visibility", "visible")
+    }
+    else {
+        $('.paymentMethodInnerInnerDiv').css("visibility", "hidden")
+    }
+}
