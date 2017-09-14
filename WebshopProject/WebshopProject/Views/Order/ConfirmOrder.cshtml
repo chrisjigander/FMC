@@ -21,7 +21,6 @@
     }
 </div>
 <div id="confirmOrderDiv">
-    <h1>@Model.Account.FirstName @Model.Account.LastName</h1>
     <table>
         <tr>
             <td><strong>Förnamn</strong></td>
@@ -55,9 +54,31 @@
             <td>@Model.Account.Email</td>
             <td></td>
         </tr>
+        <tr>
+            <td><strong>Valt betalsätt</strong></td>
+            <td><strong>Vald leveransmetod</strong></td>
+        </tr>
+        <tr>
+            <td>@Model.Account.Payment</td>
+            <td>@Model.Account.Delivery</td>
+        </tr>
+        
 
     </table>
     <br />
+
+
+
+    
     <a asp-controller="Order" asp-action="CheckOut"><button class="proceedToCheckOutBtn">Gå tillbaka</button></a>
-    <a asp-controller="Order" asp-action="Confirmed"><button class="proceedToCheckOutBtn">Bekräfta köp</button></a>
+    <form asp-controller="Order" asp-action="ConfirmOrder">
+        <input type="hidden" asp-for="Account.FirstName" />
+        <input type="hidden" asp-for="Account.LastName" />
+        <input type="hidden" asp-for="Account.PhoneNumber" />
+        <input type="hidden" asp-for="Account.AddressLine" />
+        <input type="hidden" asp-for="Account.City" />
+        <input type="hidden" asp-for="Account.ZipCode" />
+        <input type="hidden" asp-for="Account.Email" />
+        <input class="proceedToCheckOutBtn" type="submit" value="Bekräfta köp" />
+    </form>
 </div>

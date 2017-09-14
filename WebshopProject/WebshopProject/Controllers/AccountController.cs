@@ -120,6 +120,7 @@ namespace WebshopProject.Controllers
             JObject userToJobject = JObject.Parse(userToString);
 
             webShopDBContext.AddUser(userToJobject, userID);
+
             return Redirect("/Home/Index");
         }
 

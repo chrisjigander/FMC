@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using WebshopProject.Models.VM;
+using WebshopProject.Utils;
 
 namespace WebshopProject.Models.Entities
 {
@@ -31,6 +32,9 @@ namespace WebshopProject.Models.Entities
                 Email = (string)user["Email"]
             });
             SaveChanges();
+
+            User tempUser = User.First(u => u.Uid == uID);
+            EmailUtils.SendRegistrationConfEmail(tempUser);
         }
         internal AccountMyProfileVM GetUserProfile(string userID)
         {
@@ -335,7 +339,7 @@ namespace WebshopProject.Models.Entities
             return null;
         }
 
-        internal void AddOrder(int customerId, MyShoppingCartVM myCart)
+        internal void AddOrder(int customerId, MyShoppingCartVM myCart, WebShopDBContext context)
         {
             DateTime timeStamp = DateTime.Now;
             Order.Add(new Order { DateTime = timeStamp, CustomerId = customerId });
@@ -352,7 +356,8 @@ namespace WebshopProject.Models.Entities
                 });
                 SaveChanges();
             };
-
+            User myUser = context.User.First(c => c.Id == customerId);
+            EmailUtils.SendOrderConfEmail(OID, context, myUser);
         }
 
         internal ProfileMyOrdersPartialVM GetMyOrders(int customerID)

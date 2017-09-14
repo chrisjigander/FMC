@@ -158,9 +158,9 @@ namespace WebshopProject.Models.Entities
                     .HasName("UQ__User__A9D105342C9DAAB3")
                     .IsUnique();
 
-                entity.HasIndex(e => e.Uid)
-                    .HasName("UQ__User__C5B19603C4A358B3")
-                    .IsUnique();
+                //entity.HasIndex(e => e.Uid)
+                //.HasName("UQ__User__C5B19603C4A358B3");
+                //.IsUnique();
 
                 entity.Property(e => e.Addressline).HasMaxLength(40);
 

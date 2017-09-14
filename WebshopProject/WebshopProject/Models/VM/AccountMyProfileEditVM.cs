@@ -47,5 +47,8 @@ namespace WebshopProject.Models.VM
         [Display(Name = "Telefonnummer mobil")]
         [Phone(ErrorMessage = "Ogiltigt telefonnummer!")]
         public string PhoneNumber { get; set; }
+
+        public string Payment { get; set; }
+        public string Delivery { get; set; }
     }
 }

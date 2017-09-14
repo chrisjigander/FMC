@@ -70,8 +70,11 @@ namespace WebshopProject.Controllers
         }
 
         [HttpPost]
-        public IActionResult CheckOut(AccountMyProfileEditVM account)
+        public IActionResult CheckOut(AccountMyProfileEditVM account, string payment, string delivery)
         {
+            account.Delivery = delivery;
+            account.Payment = payment;
+
             return RedirectToAction(nameof(ConfirmOrder), account);
         }
 
@@ -85,21 +88,42 @@ namespace WebshopProject.Controllers
             return View(thingsNeededToCompletePurchase);
         }
 
-        [HttpGet]
-        public IActionResult Confirmed()
+        [HttpPost]
+        public IActionResult ConfirmOrder(OrderConfirmOrderVM order)
         {
+            return RedirectToAction(nameof(Confirmed), order.Account);
+        }
+
+        [HttpGet]
+        public IActionResult Confirmed(AccountMyProfileEditVM account)
+        {
+            MyShoppingCartVM myCartVM;
             if (User.Identity.IsAuthenticated)
             {
                 string userID = signInManager.UserManager.GetUserId(HttpContext.User);
                 int customerID = webShopDBContext.User.First(u => u.Uid == userID).Id;
-                MyShoppingCartVM myCartVM = SessionUtils.GetArticles(this, webShopDBContext);
-                webShopDBContext.AddOrder(customerID, myCartVM);
+                myCartVM = SessionUtils.GetArticles(this, webShopDBContext);
+                webShopDBContext.AddOrder(customerID, myCartVM, webShopDBContext);
             }
             else
             {
-                // 
+                webShopDBContext.User.Add(new User {
+                    Firstname = account.FirstName,
+                    Lastname = account.LastName,
+                    Phonenumber = account.PhoneNumber,
+                    Email = account.Email,
+                    Addressline = account.AddressLine,
+                    Zipcode = account.ZipCode,
+                    City = account.City
+                });
+                webShopDBContext.SaveChanges();
+
+                int customerID = webShopDBContext.User.First(u => u.Email == account.Email).Id;
+                myCartVM = SessionUtils.GetArticles(this, webShopDBContext);
+                webShopDBContext.AddOrder(customerID, myCartVM, webShopDBContext);
             }
             HttpContext.Session.Clear();
+
             return View();
         }
 

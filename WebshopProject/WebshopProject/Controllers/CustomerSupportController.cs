@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using WebshopProject.Models.VM;
+using WebshopProject.Utils;
 
 // For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
@@ -16,8 +17,12 @@ namespace WebshopProject.Controllers
             return View(new CustomerSupportIndexVM { PageId = id });
         }
 
-        public IActionResult HandleContactForm()
+        [HttpPost]
+        public IActionResult HandleContactForm(CustomerSupportHandleContactFormVM formVM)
         {
+
+            EmailUtils.SendContactUsConfEmail(formVM);
+            //tempMsg Tack för ditt mail
             return Redirect("/Home/Index/");
         }
 
