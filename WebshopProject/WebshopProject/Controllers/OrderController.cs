@@ -130,7 +130,7 @@ namespace WebshopProject.Controllers
         public IActionResult EditProduct(string artNr, string size, int plusOrMinus)
         {
 
-            SessionUtils.EditProduct(this, artNr, size, plusOrMinus);
+            SessionUtils.EditProduct(this, artNr, size, plusOrMinus, webShopDBContext);
             return RedirectToAction(nameof(MyCart));
         }
 

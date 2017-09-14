@@ -93,10 +93,8 @@
             </div>
 
         </div>
-        <div class="chooseNextStepOptions">
             <br />
-            <a asp-controller="Order" asp-action="MyCart"><button class="proceedToCheckOutBtn">Gå tillbaka</button></a>
-            <input class="proceedToCheckOutBtn" type="submit" value="Gå vidare" />
-        </div>
-    </form>
+            <input class="proceedToCheckOutBtn" type="submit" value="Fortsätt" />
+    </form><br />
+     <a asp-controller="Order" asp-action="MyCart"><button id="goBackBtn" class="proceedToCheckOutBtn">Gå tillbaka</button></a>
 </div>

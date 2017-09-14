@@ -704,9 +704,10 @@ tr.strongTR > td {
     position: relative;
 }
 
-.dividedDiv .saveButtonEditProfile {
+.dividedDiv #saveButtonEditProfile {
     position: absolute;
     right: 4px;
+    width: 50%;
 }
 
 /*****************************   ERROR VIEWS  ***************************************/
@@ -825,6 +826,7 @@ tr.strongTR > td {
     border-radius: 6px;
     width: 220px;
     cursor: pointer;
+    display: inline-block;
 }
 
 
@@ -941,6 +943,31 @@ tr.strongTR > td {
     display: inline-block;
 }
 
-.paymentMethodDiv {
-    display: inline-block;
+.confirmOrderDiv {
+    font-family: lato-light;
+}
+
+#confirmOrderHr {
+    width: 350px;
+    height: 3px;
+}
+
+.myOrdersPartial {
+    font-family: lato-light;
+    color: var(--dark-grey);
+    margin-bottom: 10px;
+}
+
+.myOrdersPartial h1 {
+    font-family: theanooldstyle-regular;
+}
+
+.myOrdersPartial td, th{
+    text-align: left;
+    padding-right: 20px;
+}
+
+.contactUsDiv {
+    font-family: lato-light;
+    margin-bottom: 10px;
 }

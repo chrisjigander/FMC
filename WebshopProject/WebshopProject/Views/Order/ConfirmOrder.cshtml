@@ -1,11 +1,13 @@
 ﻿@model OrderConfirmOrderVM
 
-<h2>Kontrollera dina uppgifter</h2>
+<h2>Produkter</h2>
+<hr id="confirmOrderHr" />
+<br />
 <div class="displayingProductsDiv">
 
     @if (Model.ProductsToPurchase.Products != null)
     {
-    
+
 
         @foreach (var item in Model.ProductsToPurchase.Products)
         {
@@ -20,7 +22,11 @@
         }
     }
 </div>
-<div id="confirmOrderDiv">
+
+<h2>Kontrollera dina uppgifter</h2>
+<hr id="confirmOrderHr" />
+<br />
+<div class="confirmOrderDiv">
     <table>
         <tr>
             <td><strong>Förnamn</strong></td>
@@ -54,7 +60,7 @@
             <td>@Model.Account.Email</td>
             <td></td>
         </tr>
-        <tr>
+        <tr class="strongTR">
             <td><strong>Valt betalsätt</strong></td>
             <td><strong>Vald leveransmetod</strong></td>
         </tr>
@@ -62,15 +68,9 @@
             <td>@Model.Account.Payment</td>
             <td>@Model.Account.Delivery</td>
         </tr>
-        
-
     </table>
     <br />
 
-
-
-    
-    <a asp-controller="Order" asp-action="CheckOut"><button class="proceedToCheckOutBtn">Gå tillbaka</button></a>
     <form asp-controller="Order" asp-action="ConfirmOrder">
         <input type="hidden" asp-for="Account.FirstName" />
         <input type="hidden" asp-for="Account.LastName" />
@@ -79,6 +79,7 @@
         <input type="hidden" asp-for="Account.City" />
         <input type="hidden" asp-for="Account.ZipCode" />
         <input type="hidden" asp-for="Account.Email" />
-        <input class="proceedToCheckOutBtn" type="submit" value="Bekräfta köp" />
-    </form>
+        <input class="proceedToCheckOutBtn" id="confirmOrderBtn" type="submit" value="Bekräfta köp" />
+    </form><br/>
+    <a asp-controller="Order" asp-action="CheckOut"><button class="proceedToCheckOutBtn">Gå tillbaka</button></a>
 </div>

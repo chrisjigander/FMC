@@ -23,32 +23,28 @@
                 </div><br />
                 <span id="cartArticleNum">Art nr: @item.ArticleNrShort@item.Size</span>
                 <br />
-                <hr id="separateProdHr"/>
+                <hr id="separateProdHr" />
                 <br />
             }
         }
 
         <strong>Totalt antal varor:</strong> @Model.TotalNumberOfProducts <br />
         <strong>Summa:</strong> @Model.TotalCost kr
-</div>
-
-    <div class="cartOptionsDiv">
-
-        <div class="keepShoppingBtnDiv">
-            <a asp-controller="Home" asp-action="Index"><button class="proceedToCheckOutBtn">Fortsätt handla</button></a>
-        </div>
-
-        <div class="proceedToCheckOutBtnsDiv">
-            @if (Model.IsLoggedIn)
-            {
-                <a asp-controller="Order" asp-action="CheckOut"><button class="proceedToCheckOutBtn">Gå vidare</button></a>
-            }
-            else
-            {
-                <a asp-controller="Account" asp-action="Register"><button class="proceedToCheckOutBtn">Bli medlem</button></a><br />
-                <a asp-controller="Account" asp-action="Login"><button class="proceedToCheckOutBtn">Redan medlem? Logga in</button></a><br />
-                <a asp-controller="Order" asp-action="CheckOut"><button class="proceedToCheckOutBtn">Gå vidare utan att logga in</button></a><br />
-            }
-        </div>
     </div>
+
+        @if (Model.IsLoggedIn)
+        {
+                <a asp-controller="Order" asp-action="CheckOut"><button class="proceedToCheckOutBtn">Gå vidare</button></a><br/><br/>
+        }
+        else
+        {
+            <div class="proceedToCheckOutBtnsDiv">
+            <a asp-controller="Account" asp-action="Register"><button class="proceedToCheckOutBtn">Bli medlem</button></a><br />
+            <a asp-controller="Account" asp-action="Login"><button class="proceedToCheckOutBtn">Redan medlem? Logga in</button></a><br />
+            <a asp-controller="Order" asp-action="CheckOut"><button class="proceedToCheckOutBtn">Gå vidare utan att logga in</button></a><br />
+            </div>
+        }
+
+        <a asp-controller="Home" asp-action="Index"><button class="proceedToCheckOutBtn">Fortsätt handla</button></a>
+
 </div>

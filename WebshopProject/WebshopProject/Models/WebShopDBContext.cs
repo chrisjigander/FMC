@@ -1,4 +1,6 @@
-﻿using Microsoft.AspNetCore.Mvc.Rendering;
+﻿using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using Newtonsoft.Json.Linq;
 using System;
@@ -334,10 +336,6 @@ namespace WebshopProject.Models.Entities
             return new ProductProductOverviewVM { ProdThumbnails = thumbnailList.ToArray() };
         }
 
-        internal ProductProductItemVM GetAccessoriesView(string id)
-        {
-            return null;
-        }
 
         internal void AddOrder(int customerId, MyShoppingCartVM myCart, WebShopDBContext context)
         {
@@ -348,12 +346,18 @@ namespace WebshopProject.Models.Entities
 
             foreach (var article in myCart.Products)
             {
-                OrderArticles.Add(new OrderArticles
+                for (int i = 0; i < article.NumberOfSameArticle; i++)
                 {
-                    Oid = OID,
-                    ArticleNumber = $"{article.ArticleNrShort}{article.Size}",
-                    Price = article.Price
-                });
+                    OrderArticles.Add(new OrderArticles
+                    {
+                        Oid = OID,
+                        ArticleNumber = $"{article.ArticleNrShort}{article.Size}",
+                        Price = article.Price
+                    });
+                    SaveChanges();
+                }
+                int currentQty = Product.First(p => p.ProdArtNr == $"{article.ArticleNrShort}{article.Size}").ProdQty;
+                Product.First(p => p.ProdArtNr == $"{article.ArticleNrShort}{article.Size}").ProdQty = currentQty - article.NumberOfSameArticle;
                 SaveChanges();
             };
             User myUser = context.User.First(c => c.Id == customerId);
@@ -444,7 +448,30 @@ namespace WebshopProject.Models.Entities
 
             myOrder.OrderArticles = prodThumbList.ToArray();
             return myOrder;
+
+        }
+
+        internal bool CheckIfInStock(string sessionKey, Controller controller)
+        {
+
+            bool IsInStock = true;
             
+
+            if (controller.HttpContext.Session.GetString(sessionKey) != null)
+            {
+
+                string[] sessionString = controller.HttpContext.Session.GetString(sessionKey).Split(';');
+                string articleNum = sessionString[0];
+                string count = sessionString[1];
+
+                int stockCount = Product.First(p => p.ProdArtNr == articleNum).ProdQty;
+
+                if (stockCount - (Convert.ToInt32(count)) < 1)
+                {
+                    IsInStock = false;
+                }
+            }
+            return IsInStock;
         }
     }
 }

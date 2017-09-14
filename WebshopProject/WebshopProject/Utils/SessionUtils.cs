@@ -115,12 +115,12 @@ namespace WebshopProject.Utils
 
         }
 
-        internal static void EditProduct(OrderController orderController, string artNr, string size, int plusOrMinus)
+        internal static void EditProduct(OrderController orderController, string artNr, string size, int plusOrMinus, WebShopDBContext context)
         {
             string[] articlesInCart = GetArticleNumbersInCart(orderController);
             string article = articlesInCart.First(a => a.StartsWith($"{artNr}{size}"));
             string[] articleSplit = article.Split(';');
-            int sessionKey = GetNumberOfSame(orderController, articleSplit[0]);
+            int sessionKey = GetSessionIndex(orderController, articleSplit[0]);
 
             if (articleSplit[1] == "1" && plusOrMinus == 1)
             {
@@ -137,8 +137,9 @@ namespace WebshopProject.Utils
                     count--;
 
                 }
-                else if (plusOrMinus == 2) // Lägg till EN produkt
+                else if (plusOrMinus == 2 && (context.CheckIfInStock(sessionKey.ToString(), orderController))) // Lägg till EN produkt
                 {
+                    
                     count++;
                 }
 
@@ -174,7 +175,7 @@ namespace WebshopProject.Utils
             string[] articlesInCart = GetArticleNumbersInCart(orderController);
             string article = articlesInCart.First(a => a.StartsWith($"{artNr}{size}"));
             string[] articleSplit = article.Split(';');
-            int sessionKey = GetNumberOfSame(orderController, articleSplit[0]);
+            int sessionKey = GetSessionIndex(orderController, articleSplit[0]);
 
             int totalRows = Convert.ToInt32(GetSingleSessionCount(orderController));
             orderController.HttpContext.Session.Remove(sessionKey.ToString());
@@ -198,7 +199,7 @@ namespace WebshopProject.Utils
             return listOfSessionStrings.ToArray();
         }
 
-        internal static int GetNumberOfSame(Controller controller, string artNr)
+        internal static int GetSessionIndex(Controller controller, string artNr)
         {
             //int nrOfSame = 0;
             int indexOfExistingArticle = -1;

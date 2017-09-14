@@ -89,6 +89,7 @@ namespace WebshopProject.Controllers
         [HttpPost]
         public IActionResult ProductItem(ProductProductItemVM addProductToCart)
         {
+            
             DataManager.AddToCart(this, addProductToCart, webShopDBContext);
 
             return RedirectToAction(nameof(ProductItem));
@@ -105,13 +106,6 @@ namespace WebshopProject.Controllers
         {
             return null;
         }
-
-        //public IActionResult ProductOverview(char id)
-        //{
-        //    ProductProductOverviewVM overviewVM = webShopDBContext.GetOverview(id, null);
-
-        //    return View(overviewVM);
-        //}
 
         public IActionResult ProductOverview(char id, string link)
         {

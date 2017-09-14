@@ -13,7 +13,7 @@ namespace WebshopProject.Models
 {
     public static class DataManager
     {
-        
+
         public static void AddToCart(ProductController controller, ProductProductItemVM prodItemVM, WebShopDBContext webShopDBContext)
         {
             string index = "-1";
@@ -27,31 +27,41 @@ namespace WebshopProject.Models
                 }
             }
 
-            if (index == "-1")
+            string size = webShopDBContext.Size.First(s => s.SizeId == Convert.ToInt32(prodItemVM.SelectedSize)).SizeName;
+            string artNr = $"{prodItemVM.ArticleNum}{size}";
+
+            int indexOfArticle = SessionUtils.GetSessionIndex(controller, artNr);
+
+            bool isInStock = webShopDBContext.CheckIfInStock(indexOfArticle.ToString(), controller);
+            if (isInStock)
             {
 
-            }
-            else
-            {
-                string size = webShopDBContext.Size.First(s => s.SizeId == Convert.ToInt32(prodItemVM.SelectedSize)).SizeName;
-                string artNr = $"{prodItemVM.ArticleNum}{size}";
-                int numberOfSame = SessionUtils.GetNumberOfSame(controller, artNr);
-
-                if (numberOfSame == -1)
+                if (index == "-1")
                 {
-                    string sessionString = $"{artNr};1";
-                    controller.HttpContext.Session.SetString(index, sessionString);
 
                 }
                 else
                 {
-                    string[] splitt = controller.HttpContext.Session.GetString(numberOfSame.ToString()).Split(';');
-                    int numberOfArt = Convert.ToInt32(splitt[1]);
-                    int newNumberOfArt = ++numberOfArt;
-                    string sessionString = $"{artNr};{newNumberOfArt}";
-                    controller.HttpContext.Session.SetString(numberOfSame.ToString(), sessionString);
+                    
+                    int numberOfSame = SessionUtils.GetSessionIndex(controller, artNr);
+
+                    if (numberOfSame == -1)
+                    {
+                        string sessionString = $"{artNr};1";
+                        controller.HttpContext.Session.SetString(index, sessionString);
+
+                    }
+                    else
+                    {
+                        string[] splitt = controller.HttpContext.Session.GetString(numberOfSame.ToString()).Split(';');
+                        int numberOfArt = Convert.ToInt32(splitt[1]);
+                        int newNumberOfArt = ++numberOfArt;
+                        string sessionString = $"{artNr};{newNumberOfArt}";
+                        controller.HttpContext.Session.SetString(numberOfSame.ToString(), sessionString);
+                    }
                 }
             }
+
         }
 
 
