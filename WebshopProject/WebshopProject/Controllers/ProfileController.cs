@@ -30,6 +30,9 @@ namespace WebshopProject.Controllers
         }
         public IActionResult Index(int id)
         {
+            if (id == 0)
+                id = 1;
+
             return View(new ProfileIndexVM { PageId=id});
         }
         
@@ -63,7 +66,7 @@ namespace WebshopProject.Controllers
             string userID = signInManager.UserManager.GetUserId(HttpContext.User);
 
             webShopDBContext.UpdateUser(editedUser, userID);
-            return RedirectToAction("Index");
+            return RedirectToAction("Index", 1);
         }
     }
 }

@@ -288,3 +288,14 @@ function GetSelectedProduct(id) {
         }
     });
 }
+
+
+function EnableButton() {
+    if ($('#checkBoxTerms').is(':checked')) {
+        $('#confirmOrderBtn').removeAttr("disabled");
+    }
+    else {
+        $('#confirmOrderBtn').attr("disabled", "disabled");
+    }
+    
+}

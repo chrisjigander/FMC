@@ -79,7 +79,8 @@
         <input type="hidden" asp-for="Account.City" />
         <input type="hidden" asp-for="Account.ZipCode" />
         <input type="hidden" asp-for="Account.Email" />
-        <input class="proceedToCheckOutBtn" id="confirmOrderBtn" type="submit" value="Bekräfta köp" />
+        <input type="checkbox" onclick="EnableButton()" id="checkBoxTerms" />Jag godkänner <a href="/CustomerSupport/Index/5" target="_blank">Köpvillkoren</a><br /><br />
+        <input class="proceedToCheckOutBtn" id="confirmOrderBtn" type="submit" value="Bekräfta köp" disabled="disabled" />
     </form><br/>
     <a asp-controller="Order" asp-action="CheckOut"><button class="proceedToCheckOutBtn">Gå tillbaka</button></a>
 </div>
