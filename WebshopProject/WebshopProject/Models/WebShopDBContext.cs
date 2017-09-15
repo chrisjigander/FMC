@@ -214,6 +214,11 @@ namespace WebshopProject.Models.Entities
             allProductsToFilter = Product.ToList();
 
 
+            List<Brand> allBrands = Brand.ToList();
+            List<Model> allModels = Model.ToList();
+            List<Color> allColors = Color.ToList();
+            List<Size> allSizes = Size.ToList();
+
             //check if id is not null
             if (int.TryParse(id.ToString(), out int result))
             {
@@ -282,13 +287,13 @@ namespace WebshopProject.Models.Entities
                 }
                 else if (id == '3')
                 {
-                    int brandID = Brand.First(b => b.BrandName == link).BrandId;
+                    int brandID = allBrands.First(b => b.BrandName == link).BrandId;
                     allProductsToFilter = allProductsToFilter.Where(p => p.ProdBrandId == brandID).ToList();
                 }
             }
             else if (link != null)
             {
-                int brandID = Brand.First(b => b.BrandName == link).BrandId;
+                int brandID = allBrands.First(b => b.BrandName == link).BrandId;
                 allProductsToFilter = allProductsToFilter.Where(p => p.ProdBrandId == brandID).ToList();
             }
 
@@ -321,10 +326,10 @@ namespace WebshopProject.Models.Entities
 
             foreach (var item in listOfProductsToReturn)
             {
-                string currBrandName = Brand.FirstOrDefault(b => b.BrandId == item.ProdBrandId).BrandName;
-                string currModelName = Model.FirstOrDefault(m => m.ModelId == item.ProdModelId).ModelName;
-                string currSizeName = Size.FirstOrDefault(s => s.SizeId == item.ProdSizeId).SizeName;
-                string currColorName = Color.FirstOrDefault(c => c.ColorId == item.ProdColorId).ColorName;
+                string currBrandName = allBrands.FirstOrDefault(b => b.BrandId == item.ProdBrandId).BrandName;
+                string currModelName = allModels.FirstOrDefault(m => m.ModelId == item.ProdModelId).ModelName;
+                string currSizeName = allSizes.FirstOrDefault(s => s.SizeId == item.ProdSizeId).SizeName;
+                string currColorName = allColors.FirstOrDefault(c => c.ColorId == item.ProdColorId).ColorName;
                 thumbnailList.Add(new ProductThumbnail
                 {
                     ImgPath = $"{item.ProdArtNr.Remove(item.ProdArtNr.Length - 2)}_1.jpg",
@@ -342,9 +347,9 @@ namespace WebshopProject.Models.Entities
             SetSelectListItems(PPOVM);
 
             return PPOVM;
-            //return new ProductProductOverviewVM { ProdThumbnails = thumbnailList.ToArray(), BrandArray = brandList.ToArray(), ColorArray = colorList.ToArray(), SizeArray = sizeList.ToArray(), PriceArray = priceSpans };
         }
 
+        
         internal void SetSelectListItems(ProductProductOverviewVM PPOVM)
         {
             var sizeArray = Size.ToArray();
