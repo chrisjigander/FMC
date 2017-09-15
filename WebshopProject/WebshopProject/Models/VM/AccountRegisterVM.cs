@@ -18,6 +18,12 @@ namespace WebshopProject.Models.VM
         public string PassWord { get; set; }
 
         [Required(ErrorMessage = "Obligatoriskt fält!")]
+        [DataType(DataType.Password)]
+        [Display(Name = "Upprepa lösenord")]
+        [Compare("PassWord", ErrorMessage ="Lösenorden måste stämma överens")]
+        public string RepeatPassWord { get; set; }
+
+        [Required(ErrorMessage = "Obligatoriskt fält!")]
         [Display(Name = "Förnamn")]
         public string FirstName { get; set; }
 
